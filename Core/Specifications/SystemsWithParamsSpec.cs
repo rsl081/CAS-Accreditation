@@ -6,30 +6,30 @@ using Core.Entities;
 
 namespace Core.Specifications
 {
-
-    public class ParamsWithFilesSpec : BaseSpecification<Parameter>
+    public class SystemsWithParamsSpec : 
+        BaseSpecification<TheSystem>
     {
-        
-        public ParamsWithFilesSpec(FileRepoSpecParams fileRepoSpecParams, Guid? areaId) : base(x => 
+
+
+        public SystemsWithParamsSpec(FileRepoSpecParams fileRepoSpecParams, Guid? parameterId) 
+            : base(x => 
             (string.IsNullOrEmpty(fileRepoSpecParams.Search) ||
                 x.Name.ToLower().Contains(fileRepoSpecParams.Search) ||
             string.IsNullOrEmpty(fileRepoSpecParams.Search) ||
-                x.ParamName.ToLower().Contains(fileRepoSpecParams.Search) ||
+                x.SystemName.ToLower().Contains(fileRepoSpecParams.Search) ||
             string.IsNullOrEmpty(fileRepoSpecParams.Search))
                 && 
-            (!areaId.HasValue || x.AreaId == areaId))
+            (!parameterId.HasValue || x.ParameterId == parameterId))
         {
-            AddInclude(x => x.Area);
+            AddInclude(x => x.Parameter);
         }
 
-        public ParamsWithFilesSpec(Guid id) 
+
+        public SystemsWithParamsSpec(Guid id) 
             : base(x => x.Id == id)
         {
-            //* To Show Levels, Its okay to not include
-            AddInclude(x => x.Area);
-           
+            AddInclude(x => x.Parameter);
         }
-
+        
     }
-
 }

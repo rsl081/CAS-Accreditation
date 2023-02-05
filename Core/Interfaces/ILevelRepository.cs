@@ -8,10 +8,13 @@ namespace Core.Interfaces
 {
     public interface ILevelRepository
     {
-        Task<Level> GetLevelByIdAsync(int id);
+        Task<Level> GetLevelByIdAsync(Guid id);
         Task<IReadOnlyList<Level>> GetLevelsAsync();
         Task<IReadOnlyList<Area>> GetAreasAsync();
         Task<IReadOnlyList<Parameter>> GetParamsAsync();
+        Task<IReadOnlyList<TheSystem>> GetSystemsAsync();
+        Task<IReadOnlyList<TheImplementation>> GetImplementationsAsync();
+        Task<IReadOnlyList<TheOutput>> GetOutputsAsync();
         Task<IReadOnlyList<TheFile>> GetTheFilesAsync();
     }
 }

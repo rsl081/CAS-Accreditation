@@ -1,4 +1,5 @@
 using API.Dtos;
+using API.Dtos.SIO;
 using AutoMapper;
 using Core.Entities;
 using Core.Entities.Identity;
@@ -16,10 +17,22 @@ namespace API.Helpers
             CreateMap<LevelUpdateDto, Level>();
             CreateMap<Level, LevelToReturn>();
 
-            CreateMap<ParameterCreateDto, Parameter>();
             CreateMap<ParameterUpdateDto, Parameter>();
+            CreateMap<ParameterCreateDto, Parameter>();
             CreateMap<Parameter, ParameterToReturn>();
             CreateMap<Parameter, DateAndTimeDto>();
+
+            CreateMap<SystemCreateDto, TheSystem>();
+            CreateMap<TheSystem, SystemToReturn>();
+            CreateMap<SystemUpdateDto, TheSystem>();
+
+            CreateMap<ImpleCreateDto, TheImplementation>();
+            CreateMap<TheImplementation, ImpleToReturn>();
+            CreateMap<ImpleUpdateDto, TheImplementation>();
+
+            CreateMap<OutputCreateDto, TheOutput>();
+            CreateMap<TheOutput, OutputToReturn>();
+            CreateMap<OutputUpdateDto, TheOutput>();
 
             CreateMap<FileCreateDto, TheFile>();
             CreateMap<FileUpdateDto, TheFile>();
