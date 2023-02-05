@@ -21,13 +21,13 @@ namespace Core.Entities
             ArName = name;
         }
 
-        public Area(int id)
+        public Area(Guid id)
         {
             Id = id;
         }
         
         public Level Level { get; set; }
-        public int LevelId { get; set; }
+        public Guid LevelId { get; set; }
         public AppUser FacultyUser { get; set; }
         public string FacultyUserId { get; set; }
         public List<Parameter> Params { get; set; } = new List<Parameter>();

@@ -9,7 +9,8 @@ namespace Core.Specifications
     public class FileSpec : BaseSpecification<TheFile>
     {
   
-        public FileSpec(string sort, FileRepoSpecParams fileSpecParam, int? paramId) 
+        public FileSpec(string sort, FileRepoSpecParams fileSpecParam, 
+            Guid? systemId, Guid? impleId, Guid? outputId) 
             : base(x => 
             (string.IsNullOrEmpty(fileSpecParam.Search) ||
                 x.Name.ToLower().Contains(fileSpecParam.Search) ||
@@ -20,7 +21,10 @@ namespace Core.Specifications
             string.IsNullOrEmpty(fileSpecParam.Search) ||
                 x.FileName.ToLower().Contains(fileSpecParam.Search))
                 &&
-            (!paramId.HasValue || x.ParameterId == paramId))
+            ( !systemId.HasValue || x.TheSystemId == systemId ||
+              !impleId.HasValue || x.TheImplementationId == impleId ||
+              !outputId.HasValue || x.TheOutputId == outputId 
+            ))
         {
             
             AddInclude(x => x.FileRepo);
@@ -57,7 +61,7 @@ namespace Core.Specifications
             }
         }
 
-        public FileSpec(int id) 
+        public FileSpec(Guid id) 
             : base(x => x.Id == id)
         {
             AddInclude(x => x.FileRepo);

@@ -19,7 +19,7 @@ namespace Core.Specifications
             AddInclude(x => x.Areas);
         }
 
-        public LevelsWithAreasSpec(int id) 
+        public LevelsWithAreasSpec(Guid id) 
             : base(x => x.Id == id)
         {
             AddInclude(x => x.Areas);

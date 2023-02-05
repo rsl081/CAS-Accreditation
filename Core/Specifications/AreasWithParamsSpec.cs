@@ -15,7 +15,7 @@ namespace Core.Specifications
         //     AddInclude(x => x.Params);
         // }
         
-        public AreasWithParamsSpec(FileRepoSpecParams areaSpecParam, int? levelId) 
+        public AreasWithParamsSpec(FileRepoSpecParams areaSpecParam, Guid? levelId) 
             : base(x => 
             (string.IsNullOrEmpty(areaSpecParam.Search) ||
                 x.Name.ToLower().Contains(areaSpecParam.Search) ||
@@ -29,7 +29,7 @@ namespace Core.Specifications
             AddInclude(x => x.Params);
         }
 
-        public AreasWithParamsSpec(int id) 
+        public AreasWithParamsSpec(Guid id) 
             : base(x => x.Id == id)
         {
             //* To Show Levels, Its okay to not include

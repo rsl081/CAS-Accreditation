@@ -58,7 +58,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Level>> UpdateLevel(
-            int id, 
+            Guid id, 
             LevelUpdateDto levelToUpdate)
         {
             //var levelUpdate = _mapper.Map<LevelUpdateDto, Level>(levelToUpdate);
@@ -80,7 +80,7 @@ namespace API.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Level>> GetLevel(int id)
+        public async Task<ActionResult<Level>> GetLevel(Guid id)
         {
             var spec = new LevelsWithAreasSpec(id);
             return await _unitOfWork.Repository<Level>().GetEntityWithSpec(spec);
@@ -88,7 +88,7 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin")]
-        public async Task<ActionResult<Level>> DeleteLevel(int id)
+        public async Task<ActionResult<Level>> DeleteLevel(Guid id)
         {
             var level = await _unitOfWork.Repository<Level>()
                 .GetByIdAsync(id);

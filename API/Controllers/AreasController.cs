@@ -25,7 +25,7 @@ namespace API.Controllers
         [HttpPut("edit/{id}")]
         [Authorize(Roles = "Admin,Faculty")]
         public async Task<ActionResult<Area>> UpdateArea(
-            int id, AreaUpdateDto areaToUpdate)
+            Guid id, AreaUpdateDto areaToUpdate)
         {
             var area = await _unitOfWork.Repository<Area>().GetByIdAsync(id);
 
@@ -45,7 +45,7 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
-        public async Task<ActionResult<Area>> DeleteArea(int id)
+        public async Task<ActionResult<Area>> DeleteArea(Guid id)
         {
             var area = await _unitOfWork.Repository<Area>()
                 .GetByIdAsync(id);
@@ -84,7 +84,7 @@ namespace API.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Area>> GetArea(int id)
+        public async Task<ActionResult<Area>> GetArea(Guid id)
         {
             var spec = new AreasWithParamsSpec(id);
             var areas = await _unitOfWork.Repository<Area>().GetEntityWithSpec(spec);
@@ -97,7 +97,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
         public async Task<ActionResult<Area>> UpdateAreaFacultyUserId(
-            int id, AreaFacultyUserIdDto areaFacultyIdToUpdate)
+            Guid id, AreaFacultyUserIdDto areaFacultyIdToUpdate)
         {
             var area = await _unitOfWork.Repository<Area>().GetByIdAsync(id);
 
@@ -117,7 +117,7 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<Pagination<Area>>> GetAreas(
-            [FromQuery]FileRepoSpecParams areaSpecParams, int? levelId
+            [FromQuery]FileRepoSpecParams areaSpecParams, Guid? levelId
         )
         {
             var spec = new AreasWithParamsSpec(areaSpecParams, levelId);

@@ -8,12 +8,12 @@ namespace API.Dtos
 {
     public class FileToReturnDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string FileName { get; set; }
         public string Name { get; set; }
         public string Size { get; set; }
         public string FileRepo { get; set; }
-        public int ParameterId { get; set; }
+        public Guid ParameterId { get; set; }
 
         [JsonIgnore]
         public DateTime Created { get; set; }

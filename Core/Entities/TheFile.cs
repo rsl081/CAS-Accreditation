@@ -17,7 +17,14 @@ namespace Core.Entities
         public FileRepo FileRepo { get; set; }
 
         [JsonIgnore]
-        public Parameter Parameter { get; set; }
-        public int ParameterId { get; set; }
+        public TheSystem TheSystem { get; set; }
+        public Guid TheSystemId { get; set; }
+        [JsonIgnore]
+        public TheImplementation TheImplementation { get; set; }
+        public Guid TheImplementationId { get; set; }
+        [JsonIgnore]
+        public TheOutput TheOutput { get; set; }
+        public Guid TheOutputId { get; set; }
+
     }
 }

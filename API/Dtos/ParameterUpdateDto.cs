@@ -10,11 +10,11 @@ namespace API.Dtos
     public class ParameterUpdateDto
     {
         [Required]
-        public string LetterName { get; set; }
+        public string ParamName { get; set; }
         
         public string Name { get; set; }
         [Required]
-        public int AreaId { get; set; }
+        public Guid AreaId { get; set; }
 
         [JsonIgnore]
         public DateTime LastModified { get; set; } = DateTime.Now;

@@ -16,7 +16,7 @@ namespace API.Dtos
         [Required]
         public string Name { get; set; }
         [Required]
-        public int LevelId { get; set; }
+        public Guid LevelId { get; set; }
         public string FacultyUserId { get; set; }
         
         [JsonIgnore]

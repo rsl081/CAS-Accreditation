@@ -54,6 +54,46 @@ namespace Infrastructure.Data
 
                     await context.SaveChangesAsync();
                 }
+                if(!context.TheSystems.Any())
+                {
+                    var theSystem = File.ReadAllText("../Infrastructure/Data/SeedData/system.json");
+
+                    var sysF = JsonSerializer.Deserialize<List<TheSystem>>(theSystem);
+
+                    foreach(var item in sysF)
+                    {
+                        context.TheSystems.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+                if(!context.TheImplementations.Any())
+                {
+                    var imple = File.ReadAllText("../Infrastructure/Data/SeedData/implementation.json");
+
+                    var impleF = JsonSerializer.Deserialize<List<TheImplementation>>(imple);
+
+                    foreach(var item in impleF)
+                    {
+                        context.TheImplementations.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
+
+                if(!context.TheOutputs.Any())
+                {
+                    var output = File.ReadAllText("../Infrastructure/Data/SeedData/output.json");
+
+                    var outputF = JsonSerializer.Deserialize<List<TheOutput>>(output);
+
+                    foreach(var item in outputF)
+                    {
+                        context.TheOutputs.Add(item);
+                    }
+
+                    await context.SaveChangesAsync();
+                }
 
                 if(!context.TheFiles.Any())
                 {

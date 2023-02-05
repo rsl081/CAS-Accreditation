@@ -18,6 +18,7 @@ namespace Infrastructure.Identity
                 {
                     new AppUser
                     {
+                        Id = "911465f9-be4d-4d61-949c-da9c9f7bea3c",
                         DisplayName = "Accreditor",
                         Email = "accre@test.com",
                         UserName = "accre@test.com",
@@ -27,6 +28,7 @@ namespace Infrastructure.Identity
 
                     new AppUser
                     {
+                        Id = "c65e6d63-19ca-493a-9084-2b4a610c77e8",
                         DisplayName = "Admin",
                         Email = "admin@test.com",
                         UserName = "admin@test.com",

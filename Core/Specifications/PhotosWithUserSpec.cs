@@ -13,7 +13,7 @@ namespace Core.Specifications
             AddInclude(x => x.AppUser);
         }
 
-        public PhotosWithUserSpec(int id) 
+        public PhotosWithUserSpec(Guid id) 
             : base(x => x.Id == id)
         {
             //* To Show Levels, Its okay to not include

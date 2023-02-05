@@ -9,7 +9,7 @@ namespace Core.Specifications
     public class FileTableSpec : BaseSpecification<FileRepo>
     {
         public FileTableSpec(FileRepoSpecParams fileSpecParam, 
-            int? fileId) 
+            Guid? fileId) 
             : base(x => 
             (string.IsNullOrEmpty(fileSpecParam.Search) ||
                 x.PublicId.ToLower().Contains(fileSpecParam.Search) ||
@@ -23,7 +23,7 @@ namespace Core.Specifications
             
         }
 
-        public FileTableSpec(int id) 
+        public FileTableSpec(Guid id) 
             : base(x => x.Id == id)
         {
             AddInclude(x => x.TheFile);
