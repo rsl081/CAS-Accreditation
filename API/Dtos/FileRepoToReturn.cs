@@ -8,9 +8,9 @@ namespace API.Dtos
 {
     public class FileRepoToReturn
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Url { get; set; }
         public string PublicId { get; set; }
-        public int TheFileId { get; set; }
+        public Guid TheFileId { get; set; }
     }
 }

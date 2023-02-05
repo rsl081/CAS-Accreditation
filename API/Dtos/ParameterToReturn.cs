@@ -8,8 +8,8 @@ namespace API.Dtos
 {
     public class ParameterToReturn
     {
-        public int Id { get; set; }
-        public string LetterName { get; set; }
+        public Guid Id { get; set; }
+        public string ParamName { get; set; }
         public string Name { get; set; }
         [JsonIgnore]
         public DateTime Created { get; set; }
@@ -29,6 +29,6 @@ namespace API.Dtos
             set{}
         }
         
-        public int AreaId { get; set; }
+        public Guid AreaId { get; set; }
     }
 }

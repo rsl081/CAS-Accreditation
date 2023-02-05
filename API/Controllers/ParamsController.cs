@@ -29,7 +29,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
         public async Task<ActionResult<Parameter>> UpdateParameter(
-            int id, ParameterUpdateDto parameterToUpdate)
+            Guid id, ParameterUpdateDto parameterToUpdate)
         {
             var parameter = await _unitOfWork.Repository<Parameter>().GetByIdAsync(id);
 
@@ -67,7 +67,7 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
-        public async Task<ActionResult<Parameter>> DeleteParameter(int id)
+        public async Task<ActionResult<Parameter>> DeleteParameter(Guid id)
         {
             var parameter = await _unitOfWork.Repository<Parameter>()
                 .GetByIdAsync(id);
@@ -85,7 +85,7 @@ namespace API.Controllers
         
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Parameter>> GetParam(int id)
+        public async Task<ActionResult<Parameter>> GetParam(Guid id)
         {
             var spec = new ParamsWithFilesSpec(id);
             var parameters = await _unitOfWork.Repository<Parameter>().GetEntityWithSpec(spec);
@@ -97,7 +97,7 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<Pagination<Parameter>>> GetParams(
-           [FromQuery]FileRepoSpecParams fileRepoSpecParams, int? areaId
+           [FromQuery]FileRepoSpecParams fileRepoSpecParams, Guid? areaId
         )
         {
             

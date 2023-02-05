@@ -15,7 +15,7 @@ namespace API.Dtos
         [Required]
         public string Size { get; set; }
         [Required]
-        public int ParameterId { get; set; }
+        public Guid ParameterId { get; set; }
         
         [JsonIgnore]
         public DateTime Created { get; set; } = DateTime.Now;

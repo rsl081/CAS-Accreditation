@@ -13,6 +13,6 @@ namespace Core.Entities
         
         public TheFile TheFile { get; set; }
         
-        public int TheFileId { get; set; }
+        public Guid TheFileId { get; set; }
     }
 }

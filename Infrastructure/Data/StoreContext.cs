@@ -18,6 +18,9 @@ namespace Infrastructure.Data
         public DbSet<Level> Levels { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Parameter> Params { get; set; }
+        public DbSet<TheSystem> TheSystems { get; set; }
+        public DbSet<TheImplementation> TheImplementations { get; set; }
+        public DbSet<TheOutput> TheOutputs { get; set; }
         public DbSet<TheFile> TheFiles { get; set; }
 
          protected override void OnModelCreating(
@@ -53,8 +56,6 @@ namespace Infrastructure.Data
                 .HasOne(p => p.Level)
                 .WithMany(b => b.Areas)
                 .OnDelete(DeleteBehavior.Cascade);
-
-            
         }
 
     }

@@ -31,7 +31,7 @@ namespace API.Controllers
         
         //*= Files =
         [HttpGet("{id}")]
-        public async Task<ActionResult<TheFile>> GetFile(int id)
+        public async Task<ActionResult<TheFile>> GetFile(Guid id)
         {
             var spec = new FileSpec(id);
             return await _unitOfWork.Repository<TheFile>().GetEntityWithSpec(spec);
@@ -39,10 +39,12 @@ namespace API.Controllers
 
         [HttpGet(Name = "TheFile")]
         public async Task<ActionResult<Pagination<TheFile>>> GetFiles(
-            [FromQuery]FileRepoSpecParams fileSpecParams, int? paramId, string sort
+            [FromQuery]FileRepoSpecParams fileSpecParams, 
+            Guid? systemId, Guid? impleId, Guid? outputId,
+            string sort
         )
         {
-            var spec = new FileSpec(sort, fileSpecParams, paramId);
+            var spec = new FileSpec(sort, fileSpecParams, systemId, impleId, outputId);
             var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
             var totalItems = await _unitOfWork.Repository<TheFile>().CountAsync(spec);
             
@@ -55,7 +57,7 @@ namespace API.Controllers
 
         [HttpGet("repo")]
         public async Task<ActionResult<Pagination<FileRepo>>> GetFileRepos(
-            [FromQuery]FileRepoSpecParams fileSpecParams, int? fileId
+            [FromQuery]FileRepoSpecParams fileSpecParams, Guid? fileId
         )
         {
             
@@ -72,7 +74,7 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
-        public async Task<ActionResult<TheFile>> DeleteFile(int id)
+        public async Task<ActionResult<TheFile>> DeleteFile(Guid id)
         {
             var theFile = await _unitOfWork.Repository<TheFile>()
                 .GetByIdAsync(id);
@@ -108,7 +110,7 @@ namespace API.Controllers
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
         public async Task<ActionResult<TheFile>> UpdateFiles(
-            int id, FileUpdateDto fileToUpdate)
+            Guid id, FileUpdateDto fileToUpdate)
         {
             var theFile = await _unitOfWork.Repository<TheFile>().GetByIdAsync(id);
 
@@ -126,7 +128,7 @@ namespace API.Controllers
 
         [HttpPost("add-file/{id}")]
         public async Task<ActionResult<FileRepoCreateDto>> AddFile(
-            IFormFile file, int id)
+            IFormFile file, Guid id)
         {
             var theFile = await _unitOfWork.Repository<TheFile>()
                                             .GetByIdAsync(id);
@@ -158,7 +160,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("delete-file-repo/{id}")]
-        public async Task<ActionResult<FileRepo>> DeleteFileRepo(int id)
+        public async Task<ActionResult<FileRepo>> DeleteFileRepo(Guid id)
         {
 
             var file = await _unitOfWork.Repository<FileRepo>().GetByIdAsync(id);

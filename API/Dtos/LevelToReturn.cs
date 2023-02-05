@@ -10,7 +10,7 @@ namespace API.Dtos
 {
     public class LevelToReturn
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string LevelName { get; set; }
         public string Name { get; set; }
 

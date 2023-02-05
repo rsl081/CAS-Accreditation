@@ -7,8 +7,8 @@ namespace API.Dtos
 {
     public class FileRepoCreateDto
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Url { get; set; }
-        public int TheFileId { get; set; }
+        public Guid TheFileId { get; set; }
     }
 }
