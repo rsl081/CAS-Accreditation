@@ -291,6 +291,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("ImpleName")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime>("LastModified")
                         .HasColumnType("timestamp without time zone");
 
@@ -298,9 +301,6 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("ParameterId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("SystemName")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -325,10 +325,10 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ParameterId")
+                    b.Property<string>("OutputName")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("SystemName")
+                    b.Property<Guid>("ParameterId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

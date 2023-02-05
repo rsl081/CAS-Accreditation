@@ -7,7 +7,7 @@ namespace Core.Entities
 {
     public class TheOutput : BaseEntity
     {
-        public string SystemName { get; set; }
+        public string OutputName { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; } = DateTime.Now;

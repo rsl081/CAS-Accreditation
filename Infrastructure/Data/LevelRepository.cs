@@ -12,7 +12,7 @@ namespace Infrastructure.Data
             this._context = context;
         }
 
-        public async Task<Level> GetLevelByIdAsync(int id)
+        public async Task<Level> GetLevelByIdAsync(Guid id)
         {
             return await _context.Levels.FindAsync(id);
         }
@@ -31,6 +31,20 @@ namespace Infrastructure.Data
         public async Task<IReadOnlyList<Parameter>> GetParamsAsync()
         {
             return await _context.Params.ToListAsync();
+        }
+        
+        public async Task<IReadOnlyList<TheSystem>> GetSystemsAsync()
+        {
+            return await _context.TheSystems.ToListAsync();
+        }
+
+        public async Task<IReadOnlyList<TheImplementation>> GetImplementationsAsync()
+        {
+            return await _context.TheImplementations.ToListAsync();
+        }
+        public async Task<IReadOnlyList<TheOutput>> GetOutputsAsync()
+        {
+            return await _context.TheOutputs.ToListAsync();
         }
 
         public async Task<IReadOnlyList<TheFile>> GetTheFilesAsync()
