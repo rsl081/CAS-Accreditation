@@ -13,6 +13,7 @@ namespace Core.Entities
         public DateTime LastModified { get; set; } = DateTime.Now;
         public Parameter Parameter { get; set; }
         public Guid ParameterId { get; set; }
-        public List<TheFile> TheFiles { get; set; } = new List<TheFile>();
+        public TheFile TheFile { get; set; }
+        public Guid TheFileId { get; set; }
     }
 }

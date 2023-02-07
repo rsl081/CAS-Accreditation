@@ -11,7 +11,16 @@ namespace API.Helpers
         public MappingProfiles()
         {
             CreateMap<TheFile, FileToReturnDto>()
-                .ForMember(f => f.FileRepo, o => o.MapFrom(s => s.FileRepo.Url));
+                .ForMember(f => f.FileRepo, o => o.MapFrom(s => s.FileRepo.Url))
+                .ForMember(s => s.TheSystems, o => o.MapFrom(s => s.TheSystems.Select(
+                    user => new 
+                    {
+                        user.Name
+                    })))
+                .ForMember(i => i.TheImplementations, 
+                    o => o.MapFrom(i => i.TheImplementations.Select(x => x.ImpleName).ToList()))
+                .ForMember(opt => opt.TheOutputs, 
+                    o => o.MapFrom(s => s.TheOutputs.Select(x => new {x.OutputName})));
 
             CreateMap<LevelCreateDto, Level>();
             CreateMap<LevelUpdateDto, Level>();
