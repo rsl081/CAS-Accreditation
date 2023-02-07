@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Core.Entities
 {
@@ -13,18 +9,11 @@ namespace Core.Entities
         public string Size { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-         public DateTime LastModified { get; set; } = DateTime.Now;
+        public DateTime LastModified { get; set; } = DateTime.Now;
         public FileRepo FileRepo { get; set; }
-
-        [JsonIgnore]
-        public TheSystem TheSystem { get; set; }
-        public Guid TheSystemId { get; set; }
-        [JsonIgnore]
-        public TheImplementation TheImplementation { get; set; }
-        public Guid TheImplementationId { get; set; }
-        [JsonIgnore]
-        public TheOutput TheOutput { get; set; }
-        public Guid TheOutputId { get; set; }
-
+        public List<TheSystem> TheSystems { get; set; } = new List<TheSystem>();
+        public List<TheImplementation> TheImplementations { get; set; } = new List<TheImplementation>();
+        public List<TheOutput> TheOutputs { get; set; } = new List<TheOutput>();
+        public bool Status { get; set; }
     }
 }

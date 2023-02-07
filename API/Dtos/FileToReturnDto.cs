@@ -13,7 +13,10 @@ namespace API.Dtos
         public string Name { get; set; }
         public string Size { get; set; }
         public string FileRepo { get; set; }
-        public Guid ParameterId { get; set; }
+        public List<string> TheSystems { get; set; } = new List<string>();
+        public List<string> TheImplementations { get; set; } = new List<string>();
+        public List<string> TheOutputs { get; set; } = new List<string>();
+        public bool Status { get; set; }
 
         [JsonIgnore]
         public DateTime Created { get; set; }
