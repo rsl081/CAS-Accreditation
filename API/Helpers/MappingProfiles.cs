@@ -12,15 +12,11 @@ namespace API.Helpers
         {
             CreateMap<TheFile, FileToReturnDto>()
                 .ForMember(f => f.FileRepo, o => o.MapFrom(s => s.FileRepo.Url))
-                .ForMember(s => s.TheSystems, o => o.MapFrom(s => s.TheSystems.Select(
-                    user => new 
-                    {
-                        user.Name
-                    })))
+                .ForMember(s => s.TheSystems, o => o.MapFrom(s => s.TheSystems.Select(x => x.Id).ToList()))
                 .ForMember(i => i.TheImplementations, 
                     o => o.MapFrom(i => i.TheImplementations.Select(x => x.ImpleName).ToList()))
                 .ForMember(opt => opt.TheOutputs, 
-                    o => o.MapFrom(s => s.TheOutputs.Select(x => new {x.OutputName})));
+                    o => o.MapFrom(s => s.TheOutputs.Select(x => x.OutputName).ToList()));
 
             CreateMap<LevelCreateDto, Level>();
             CreateMap<LevelUpdateDto, Level>();

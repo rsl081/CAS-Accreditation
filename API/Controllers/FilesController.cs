@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Dtos;
 using API.Errors;
 using API.Helpers;
@@ -9,8 +5,10 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
+using Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -19,14 +17,17 @@ namespace API.Controllers
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         private readonly IPhotoService _photoService;
+        private readonly StoreContext _context;
 
         public FilesController(IUnitOfWork unitOfWork,
             IMapper mapper,
-            IPhotoService photoService)
+            IPhotoService photoService,
+            StoreContext context)
         {
             this._unitOfWork = unitOfWork;
             this._mapper = mapper;
             this._photoService = photoService;
+            this._context = context;
         }
         
         //*= Files =
@@ -45,8 +46,17 @@ namespace API.Controllers
         )
         {
             var spec = new FileSpec(sort, fileSpecParams, systemId, impleId, outputId);
-            var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
+
+            // var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
+            var files = await _context.TheFiles
+                                .Include(x => x.FileRepo)
+                                .Include(x => x.TheSystems)
+                                .Include(x => x.TheImplementations)
+                                .Include(x => x.TheOutputs)
+                                .ToListAsync();
+
             var totalItems = await _unitOfWork.Repository<TheFile>().CountAsync(spec);
+
             
             var data = _mapper.Map<IReadOnlyList<TheFile>,
                         IReadOnlyList<FileToReturnDto>>(files);
