@@ -1,0 +1,53 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  type="area"
+  dialogTitle="Add Area"
+  inputPlaceholder="Area Name"
+  (dialogClosed)="toggleAddAreaDialog()"
+></app-dashboard-dialog>
+
+<div
+  class="border border-gray-400 mx-3 mt-3 rounded-lg"
+  *ngIf="parameterOutlet.isActivated == false"
+>
+  <h1
+    class="p-3 rounded-t-lg text-base font-bold text-gray-600 bg-gray-50 border-b border-gray-400 dark:bg-neutral-700 dark:text-white"
+  >
+    Your Areas
+  </h1>
+  <div
+    class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+  >
+    <app-dashboard-add-card
+      (cardClicked)="toggleAddAreaDialog()"
+    ></app-dashboard-add-card>
+    <app-faculty-area
+      cred="owner"
+      *ngFor="let area of myAreas"
+      [element]="area"
+    ></app-faculty-area>
+  </div>
+</div>
+
+<div
+  class="border border-gray-400 mx-3 mt-3 rounded-lg"
+  *ngIf="parameterOutlet.isActivated == false"
+>
+  <h1
+    class="p-3 rounded-t-lg text-base font-bold text-gray-600 bg-gray-50 border-b border-gray-400 dark:bg-neutral-700 dark:text-white"
+  >
+    Other Areas
+  </h1>
+  <div
+    class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+  >
+    <app-faculty-area
+      cred="non-owner"
+      *ngFor="let area of otherAreas"
+      [element]="area"
+    ></app-faculty-area>
+  </div>
+</div>
+
+<router-outlet #parameterOutlet="outlet"></router-outlet>

@@ -1,0 +1,23 @@
+<!-- breadcrumb container  -->
+<div>
+  <!-- breadcrumb navigation  -->
+  <xng-breadcrumb class="dark:bg-neutral-700" [separator]="iconTemplate">
+    <ng-container *xngBreadcrumbItem="let breadcrumb">
+      <div class="dark:text-neutral-200">
+        <ng-container>{{ breadcrumb }}</ng-container>
+      </div>
+    </ng-container>
+  </xng-breadcrumb>
+
+  <ng-template #iconTemplate>
+    <svg
+      class="h-5 w-5 dark:stroke-white"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+    </svg>
+  </ng-template>
+</div>

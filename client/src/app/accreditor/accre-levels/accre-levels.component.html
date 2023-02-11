@@ -1,0 +1,10 @@
+<div
+  *ngIf="areaOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+  <app-accre-level
+    *ngFor="let level of levels"
+    [element]="level"
+  ></app-accre-level>
+</div>
+<router-outlet #areaOutlet="outlet"></router-outlet>

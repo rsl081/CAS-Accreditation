@@ -1,0 +1,17 @@
+<!-- cards such as level, area, and parameter can reuse this component -->
+<div
+  class="flex justify-center items-center border border-gray-400 rounded-lg p-3 h-full min-h-[133.6px] hover:bg-gray-50 dark:hover:bg-neutral-700"
+>
+  <!-- add icon -->
+  <svg
+    (click)="onCardClick()"
+    class="h-16 w-16 fill-[#888888] cursor-pointer hover:opacity-90 dark:fill-white"
+    viewBox="0 0 20 20"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+      clip-rule="evenodd"
+    />
+  </svg>
+</div>

@@ -1,0 +1,19 @@
+<td class="px-6 py-3 whitespace-nowrap text-sm text-gray-900">
+  {{ faculty.displayName }}
+</td>
+<td class="px-6 py-3 whitespace-nowrap text-sm text-gray-900">
+  {{ faculty.email }}
+</td>
+<td class="px-6 py-3 whitespace-nowrap text-sm text-gray-900">
+  {{ faculty.createdAt }}
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  <div *ngFor="let level of levels">
+    {{ level }}
+  </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  <div *ngFor="let area of areas">
+    {{ area }}
+  </div>
+</td>

@@ -1,0 +1,24 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  [selectedParentId]="query"
+  type="parameter"
+  dialogTitle="Add Parameter"
+  inputPlaceholder="Parameter Name"
+  (dialogClosed)="toggleAddParameterDialog()"
+></app-dashboard-dialog>
+<div
+  *ngIf="filesOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+  <!-- Came from the shared folder -->
+  <app-dashboard-add-card
+    (cardClicked)="toggleAddParameterDialog()"
+  ></app-dashboard-add-card>
+
+  <app-admin-parameter
+    *ngFor="let parameter of parameters"
+    [element]="parameter"
+  ></app-admin-parameter>
+</div>
+<router-outlet #filesOutlet="outlet"></router-outlet>

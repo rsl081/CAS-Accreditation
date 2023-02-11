@@ -1,0 +1,19 @@
+<div [ngClass]="{ 'cursor-not-allowed': areaInfo.facultyUserId != null }">
+  <div
+    #card
+    (click)="onSelect()"
+    class="h-full min-h-[100px] flex flex-col items-center rounded-lg p-3 gap-1 hover:shadow-lg transition-[shadow,transform] duration-100 select-none"
+    [ngClass]="{
+      ' bg-orange-100 border border-[#f96332] text-[#f96332] cursor-pointer hover:scale-[1.02]':
+        areaInfo.facultyUserId == null,
+      ' bg-gray-100 text-gray-500 pointer-events-none':
+        areaInfo.facultyUserId != null
+    }"
+  >
+    <div class="w-full flex flex-1 flex-col justify-between items-center">
+      <h2 class="text-base font-bold before:text-center text-center">
+        {{ areaInfo.arNameNo + ": " + areaInfo.arName }}
+      </h2>
+    </div>
+  </div>
+</div>

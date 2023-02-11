@@ -1,0 +1,70 @@
+<div
+  class="dark:bg-neutral-900 px-3 md:px-[1%] py-5 gap-3 flex flex-col rounded-md"
+  *ngIf="regSummaryOutlet.isActivated == false"
+>
+  <!-- Legend container -->
+  <div class="flex gap-4 p-3 rounded-lg">
+    <div class="flex gap-3 items-center">
+      <div class="w-5 h-5 bg-orange-100 border border-[#f96332]"></div>
+      <p class="font-bold text-[#f96332]">Available</p>
+    </div>
+    <div class="flex gap-3 items-center">
+      <div class="w-5 h-5 bg-gray-200"></div>
+      <p class="font-bold text-gray-500">Unavailable</p>
+    </div>
+    <div class="flex gap-3 items-center">
+      <div class="w-5 h-5 bg-[#f96332]"></div>
+      <p class="font-bold text-[#f96332]">Selected</p>
+    </div>
+  </div>
+
+  <!-- level container -->
+  <div
+    *ngFor="let level of levels; let levelIndex = index"
+    class="rounded-lg w-full mx-auto border border-gray-400"
+  >
+    <h1
+      class="text-lg tracking-wide font-bold text-gray-600 border-b border-gray-400 p-3 rounded-t-lg"
+    >
+      {{ level.levelName }}
+    </h1>
+    <div
+      class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-3 p-3 auto-rows-[1fr]"
+    >
+      <app-selectable-card
+        *ngFor="let area of twoDimensionalAreas[levelIndex]"
+        [areaInfo]="area"
+        (cardSelected)="addSelectedArea($event)"
+        (cardUnselected)="popSelectedArea($event)"
+      ></app-selectable-card>
+    </div>
+  </div>
+
+  <!-- error message -->
+  <div class="self-end flex items-center gap-1" *ngIf="!isSelectionValid">
+    <svg class="h-4 w-4 fill-red-500" viewBox="0 0 18 18">
+      <path
+        fill-rule="evenodd"
+        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+        clip-rule="evenodd"
+      />
+    </svg>
+    <p class="text-sm text-red-500">Please select atleast one area</p>
+  </div>
+
+  <div class="self-end flex justify-end gap-3 mt-3">
+    <button
+      class="min-w-[10rem] text-lg bg-[#888888] px-3 py-2 text-white rounded-lg"
+      (click)="back()"
+    >
+      Back
+    </button>
+    <button
+      (click)="proceedToSummary()"
+      class="min-w-[10rem] bg-[#f96332] px-3 py-2 text-lg text-white rounded-lg"
+    >
+      Next
+    </button>
+  </div>
+</div>
+<router-outlet #regSummaryOutlet="outlet"></router-outlet>

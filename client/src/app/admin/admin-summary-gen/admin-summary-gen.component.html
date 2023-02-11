@@ -1,0 +1,83 @@
+<app-edit-file-dialog
+  *ngIf="showEditFileDialog"
+  [file]="fileToEdit"
+  (dialogClosed)="toggleEditFileDialog()"
+></app-edit-file-dialog>
+
+<app-move-file-dialog
+  *ngIf="showMoveFileDialog"
+  [file]="fileToMove"
+></app-move-file-dialog>
+
+<div class="bg-white dark:bg-neutral-800 shadow-lg rounded-lg mx-4 mb-4">
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-3 bg-white dark:bg-neutral-800 rounded-t-md"
+  >
+    <h1 class="col-span-full text-2xl text-gray-600 dark:text-white font-bold">
+      Summary Gen
+    </h1>
+    <app-dashboard-metrics-card
+      type="Faculty"
+      cardLabel="Faculties"
+      [figures]="totalFaculties"
+    ></app-dashboard-metrics-card>
+    <app-dashboard-metrics-card
+      type="File"
+      cardLabel="Files"
+      [figures]="totalFiles"
+    ></app-dashboard-metrics-card>
+  </div>
+
+  <!-- Files -->
+  <div
+    class="flex flex-col gap-8 w-full p-4 items-center bg-[#2a2a2a] dark:bg-neutral-800"
+  >
+    <div class="w-full flex justify-start">
+      <h1 class="text-2xl text-white font-bold">Files</h1>
+    </div>
+    <div class="flex gap-4 w-full items-center flex-wrap">
+      <app-file-sort-button-group></app-file-sort-button-group>
+      <button
+        (click)="exportExcel('File')"
+        class="bg-[#606060] text-white px-3 py-1.5 rounded hover:opacity-90 mr-auto min-w-fit"
+      >
+        Export to Excel
+      </button>
+      <app-search-bar></app-search-bar>
+    </div>
+  </div>
+
+  <!-- buffer -->
+  <div class="h-20" *ngIf="!areFilesLoaded"></div>
+  <div
+    class="mx-auto my-8 text-gray-400"
+    *ngIf="areFilesLoaded && files.length < 1"
+  >
+    <p class="text-xl font-semibold text-center whitespace-nowrap">
+      No Files Found
+    </p>
+  </div>
+
+  <div class="w-full overflow-x-auto" *ngIf="files.length > 0">
+    <app-file-table [files]="files"></app-file-table>
+  </div>
+
+  <!-- faculty -->
+  <div class="w-full">
+    <div class="flex flex-col gap-4 w-full p-4 items-center bg-[#2a2a2a]">
+      <div class="w-full flex justify-between">
+        <h1 class="text-2xl text-white font-bold">Faculty</h1>
+        <button
+          (click)="exportExcel('Faculty')"
+          class="bg-[#606060] text-white px-3 py-1.5 rounded hover:opacity-90 min-w-fit"
+        >
+          Export to Excel
+        </button>
+      </div>
+    </div>
+
+    <div class="w-full overflow-x-auto">
+      <app-faculty-table [faculty]="faculty"></app-faculty-table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="relative">
+  <input
+    [ngClass]="
+      controlDir?.control?.touched
+        ? !controlDir.control.valid
+          ? 'is-invalid'
+          : 'is-valid'
+        : null
+    "
+    [type]="type"
+    (input)="onChange($event.target.value)"
+    (blur)="onTouched()"
+    #input
+    class="bg-gray-50 dark:bg-neutral-600 text-gray-700 dark:text-white leading-tight border border-gray-400 rounded-full focus:outline-none focus:shadow-outline focus:border-[#f96332] w-full h-10 b p-5"
+    placeholder="{{ label }}"
+  />
+
+  <div
+    class="absolute mt-3 mr-3 right-0 fa fa-spinner fa-spin loader"
+    *ngIf="controlDir?.control?.status === 'PENDING'"
+  ></div>
+
+  <div class="flex items-center gap-1 self-start mb-1">
+    <div *ngIf="!controlDir?.control?.valid && controlDir?.control?.touched">
+      <span *ngIf="controlDir.control.errors?.required">
+        <span class="fa fa-exclamation text-sm text-red-500"></span>
+        <span class="font-sans text-sm text-red-500">
+          {{ label }} is required
+        </span>
+      </span>
+
+      <span
+        *ngIf="
+          controlDir.control.errors?.pattern &&
+          label.toLowerCase() === 'display name'
+        "
+      >
+        <span class="fa fa-exclamation text-sm text-red-500"></span>
+        <span class="font-sans text-sm text-red-500">
+          Invalid {{ label }}
+        </span>
+      </span>
+
+      <span
+        *ngIf="
+          controlDir.control.errors?.pattern &&
+          label.toLowerCase() === 'email address'
+        "
+      >
+        <span class="fa fa-exclamation text-sm text-red-500"></span>
+        <span class="font-sans text-sm text-red-500">
+          Invalid email address
+        </span>
+      </span>
+
+      <span
+        *ngIf="
+          controlDir.control.errors?.pattern &&
+          label.toLowerCase() === 'password'
+        "
+      >
+        <span class="fa fa-exclamation text-sm text-red-500"></span>
+        <span class="font-sans text-sm text-red-500">
+          Password must have 1 uppercase, 1 lowercase, 1 number, 1 non
+          alphanumeric and at least 6 characters
+        </span>
+      </span>
+    </div>
+
+    <div *ngIf="!controlDir?.control?.valid && controlDir?.control?.dirty">
+      <span *ngIf="controlDir.control.errors?.emailExists">
+        <span class="fa fa-exclamation text-sm text-red-500"></span>
+        <span class="font-sans text-sm text-red-500">
+          Email address is in use
+        </span>
+      </span>
+    </div>
+
+    <div *ngIf="!controlDir?.control?.valid && controlDir?.control?.dirty">
+      <span *ngIf="controlDir.control.errors?.emailNotFound">
+        <span class="fa fa-exclamation text-sm text-red-500"></span>
+        <span class="font-sans text-sm text-red-500">
+          No account found with that email address
+        </span>
+      </span>
+    </div>
+  </div>
+</div>

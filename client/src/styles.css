@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.xng-breadcrumb-root{
+    background-color: #F3F4F6; /* gray-100 */
+    padding: 0.75rem;
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+label.xng-breadcrumb-trail{
+    color: #f96332;
+    font-weight: 600;
+}
+
+#toast-container>.toast-success {
+    background-color: #18ce0f;
+    color: white;
+    box-shadow: none;
+}
+
+#toast-container>.toast-error {
+    background-color: #ff3636;
+    color: white;
+    box-shadow: none;
+}

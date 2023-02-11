@@ -1,0 +1,37 @@
+<!-- faculty restricted files main container -->
+<div class="flex flex-col w-full items-center p-2 gap-8">
+  <app-alert-message
+    alertType="Error"
+    alertTitle="Atention"
+    alertMessage="Restricted files. You cannot edit here."
+  ></app-alert-message>
+  <h1 class="text-2xl font-bold text-gray-600">{{ parameterName }}</h1>
+  <!-- button container -->
+  <div class="flex gap-4">
+    <button
+      disabled
+      class="w-36 rounded-full relative overflow-hidden inline-flex group items-center justify-center bg-red-700 text-white p-2 active:shadow-none shadow-lg"
+    >
+      <!-- hover effect -->
+      <span
+        class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-36 group-hover:h-36 opacity-10"
+      ></span>
+      <span class="relative">Print Table</span>
+    </button>
+    <button
+      class="w-36 rounded-full relative overflow-hidden inline-flex group items-center justify-center bg-red-700 text-white p-2 active:shadow-none shadow-lg"
+    >
+      <!-- hover effect -->
+      <span
+        class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-36 group-hover:h-36 opacity-10"
+      ></span>
+      <span class="relative">Add File</span>
+    </button>
+  </div>
+  <!-- search bar -->
+  <app-faculty-restricted-file-search-bar></app-faculty-restricted-file-search-bar>
+  <!-- passing files array property to child element app-admin-file-table -->
+  <app-faculty-restricted-file-table
+    [files]="fileArray"
+  ></app-faculty-restricted-file-table>
+</div>

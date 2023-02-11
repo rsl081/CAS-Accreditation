@@ -1,0 +1,40 @@
+<app-alert-message
+  alertType="Error"
+  alertTitle="Atention"
+  alertMessage="Restricted files. You cannot edit, move or delete here."
+></app-alert-message>
+
+<div class="flex flex-col w-full items-center gap-3">
+  <h1 class="text-2xl font-bold text-gray-600">{{ parameterName }}</h1>
+  <!-- button container -->
+  <div class="flex flex-col gap-8 w-full p-4 items-center bg-[#2a2a2a]">
+    <div class="w-full flex justify-start">
+      <h1 class="text-2xl text-white font-bold">Files</h1>
+    </div>
+    <div class="flex gap-4 w-full items-center flex-wrap">
+      <app-file-sort-button-group></app-file-sort-button-group>
+      <button
+        (click)="exportExcel()"
+        class="bg-[#606060] text-white px-3 py-1.5 rounded hover:opacity-90 mr-auto"
+      >
+        Export to Excel
+      </button>
+      <app-search-bar></app-search-bar>
+    </div>
+  </div>
+
+  <!-- buffer -->
+  <div class="h-20" *ngIf="!areFilesLoaded"></div>
+  <div
+    class="mt-5 mb-8 text-gray-400"
+    *ngIf="areFilesLoaded && files.length < 1"
+  >
+    <p class="text-xl font-semibold text-center whitespace-nowrap">
+      No Files Found
+    </p>
+  </div>
+
+  <div class="w-full mb-4 overflow-x-auto" *ngIf="files.length > 0">
+    <app-file-table [files]="files"></app-file-table>
+  </div>
+</div>
