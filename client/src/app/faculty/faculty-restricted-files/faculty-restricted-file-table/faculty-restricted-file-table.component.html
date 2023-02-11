@@ -1,0 +1,73 @@
+<div class="flex flex-col">
+  <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+      <div class="overflow-hidden">
+        <table class="min-w-full">
+          <thead class="bg-white border-b">
+            <tr>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Faculty
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                File Name
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-left"
+              >
+                Size
+              </th>
+              <th
+                scope="col"
+                class="text-sm font-medium text-gray-900 px-6 py-4 text-center"
+              >
+                Action
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- table rows -->
+            <tr
+              class="border-b"
+              *ngFor="let file of files; let i = index"
+              [ngClass]="i % 2 == 0 ? 'bg-gray-100' : 'bg-white'"
+            >
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                {{ file.faculty }}
+              </td>
+              <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                {{ file.fileName }}
+              </td>
+              <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+                {{ file.size }}
+              </td>
+              <td
+                class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap flex gap-2"
+              >
+                <button
+                  type="button"
+                  class="btn p-1 bg-sky-800 text-white rounded hover:bg-sky-700 hover:shadow-lg focus:bg-sky-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-sky-800 active:shadow-lg transition duration-150 ease-in-out"
+                >
+                  <svg class="h-5 w-5" viewBox="0 0 20 20">
+                    <path
+                      fill-rule="evenodd"
+                      d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                      clip-rule="evenodd"
+                      fill="currentColor"
+                    />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

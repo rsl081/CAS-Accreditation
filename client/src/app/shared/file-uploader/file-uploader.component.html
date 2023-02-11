@@ -1,0 +1,101 @@
+<div
+  class="w-full mx-auto flex flex-wrap gap-4 p-4 text-gray-700 dark:bg-neutral-800"
+  [ngClass]="{ 'border border-gray-400 rounded-md': !isOnDialog }"
+>
+  <!-- left -->
+  <div class="flex-1 flex flex-col gap-4">
+    <h3 class="dark:text-white text-2xl">
+      {{ !isOnDialog ? "Add File" : "Update File" }}
+    </h3>
+
+    <div
+      ng2FileDrop
+      [ngClass]="{ 'nv-file-over': hasBaseDropZoneOver }"
+      (fileOver)="fileOverBase($event)"
+      [uploader]="uploader"
+      class="my-drop-zone p-7 bg-gray-100 dark:bg-neutral-700 border-[3px] border-dashed border-gray-300 text-gray-500 rounded"
+    >
+      Drag and drop your file here
+    </div>
+
+    <input
+      class="dark:text-white"
+      type="file"
+      ng2FileSelect
+      [uploader]="uploader"
+    />
+  </div>
+
+  <!-- right -->
+  <div class="flex-[4] flex flex-col gap-2 min-w-[400px]">
+    <h3 class="text-2xl dark:text-white">Upload queue</h3>
+    <p class="dark:text-white">Queue length: {{ uploader?.queue?.length }}</p>
+
+    <table class="table">
+      <thead class="border-b border-gray-300">
+        <tr>
+          <th class="w-[70%] text-left dark:text-white">Name</th>
+          <th class="text-left dark:text-white">Size</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of uploader.queue">
+          <td>
+            <strong>{{ item?.file?.name }}</strong>
+          </td>
+          <td *ngIf="uploader.options.isHTML5" nowrap class="text-left">
+            {{ item?.file?.size / 1024 / 1024 | number: ".2" }} MB
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div>
+      <div class="dark:text-white">
+        Queue progress:
+        <div class="w-full bg-gray-100 rounded-md h-4 progress">
+          <div
+            class="bg-[#18ce0f] rounded-md h-full"
+            role="progressbar"
+            [ngStyle]="{ width: uploader.progress + '%' }"
+          ></div>
+        </div>
+      </div>
+      <div class="flex gap-3 justify-end mt-3">
+        <button
+          [appDisabledBtn]="!uploader?.queue?.length"
+          disabledBackgroundColor="#ffedd5"
+          enabledBackgroundColor="#f96332"
+          type="button"
+          class="bg-[#f96332] text-white p-2 rounded hover:opacity-90"
+          (click)="onUpload()"
+          [disabled]="!uploader.getNotUploadedItems().length"
+        >
+          <i class="fa fa-upload"></i> Upload
+        </button>
+        <button
+          [appDisabledBtn]="!uploader?.queue?.length"
+          disabledBackgroundColor="#f9e1ba"
+          enabledBackgroundColor="#ffb236"
+          type="button"
+          class="bg-[#ffb236] text-white p-2 rounded hover:opacity-90"
+          (click)="uploader.cancelAll()"
+          [disabled]="!uploader.isUploading"
+        >
+          <i class="fa fa-ban"></i> Cancel
+        </button>
+        <button
+          [appDisabledBtn]="!uploader?.queue?.length"
+          disabledBackgroundColor="#fecaca"
+          enabledBackgroundColor="#ff3636"
+          type="button"
+          class="bg-[#ff3636] text-white p-2 rounded hover:opacity-90"
+          (click)="uploader.clearQueue()"
+          [disabled]="!uploader.queue.length"
+        >
+          <i class="fa fa-trash"></i> Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

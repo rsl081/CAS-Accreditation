@@ -1,0 +1,94 @@
+<div class="dark" [ngClass]="{ dark: isDarkMode() }">
+  <nav
+    style="box-shadow: 10px 0 25px 0px rgba(0, 0, 0, 0.25)"
+    class="w-64 fixed top-0 bottom-0 -left-64 sm:left-0 z-10 overflow-y-auto bg-[#ff3636] dark:bg-neutral-800 text-white flex flex-col"
+    [@toggleNav]="stateName"
+    [ngClass]="{ 'left-0': isNavOpen() }"
+  >
+    <div class="flex items-center justify-center mt-8">
+      <img
+        class="w-28 rounded-full"
+        [src]="user.photoUrl"
+        alt="Profile picture"
+      />
+    </div>
+    <p class="font-bold text-center mt-4 text-2xl mb-8">
+      {{ user.displayName }}
+    </p>
+    <div>
+      <hr
+        style="
+          width: 85%;
+          margin: auto;
+          color: #e0f2fe;
+          background-color: #e0f2fe;
+        "
+      />
+    </div>
+    <ul class="mt-4 text-center text-lg font-normal p-4">
+      <li>
+        <a
+          routerLink="level"
+          routerLinkActive="bg-white text-[#ff3636] hover:bg-white dark:bg-neutral-700 dark:text-white"
+          [routerLinkActiveOptions]="{ exact: false }"
+          class="block py-2 hover:bg-white/20 rounded-full mb-2 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+          (click)="closeSidebar()"
+          >Dashboard</a
+        >
+      </li>
+      <li>
+        <a
+          routerLink="edit-profile"
+          routerLinkActive="bg-white text-[#ff3636] hover:bg-white dark:bg-neutral-700 dark:text-white"
+          [routerLinkActiveOptions]="{ exact: true }"
+          class="block py-2 hover:bg-white/20 rounded-full mb-2 dark:hover:bg-neutral-700 dark:focus:bg-neutral-700"
+          (click)="closeSidebar()"
+          >Edit Profile</a
+        >
+      </li>
+    </ul>
+
+    <div>
+      <hr
+        style="
+          width: 85%;
+          margin: auto;
+          color: #e0f2fe;
+          background-color: #e0f2fe;
+        "
+      />
+    </div>
+
+    <!-- Darkmode -->
+    <div class="flex flex-col text-center text-lg text-white py-4">
+      <a class="block py-2">Dark Mode</a>
+      <label for="toggleB" class="place-self-center cursor-pointer">
+        <!-- toggle -->
+        <div class="relative">
+          <!-- input -->
+          <input
+            (click)="toggleDarkMode()"
+            type="checkbox"
+            id="toggleB"
+            class="sr-only"
+          />
+          <!-- line -->
+          <div class="block bg-gray-600 w-12 h-6 rounded-full"></div>
+          <!-- dot -->
+          <div
+            class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"
+          ></div>
+        </div>
+      </label>
+    </div>
+
+    <div class="flex items-end justify-center flex-1 pb-4 px-4">
+      <button
+        class="w-full text-lg px-4 py-2 hover:bg-white/20 font-normal rounded-full"
+        (click)="logout()"
+      >
+        Logout
+      </button>
+    </div>
+  </nav>
+</div>

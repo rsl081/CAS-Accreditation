@@ -1,0 +1,27 @@
+<button (click)="onToggle()" class="mt-3">
+  <div
+    class="w-6 h-6 relative rotate-0 transition-all duration-500 ease-in-out sm:hidden cursor-pointer"
+  >
+    <span
+      class="block absolute h-[3px] w-full bg-white rounded-[9px] opacity-100 left-0 duration-[250ms] ease-in-out"
+      [ngClass]="{
+        'top-2 rotate-[135deg]': open,
+        'top-0 rotate-0': !open
+      }"
+    ></span>
+    <span
+      class="block absolute h-[3px] w-full bg-white rounded-[9px] opacity-100 left-0 rotate-0 duration-[250ms] ease-in-out top-2"
+      [ngClass]="{
+        'opacity-0 -left-[60px]': open,
+        'opacity-100 left-0': !open
+      }"
+    ></span>
+    <span
+      class="block absolute h-[3px] w-full bg-white rounded-[9px] opacity-100 left-0 duration-[250ms] ease-in-out"
+      [ngClass]="{
+        'top-2 -rotate-[135deg]': open,
+        'top-4 rotate-0': !open
+      }"
+    ></span>
+  </div>
+</button>

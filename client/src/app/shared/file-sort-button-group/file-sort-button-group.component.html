@@ -1,0 +1,39 @@
+<div class="flex gap-3">
+  <div class="relative border border-gray-400 p-2 flex gap-2 rounded">
+    <span
+      class="dark:bg-neutral-800 text-[10px] uppercase absolute bg-[#2a2a2a] left-2 bottom-8 px-2 text-white font-semibold"
+      ><p class="dark:text-white">Sort by name</p></span
+    >
+    <button
+      (click)="sortNameAscending()"
+      class="bg-[#606060] hover:opacity-90 text-white p-1 text-[10px] uppercase rounded focus:bg-[#888888] focus:text-white"
+    >
+      Ascending
+    </button>
+    <button
+      (click)="sortNameDescending()"
+      class="bg-[#606060] hover:opacity-90 text-white p-1 text-[10px] uppercase rounded focus:bg-[#888888] focus:text-white"
+    >
+      Descending
+    </button>
+  </div>
+
+  <div class="relative border border-gray-400 p-2 flex gap-2 rounded">
+    <span
+      class="dark:bg-neutral-800 text-[10px] uppercase absolute bg-[#2a2a2a] left-2 bottom-8 px-2 text-white font-semibold"
+      ><p class="dark:text-white">Sort by file name</p></span
+    >
+    <button
+      (click)="sortfileNameAscending()"
+      class="bg-[#606060] hover:opacity-90 text-white p-1 text-[10px] uppercase rounded focus:bg-[#888888] focus:text-white"
+    >
+      Ascending
+    </button>
+    <button
+      (click)="sortfileNameDescending()"
+      class="bg-[#606060] hover:opacity-90 text-white p-1 text-[10px] uppercase rounded focus:bg-[#888888] focus:text-white"
+    >
+      Descending
+    </button>
+  </div>
+</div>

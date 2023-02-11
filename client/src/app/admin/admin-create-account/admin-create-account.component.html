@@ -1,0 +1,128 @@
+<div class="bg-white rounded-md mx-4 mb-4 dark:bg-neutral-800">
+  <app-breadcrumb></app-breadcrumb>
+  <div
+    *ngIf="selectAreaOutlet.isActivated == false"
+    class="mx-auto flex flex-col w-[90%] md:w-1/2 lg:w-2/5 xl:w-1/3 py-5 h-auto text-gray-700"
+  >
+    <h1 class="dark:text-white text-2xl font-bold text-center mb-5">
+      Create Account
+    </h1>
+
+    <!-- Registration Form -->
+    <form
+      [formGroup]="registrationForm"
+      class="px-4"
+      autocomplete="off"
+      (ngSubmit)="onSubmit()"
+    >
+      <!-- Input Field Name -->
+      <label class="dark:text-white text-base mb-2 block">Name</label>
+      <app-text-input
+        formControlName="name"
+        [label]="'Display Name'"
+      ></app-text-input>
+
+      <!-- Input Field Email -->
+      <label class="dark:text-white text-base block mb-2">Email</label>
+      <app-text-input
+        formControlName="email"
+        [label]="'Email address'"
+      ></app-text-input>
+
+      <!-- Input Field Password -->
+      <label class="dark:text-white text-base block mb-2">Password</label>
+      <app-text-input
+        #input
+        formControlName="password"
+        [label]="'Password'"
+        [type]="'password'"
+      ></app-text-input>
+
+      <div class="mb-2">
+        <input type="checkbox" (click)="togglePasswordVisibility(input)" />
+        <span class="dark:text-white ml-2 text-sm">Show Password</span>
+      </div>
+      <label class="dark:text-white text-base block mb-2">User Type</label>
+
+      <div class="relative text-left w-min">
+        <button
+          type="button"
+          class="inline-flex justify-center w-full rounded-md border border-gray-400 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 dark:bg-neutral-600 dark:border-none dark:text-white"
+          aria-expanded="true"
+          aria-haspopup="true"
+          (click)="toggleDropdownMenu()"
+        >
+          <span>{{ selectedUserType }}</span>
+          <svg
+            class="-mr-1 ml-2 h-5 w-5 transition-transform duration-200"
+            [ngClass]="{ 'rotate-180': showDropdownMenu }"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </button>
+
+        <div
+          class="origin-top absolute left-0 mt-2 min-w-[10rem] rounded-md shadow-sm bg-white focus:outline-none duration-200 transition-[opacity,transform] dark:bg-neutral-600"
+          [ngClass]="{
+            'scale-y-0  ease-out ': !showDropdownMenu,
+            'scale-y-100,  ease-in ': showDropdownMenu
+          }"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabindex="-1"
+        >
+          <div role="none">
+            <!-- Active: "bg-gray-100 text-gray-900", Not Active: "text-gray-700" -->
+            <a
+              #faculty
+              (click)="onUserTypeSelect(faculty)"
+              class="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-600 dark:text-white dark:hover:bg-neutral-500"
+              role="menuitem"
+              tabindex="-1"
+              id="menu-item-0"
+              >Faculty</a
+            >
+            <a
+              #accreditor
+              (click)="onUserTypeSelect(accreditor)"
+              class="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-600 dark:text-white dark:hover:bg-neutral-500"
+              role="menuitem"
+              tabindex="-1"
+              id="menu-item-1"
+              >Accreditor</a
+            >
+            <a
+              #admin
+              (click)="onUserTypeSelect(admin)"
+              class="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-600 dark:text-white dark:hover:bg-neutral-500"
+              role="menuitem"
+              tabindex="-1"
+              id="menu-item-2"
+              >Admin</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Next/Submit Btn -->
+      <button
+        [appDisabledBtn]="!isItemSelected"
+        disabledBackgroundColor="#ffedd5"
+        enabledBackgroundColor="#f96332"
+        type="submit"
+        class="w-full text-lg bg-[#f96332] px-3 py-2 text-white rounded-lg mt-5"
+      >
+        {{ setButtonLabel() }}
+      </button>
+    </form>
+  </div>
+  <router-outlet #selectAreaOutlet="outlet"></router-outlet>
+</div>

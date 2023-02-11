@@ -1,0 +1,19 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  type="area"
+  dialogTitle="Add Area"
+  inputPlaceholder="Area Name"
+  (dialogClosed)="toggleAddAreaDialog()"
+></app-dashboard-dialog>
+<!-- <app-admin-files *ngIf="parameterOutlet.isActivated == false"></app-admin-files> -->
+<div
+  *ngIf="parameterOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 m-3 p-3 auto-rows-[1fr]"
+>
+  <app-dashboard-add-card
+    (cardClicked)="toggleAddAreaDialog()"
+  ></app-dashboard-add-card>
+  <app-admin-area *ngFor="let area of areas" [element]="area"> </app-admin-area>
+</div>
+<router-outlet #parameterOutlet="outlet"></router-outlet>

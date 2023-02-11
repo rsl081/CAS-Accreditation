@@ -1,0 +1,8 @@
+.my-drop-zone,
+.progress{
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);   
+}
+
+.nv-file-over {
+    border-color: #f96332;
+}

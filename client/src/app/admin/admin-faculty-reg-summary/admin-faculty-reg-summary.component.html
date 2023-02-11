@@ -1,0 +1,71 @@
+<div class="my-4 mx-auto w-full lg:w-1/2 h-auto">
+  <div class="text-gray-700 rounded-lg py-8">
+    <h1 class="text-2xl font-bold text-center mb-8">Account Summary</h1>
+    <div class="px-4 grid grid-cols-1 lg:grid-cols-2 gap-3">
+      <div class="col-span-1 flex gap-3 items-center">
+        <label class="text-base font-bold">Name:</label><br />
+        <input
+          required
+          type="text"
+          disabled
+          class="mb-2 text-gray-700 leading-tight mt-2 w-full"
+          value="{{ name }}"
+        />
+      </div>
+      <div class="col-span-1 flex gap-3 items-center">
+        <label class="text-base font-bold">Email:</label><br />
+        <input
+          required
+          type="username"
+          disabled
+          class="mb-2 text-gray-700 leading-tight mt-2 w-full"
+          value="{{ email }}"
+        />
+      </div>
+      <div class="col-span-1">
+        <div class="flex gap-3 items-center">
+          <label class="text-base font-bold">Password:</label><br />
+          <input
+            #input
+            required
+            type="password"
+            disabled
+            class="mb-2 text-gray-700 leading-tight mt-2 w-full"
+            value="{{ password }}"
+          />
+        </div>
+        <input type="checkbox" (click)="togglePasswordVisibility(input)" />
+        <span class="ml-2 text-sm">Show Password</span>
+      </div>
+      <div class="col-span-1 flex gap-3 items-center my-2">
+        <label class="text-base font-bold">User Type:</label>
+        <p>{{ userType }}</p>
+      </div>
+      <div class="col-span-full flex gap-3 items-center my-2">
+        <label class="text-base font-bold">Area:</label>
+        <ul class="flex text-cyan-50 flex-wrap gap-2">
+          <li
+            *ngFor="let areaName of areaNames; let i = index"
+            class="p-1 bg-orange-100 border border-[#f96332] rounded text-[#f96332]"
+          >
+            {{ areaName }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="flex justify-end gap-3 p-4">
+  <button
+    class="min-w-[10rem] text-lg bg-[#888888] px-3 py-2 text-white rounded-lg"
+    (click)="back()"
+  >
+    Back
+  </button>
+  <button
+    (click)="onRegister()"
+    class="min-w-[10rem] text-lg bg-[#f96332] px-3 py-2 text-white rounded-lg"
+  >
+    Register
+  </button>
+</div>

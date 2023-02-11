@@ -1,0 +1,99 @@
+<div
+  class="dark:bg-neutral-800 w-[90%] lg:w-[60%] mx-auto flex flex-col bg-white text-gray-700 shadow-lg rounded-md"
+>
+  <h1 class="dark:text-white text-2xl font-bold text-center my-5">
+    Edit Profile
+  </h1>
+
+  <div class="w-full mx-auto flex flex-wrap gap-8 p-4 text-gray-700">
+    <img
+      #profilePhoto
+      class="h-28 w-28 rounded-full object-cover mx-auto"
+      [src]="sanitizer.bypassSecurityTrustUrl(localImageUrl)"
+      alt=""
+    />
+
+    <div class="flex-[4] flex flex-col gap-2 min-w-[400px]">
+      <h3 class="dark:text-white text-2xl">Upload queue</h3>
+
+      <table class="table">
+        <thead class="border-b border-gray-300">
+          <tr>
+            <th class="dark:text-white w-[70%] text-left">File Name</th>
+            <th class="dark:text-white text-left">Size</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of uploader.queue">
+            <td>
+              <strong>{{ item?.file?.name }}</strong>
+            </td>
+            <td *ngIf="uploader.options.isHTML5" nowrap class="text-left">
+              {{ item?.file?.size / 1024 / 1024 | number: ".2" }} MB
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="dark:text-white">
+        Queue progress:
+        <div class="w-full bg-gray-100 rounded-md h-4 progress">
+          <div
+            class="bg-[#18ce0f] rounded-md h-full"
+            role="progressbar"
+            [ngStyle]="{ width: uploader.progress + '%' }"
+          ></div>
+        </div>
+      </div>
+
+      <div class="w-full mt-4 flex justify-end gap-4">
+        <div class="file-input">
+          <input
+            type="file"
+            ng2FileSelect
+            [uploader]="uploader"
+            class="file opacity-0 w-[0.1px] h-[0.1px] absolute"
+            id="file"
+          />
+          <label
+            for="file"
+            class="min-w-[7rem] p-2 bg-[#888888] text-white rounded relative cursor-pointer flex justify-center items-center transition-transform duration-200 ease-out hover:opacity-90"
+          >
+            Select Image
+          </label>
+        </div>
+
+        <button
+          [appDisabledBtn]="!uploader?.queue?.length"
+          disabledBackgroundColor="#fecaca"
+          enabledBackgroundColor="#dc2626"
+          type="button"
+          class="min-w-[7rem] bg-[#ff3636] text-white p-2 rounded hover:opacity-90"
+          (click)="uploader.clearQueue()"
+          [disabled]="!uploader.queue.length"
+        >
+          <i class="fa fa-trash"></i> Remove
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr class="border-gray-400" />
+  <div class="w-full flex flex-col justify-center items-center gap-4 p-4">
+    <form [formGroup]="nameForm" class="w-full" autocomplete="off">
+      <!-- Input Field Name -->
+      <label class="dark:text-white text-base mb-2 block">Name</label>
+      <app-text-input
+        formControlName="name"
+        [label]="'Display Name'"
+      ></app-text-input>
+    </form>
+
+    <button
+      type="submit"
+      class="bg-[#f96332] text-white p-2 rounded self-end min-w-[7rem] hover:opacity-90"
+      (click)="onUpload()"
+    >
+      <i class="fa fa-save"></i> Save
+    </button>
+  </div>
+</div>

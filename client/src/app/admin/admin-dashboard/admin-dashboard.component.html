@@ -1,0 +1,32 @@
+<div
+  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-3 p-3 md:mx-4 mb-4 shadow-sm rounded-md bg-white dark:bg-neutral-800"
+>
+  <h1 class="col-span-full text-2xl text-gray-600 dark:text-white font-bold">
+    Dashboard
+  </h1>
+  <app-dashboard-metrics-card
+    type="Faculty"
+    cardLabel="Faculty"
+    [figures]="totalFaculties"
+  ></app-dashboard-metrics-card>
+  <app-dashboard-metrics-card
+    type="Accreditor"
+    cardLabel="Accreditors"
+    [figures]="totalAccreditors"
+  ></app-dashboard-metrics-card>
+  <app-dashboard-metrics-card
+    type="Admin"
+    cardLabel="Administrators"
+    [figures]="totalAdmins"
+  ></app-dashboard-metrics-card>
+  <app-dashboard-metrics-card
+    type="File"
+    cardLabel="Files"
+    [figures]="totalFiles"
+  ></app-dashboard-metrics-card>
+</div>
+<!-- main container of admin dashboard -->
+<div class="bg-white dark:bg-neutral-800 shadow-sm md:mx-4 mb-4 rounded-md">
+  <app-breadcrumb></app-breadcrumb>
+  <router-outlet></router-outlet>
+</div>

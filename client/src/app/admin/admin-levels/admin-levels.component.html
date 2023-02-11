@@ -1,0 +1,23 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  type="level"
+  dialogTitle="Add Level"
+  inputPlaceholder="Level Name"
+  (dialogClosed)="toggleAddLevelDialog()"
+></app-dashboard-dialog>
+<div
+  *ngIf="areaOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+  <!-- Came from the shared folder -->
+  <app-dashboard-add-card
+    (cardClicked)="toggleAddLevelDialog()"
+  ></app-dashboard-add-card>
+
+  <app-admin-level
+    *ngFor="let level of levels"
+    [element]="level"
+  ></app-admin-level>
+</div>
+<router-outlet #areaOutlet="outlet"></router-outlet>

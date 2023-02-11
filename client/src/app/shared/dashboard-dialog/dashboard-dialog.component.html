@@ -1,0 +1,44 @@
+<app-overlay zIndex="20"></app-overlay>
+<form [formGroup]="addDirectoryForm" (ngSubmit)="onSubmit()" autocomplete="off">
+  <div
+    class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg flex flex-col gap-2 justify-center items-center z-40 fixed w-11/12 sm:w-1/2 lg:w-1/3 xl:w-1/4 top-0 left-0 right-0 bottom-0 m-auto h-min p-4"
+  >
+    <h2 class="mb-4 font-bold text-xl text-gray-600 dark:text-white">
+      {{ dialogTitle }}
+    </h2>
+
+    <app-text-input
+      class="w-full"
+      *ngIf="type === 'area'"
+      formControlName="areaNameNo"
+      label="Area Number"
+    ></app-text-input>
+
+    <app-text-input
+      class="w-full"
+      formControlName="prefName"
+      [label]="inputPlaceholder"
+    ></app-text-input>
+
+    <div class="flex w-full gap-3">
+      <button
+        type="submit"
+        class="flex-1 max-w-xs rounded-full relative overflow-hidden inline-flex group items-center justify-center bg-[#f96332] text-white px-10 py-2"
+      >
+        <span
+          class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-80 group-hover:h-80 lg:group-hover:w-56 lg:group-hover:h-56 xl:group-hover:w-80 xl:group-hover:h-80 opacity-10"
+        ></span>
+        <span class="relative">Add</span>
+      </button>
+      <button
+        class="flex-1 max-w-xs rounded-full relative overflow-hidden inline-flex group items-center justify-center bg-[#888888] text-white px-10 py-2"
+        (click)="closeDialog()"
+      >
+        <span
+          class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-80 group-hover:h-80 lg:group-hover:w-56 lg:group-hover:h-56 xl:group-hover:w-80 xl:group-hover:h-80 opacity-10"
+        ></span>
+        <span class="relative">Cancel</span>
+      </button>
+    </div>
+  </div>
+</form>

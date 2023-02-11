@@ -1,0 +1,76 @@
+<td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+  <div *ngIf="file.status; else elseBlockCatergory">Common File</div>
+  <ng-template #elseBlockCatergory>Specific File</ng-template>
+</td>
+<td class="text-sm text-gray-900 px-6 py-3 whitespace-nowrap">
+  {{ file.name }}
+</td>
+<td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+  {{ file.fileName }}
+</td>
+<td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+  {{ file.size }}
+</td>
+<td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+  {{ file.createdAt }}
+</td>
+<td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">
+  {{ file.lastModifiedAt }}
+</td>
+
+<td class="text-sm text-[#ff3636] px-6 py-4 whitespace-nowrap" 
+    [ngClass]="{'text-[#18CE0F]' : file.status}">
+  <div *ngIf="file.status; else elseBlock">Approved</div>
+  <ng-template #elseBlock>Stand by</ng-template>
+</td>
+<td
+  class="flex justify-center text-sm text-gray-900 px-6 py-4 whitespace-nowrap gap-2"
+>
+  <button
+    title="Download"
+    (click)="onDownload()"
+    type="button"
+    class="btn px-2 py-1 bg-[#18ce0f] text-white rounded hover:brightness-95 focus:shadow-lg focus:outline-none active:shadow-lg transition duration-150 ease-in-out"
+  >
+    <i class="fa fa-download"></i>
+  </button>
+  <button
+    [appDisabledBtn]="
+      role == 'Accreditor' || currentAreaControl === 'non-owner'
+    "
+    disabledBackgroundColor="#f9e1ba"
+    enabledBackgroundColor="#ffb236"
+    title="Edit"
+    (click)="onEdit()"
+    type="button"
+    class="btn px-2 py-1 bg-[#ffb236] text-white rounded hover:brightness-95 focus:shadow-lg focus:outline-none active:shadow-lg transition duration-150 ease-in-out"
+  >
+    <i class="fa fa-edit"></i>
+  </button>
+  <button
+    [appDisabledBtn]="
+      role == 'Accreditor' || currentAreaControl === 'non-owner'
+    "
+    disabledBackgroundColor="#bfdbfe"
+    enabledBackgroundColor="#2ca8ff"
+    title="Move"
+    (click)="onMove()"
+    type="button"
+    class="btn px-2 py-1 bg-[#2ca8ff] text-white rounded hover:brightness-95 focus:shadow-lg focus:outline-none active:shadow-lg transition duration-150 ease-in-out"
+  >
+    <i class="fa fa-folder"></i>
+  </button>
+  <button
+    [appDisabledBtn]="
+      role == 'Accreditor' || currentAreaControl === 'non-owner'
+    "
+    disabledBackgroundColor="#fecaca"
+    enabledBackgroundColor="#ff3636"
+    title="Delete"
+    (click)="onRemove()"
+    type="button"
+    class="btn px-2 py-1 bg-[#ff3636] text-white rounded hover:brightness-95 focus:shadow-lg focus:outline-none active:shadow-lg transition duration-150 ease-in-out"
+  >
+    <i class="fa fa-trash"></i>
+  </button>
+</td>

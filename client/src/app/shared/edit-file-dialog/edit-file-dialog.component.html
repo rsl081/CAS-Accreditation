@@ -1,0 +1,21 @@
+<app-overlay zIndex="20"></app-overlay>
+<div
+  class="bg-white dark:bg-neutral-800 rounded-lg shadow-lg flex flex-col justify-center items-center z-40 fixed w-11/12 md:w-1/2 xl:w-1/3 top-0 left-0 right-0 bottom-0 m-auto h-min p-4"
+>
+  <svg
+    class="h-5 w-5 self-end cursor-pointer dark:fill-white"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    (click)="closeDialog()"
+  >
+    <path
+      fill-rule="evenodd"
+      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+      clip-rule="evenodd"
+    />
+  </svg>
+  <app-file-uploader
+    [isOnDialog]="true"
+    [fileToEdit]="file"
+  ></app-file-uploader>
+</div>

@@ -1,0 +1,14 @@
+<div class="dark" [ngClass]="{ dark: isDarkMode() }">
+  <app-header [showMenu]="true"></app-header>
+  <div class="bg-[#d7d8dc] dark:bg-neutral-900 min-h-screen">
+    <!-- overlay when the sidebar is open in mobile view -->
+    <app-overlay *ngIf="isNavOpened" zIndex="10"></app-overlay>
+
+    <div class="relative flex gap-3 pr-3 mt-14">
+      <app-admin-sidebar [pictureUrl]="user.photoUrl"></app-admin-sidebar>
+      <main class="flex-1 grid grid-cols-1 gap-3 auto-rows-min ml-0 sm:ml-64">
+        <router-outlet></router-outlet>
+      </main>
+    </div>
+  </div>
+</div>

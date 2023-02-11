@@ -1,0 +1,83 @@
+<div
+  class="grid grid-rows-[min-content,auto] h-screen p-5 lg:p-0 grid-cols-12 bg-white"
+>
+  <div class="h-min w-full col-span-full px-5 py-3 z-50">
+    <h1 class="text-4xl text-center lg:text-left font-bold text-white">
+      <h1 class="font-light text-[#f96332]">Web-Based</h1>
+      File Repositories for Accreditation System
+    </h1>
+  </div>
+
+  <div
+    class="hero-image col-span-full bg-cover bg-center absolute left-0 right-0 top-0 overflow-hidden shadow-lg"
+  >
+    <div class="bg-gradient absolute w-full h-full z-40 opacity-60"></div>
+
+    <div class="w-full h-full absolute z-40">
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+    </div>
+  </div>
+
+  <div
+    class="z-50 col-span-12 md:col-start-4 md:col-end-10 lg:col-start-7 lg:col-end-11 my-auto bg-white text-gray-700 rounded-lg shadow-lg p-5"
+  >
+    <div
+      class="flex flex-col"
+      [ngClass]="{ 'animate-pulse-once': getActiveTab() }"
+    >
+      <div class="flex flex-wrap justify-center gap-3 text-center text-lg mb-2">
+        <button
+          *ngFor="let roleIndicator of roleIndicators"
+          class="uppercase flex-1 hover:bg-[#2a2a2a]/10 text-[#2a2a2a] font-semibold rounded-lg p-4"
+          [ngClass]="{ 'bg-[#2a2a2a]/10 ': roleIndicator.active }"
+          (click)="toggleBtn(roleIndicator.user)"
+          (focus)="setActiveTabToFalse()"
+        >
+          {{ roleIndicator.user }}
+        </button>
+      </div>
+
+      <form
+        [formGroup]="loginForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col"
+      >
+        <label class="text-base block mb-2">Email</label>
+        <app-text-input
+          formControlName="email"
+          label="Email address"
+        ></app-text-input>
+
+        <label class="text-base block mb-2">Password</label>
+        <app-text-input
+          #input
+          formControlName="password"
+          label="Password"
+          type="password"
+        ></app-text-input>
+
+        <div class="mb-2">
+          <input type="checkbox" (click)="togglePasswordVisibility(input)" />
+          <span class="ml-2 text-sm">Show Password</span>
+        </div>
+
+        <button
+          type="submit"
+          class="w-full text-xl bg-[#f96332] text-white px-3 py-2 rounded-lg hover:opacity-90 mt-3"
+        >
+          Login
+        </button>
+        <a
+          (click)="forgotPassword()"
+          class="text-sm text-[#f96332] mt-4 cursor-pointer"
+          >Forgot Password?</a
+        >
+      </form>
+    </div>
+  </div>
+</div>

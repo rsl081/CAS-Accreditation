@@ -1,0 +1,39 @@
+<!-- cards such as level, area, and parameter can reuse this component -->
+<div
+  class="h-full min-h-[133.6px] flex flex-col border items-center border-gray-400 rounded-lg p-3 gap-1 hover:bg-gray-50 dark:hover:bg-neutral-700"
+>
+  <app-kebab-menu
+    class="place-self-end"
+    [cardInfo]="card"
+    *ngIf="role != 'Accreditor'"
+  ></app-kebab-menu>
+
+  <div class="w-full flex flex-1 flex-col justify-between items-center">
+    <h2
+      class="text-xl font-bold text-center text-gray-600 dark:text-white mb-2"
+    >
+      {{ card.cardLabel }}
+    </h2>
+    <div class="mt-auto">
+      <p class="text-gray-500 text-xs text-center dark:text-white">
+        Last Modified: {{ card.lastModifiedAt }}
+      </p>
+      <p
+        *ngIf="card.name != null"
+        class="text-gray-500 text-xs text-center dark:text-neutral-300"
+      >
+        Name: {{ card.name }}
+      </p>
+    </div>
+    <button
+      (click)="onClick()"
+      class="w-full max-w-xs rounded-full relative overflow-hidden inline-flex group items-center justify-center mt-4 bg-[#f96332] text-white px-2 py-2 active:shadow-none shadow-lg"
+    >
+      <!-- hover effect -->
+      <span
+        class="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-80 group-hover:h-80 lg:group-hover:w-56 lg:group-hover:h-56 xl:group-hover:w-80 xl:group-hover:h-80 opacity-10"
+      ></span>
+      <span class="relative">{{ card.btnLabel }}</span>
+    </button>
+  </div>
+</div>
