@@ -27,7 +27,7 @@ export class SysimpleoutptService {
 
   getSysImpleOutptsByParameterId(parameterId: string) {
     return this.http.get<ISysImpleOutptRoot>(
-      this.baseURL + 'systems?parameterId=' + parameterId
+      this.baseURL + 'systems?paramId=' + parameterId
     );
   }
 }

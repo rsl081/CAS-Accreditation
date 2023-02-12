@@ -37,14 +37,14 @@ export class FileService {
     return this.http.get(this.baseURL+'files/repo?fileId='+id);
   }
 
-  getTotalFilesByParamId(paramId: string){
-    return this.http.get<IFileRoot>(this.baseURL+'files?paramId='+paramId).pipe(
+  getTotalFilesBySchemeId(schemeId: string){
+    return this.http.get<IFileRoot>(this.baseURL+'files?schemeId='+schemeId).pipe(
       map(file  => file.count)
     );
   }
 
-  getFilesByParamId(paramId: string){
-    return this.http.get<IFileRoot>(this.baseURL+'files?paramId='+paramId).pipe(
+  getFilesBySchemeId(schemeId: string){
+    return this.http.get<IFileRoot>(this.baseURL+'files?schemeId='+schemeId).pipe(
       map(file => file.data)
     );
   }
@@ -69,8 +69,8 @@ export class FileService {
     return this.http.get<IFileRoot>(this.baseURL+'files?search='+key);
   }
 
-  searchFileByParameterId(key: string, parameterId: string){
-    return this.http.get<IFileRoot>(this.baseURL+'files?paramId='+parameterId+'&search='+key);
+  searchFileBySchemeId(key: string, schemeId: string){
+    return this.http.get<IFileRoot>(this.baseURL+'files?schemeId='+schemeId+'&search='+key);
   }
 
   sortName(method: string){
@@ -89,19 +89,19 @@ export class FileService {
     }
   }
 
-  sortNameOnSelectedParameter(method: string, parameterId: string){
+  sortNameOnSelectedScheme(method: string, schemeId: string){
     if(method === 'Ascending'){
-      return this.http.get<IFileRoot>(this.baseURL+'files?sort=nameAsc&paramId='+parameterId);
+      return this.http.get<IFileRoot>(this.baseURL+'files?sort=nameAsc&schemeId='+schemeId);
     }else{
-      return this.http.get<IFileRoot>(this.baseURL+'files?sort=nameDesc&paramId='+parameterId);
+      return this.http.get<IFileRoot>(this.baseURL+'files?sort=nameDesc&schemeId='+schemeId);
     }
   }
 
-  sortFileNameOnSelectedParameter(method: string, parameterId: string){
+  sortFileNameOnSelectedScheme(method: string, schemeId: string){
     if(method === 'Ascending'){
-      return this.http.get<IFileRoot>(this.baseURL+'files?sort=fileNameAsc&paramId='+parameterId);
+      return this.http.get<IFileRoot>(this.baseURL+'files?sort=fileNameAsc&schemeId='+schemeId);
     }else{
-      return this.http.get<IFileRoot>(this.baseURL+'files?sort=fileNameDesc&paramId='+parameterId);
+      return this.http.get<IFileRoot>(this.baseURL+'files?sort=fileNameDesc&schemeId='+schemeId);
     }
   }
 

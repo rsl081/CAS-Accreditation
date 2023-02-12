@@ -47,10 +47,10 @@ namespace API.Controllers
         {
             var spec = new FileSpec(sort, fileSpecParams, schemeId);
 
-            // var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
-            var files = await _context.TheFiles
-                                .Include(x => x.FileRepo)
-                                .ToListAsync();
+            var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
+            // var files = await _context.TheFiles
+            //                     .Include(x => x.FileRepo)
+            //                     .ToListAsync();
 
             var totalItems = await _unitOfWork.Repository<TheFile>().CountAsync(spec);
 

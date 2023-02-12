@@ -19,7 +19,9 @@ namespace Core.Specifications
             string.IsNullOrEmpty(fileSpecParam.Search) ||
                 x.Size.ToLower().Contains(fileSpecParam.Search) ||
             string.IsNullOrEmpty(fileSpecParam.Search) ||
-                x.FileName.ToLower().Contains(fileSpecParam.Search)))
+                x.FileName.ToLower().Contains(fileSpecParam.Search))
+              &&
+            (!schemeId.HasValue || x.SchemeId == schemeId))
         {
             
             AddInclude(x => x.FileRepo);
