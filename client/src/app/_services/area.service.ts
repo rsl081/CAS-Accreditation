@@ -21,11 +21,11 @@ export class AreaService {
     return this.http.post(this.baseURL+'areas', body);
   }
 
-  deleteArea(id: number){
+  deleteArea(id: string){
     return this.http.delete(this.baseURL+'areas/'+id);
   }
 
-  updateArea(id: number, body: {}){
+  updateArea(id: string, body: {}){
     return this.http.put(this.baseURL+'areas/edit/'+id, body);
   }
 

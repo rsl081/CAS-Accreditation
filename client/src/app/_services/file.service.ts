@@ -33,7 +33,7 @@ export class FileService {
     );
   }
 
-  getFileRepoById(id: number){
+  getFileRepoById(id: string){
     return this.http.get(this.baseURL+'files/repo?fileId='+id);
   }
 
@@ -53,15 +53,15 @@ export class FileService {
     return this.http.post<IFile>(this.baseURL+'files', body);
   }
 
-  removeFile(id: number){
+  removeFile(id: string){
     return this.http.delete<IFile>(this.baseURL+'files/'+id);
   }
 
-  updateFile(id: number, body: {}){
+  updateFile(id: string, body: {}){
     return this.http.put<IFile>(this.baseURL+'files/'+id, body);
   }
 
-  deleteFileRepo(fileRepoId: number){
+  deleteFileRepo(fileRepoId: string){
     return this.http.delete(this.baseURL+'files/delete-file-repo/'+fileRepoId);
   }
 

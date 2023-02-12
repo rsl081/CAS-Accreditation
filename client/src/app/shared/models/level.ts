@@ -1,5 +1,5 @@
 export interface ILevel {
-  id: number;
+  id: string;
   levelName: string;
   name?: any;
   createdAt: string;

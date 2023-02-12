@@ -1,11 +1,11 @@
 export interface IArea {
-  id: number;
+  id: string;
   arNameNo: string;
   arName: string;
   name?: any;
   createdAt: string;
   lastModifiedAt: string;
-  levelId: number;
+  levelId: string;
   facultyUserId?: any;
 }
 

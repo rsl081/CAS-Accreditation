@@ -93,7 +93,7 @@ export class FileUploaderComponent implements OnInit {
     });
   }
 
-  updateFile(id:number, body: {}){
+  updateFile(id:string, body: {}){
     this.fileService.updateFile(id, body).subscribe({
       next: file =>{
         this.fileService.getFileRepoById(file.id).subscribe({
@@ -113,7 +113,7 @@ export class FileUploaderComponent implements OnInit {
     });
   }
 
-  uploadFile(fileId: number){
+  uploadFile(fileId: string){
     this.uploader.setOptions({
       url: this.baseURL+'files/add-file/'+fileId
     });

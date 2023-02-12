@@ -97,7 +97,7 @@ export class DashboardDialogComponent implements OnInit{
           arNameNo: this.addDirectoryForm.controls['areaNameNo'].value,
           arName: this.addDirectoryForm.controls['prefName'].value,
           name: this.user.displayName,
-          LevelId: Number.parseInt(this.query),
+          LevelId: this.query,
         };
 
         if(this.user.role === 'Faculty'){
@@ -116,10 +116,10 @@ export class DashboardDialogComponent implements OnInit{
         break
 
       case 'parameter':
-        body = { 
-          letterName: this.addDirectoryForm.controls['prefName'].value, 
+        body = {
+          paramName: this.addDirectoryForm.controls['prefName'].value,
           Name: this.user.displayName,
-          areaId: this.selectedParentId
+          areaId: this.selectedParentId,
         };
         this.parameterService.addParameter(body).subscribe({
           next: () =>{
