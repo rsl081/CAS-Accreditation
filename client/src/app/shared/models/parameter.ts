@@ -1,10 +1,10 @@
 export interface IParameter {
-  id: number;
-  letterName: string;
+  id: string;
+  paramName: string;
   name?: any;
   createdAt: string;
   lastModifiedAt: string;
-  areaId: number;
+  areaId: string;
 }
 
 export interface IParameterRoot {

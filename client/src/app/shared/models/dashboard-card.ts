@@ -1,5 +1,5 @@
 export interface IDashboardCard {
-  id: number;
+  id: string;
   type: string;
   cred?: string,
   cardLabel: string; 

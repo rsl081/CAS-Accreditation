@@ -18,11 +18,11 @@ export class LevelService {
     return this.http.post(this.baseURL+"levels", body);
   }
   
-  updateLevel(id: number, body: {}){
+  updateLevel(id: string, body: {}){
     return this.http.put(this.baseURL+"levels/"+id, body);
   }
 
-  deleteLevel(id: number){
+  deleteLevel(id: string){
     return this.http.delete(this.baseURL+"levels/"+id);
   }
 

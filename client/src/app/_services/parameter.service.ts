@@ -18,11 +18,11 @@ export class ParameterService {
     return this.http.post(this.baseURL+"params", body);
   }
   
-  updateParameter(id: number, body: {}){
+  updateParameter(id: string, body: {}){
     return this.http.put(this.baseURL+"params/"+id, body);
   }
 
-  deleteParameter(id: number){
+  deleteParameter(id: string){
     return this.http.delete(this.baseURL+"params/"+id);
   }
   

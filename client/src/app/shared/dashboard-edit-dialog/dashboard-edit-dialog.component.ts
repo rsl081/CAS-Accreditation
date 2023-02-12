@@ -17,7 +17,7 @@ import { IArea } from '../models/area';
 })
 export class DashboardEditDialogComponent implements OnInit {
 
-  @Input() currentId!: number;
+  @Input() currentId!: string;
   @Input() type!: string;
   @Input() dialogTitle!: string;
   @Input() currentLabel!: string;
@@ -98,7 +98,7 @@ export class DashboardEditDialogComponent implements OnInit {
             arNameNo: this.editForm.controls['areaNameNo'].value,
             arName: this.editForm.controls['newName'].value,
             name: this.user.displayName,
-            levelId: Number.parseInt(params['levelId']),
+            levelId: params['levelId'],
          }
           this.areaService.updateArea(this.currentId, body).subscribe({
             next: (response: IArea) =>{
@@ -115,7 +115,7 @@ export class DashboardEditDialogComponent implements OnInit {
       case 'parameter':
         this.route.queryParams.subscribe((params: Params) =>{
             body = {
-              letterName: this.editForm.controls['newName'].value,
+              paramName: this.editForm.controls['newName'].value,
               name: this.user.displayName,
               areaId: params['areaId'],
             };
