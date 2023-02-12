@@ -114,8 +114,8 @@ export class DashboardEditDialogComponent implements OnInit {
             arNameNo: this.editForm.controls['areaNameNo'].value,
             arName: this.editForm.controls['newName'].value,
             name: this.user.displayName,
-            levelId: params['levelId'],
-         }
+            keywordId: params['keywordId'],
+          };
           this.areaService.updateArea(this.currentId, body).subscribe({
             next: (response: IArea) =>{
               if(this.user.role === 'Faculty'){

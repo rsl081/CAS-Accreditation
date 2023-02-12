@@ -14,7 +14,7 @@ export class AdminAreasComponent implements OnInit {
 
   baseURL = environment.apiUrl;
   query: string = '';
-  areas: IArea[] = []
+  areas: IArea[] = [];
   showDialog = false;
   
   constructor(
@@ -25,6 +25,7 @@ export class AdminAreasComponent implements OnInit {
 
   ngOnInit(): void {
     this.query = this.route.snapshot.queryParams['keywordId'];
+
     this.fetchAreasByKeywordId();
     this.areaService.updateNeeded.subscribe({
       next: () =>{
@@ -37,6 +38,7 @@ export class AdminAreasComponent implements OnInit {
     this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+this.query).subscribe({
       next: response =>{
         this.areas = response.data;
+        
       },
       error: error =>{
         alert(error.message);
