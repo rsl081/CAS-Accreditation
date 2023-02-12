@@ -45,7 +45,9 @@ export class DashboardDialogComponent implements OnInit{
     this.accountService.currentUser$.subscribe({
       next: user => this.user = user
     });
-    this.query = this.route.snapshot.queryParams['levelId'];
+
+    //if this line of route is not before to the area may cause errors
+    this.query = this.route.snapshot.queryParams['keywordId'];
     this.createAddDirectoryForm();
   }
 
