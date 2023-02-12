@@ -11,7 +11,6 @@ import { OverlayService } from 'src/app/_services/overlay.service';
   styleUrls: ['./faculty-files.component.css'],
 })
 export class FacultyFilesComponent implements OnInit {
-  
   @Input() parameterName?: string;
   files: IFile[] = [];
   query: string = '';
@@ -21,7 +20,7 @@ export class FacultyFilesComponent implements OnInit {
   fileToMove: IFile;
   currentAreaControl: string;
   areFilesLoaded: boolean;
-  
+
   constructor(
     private route: ActivatedRoute,
     private fileService: FileService,
@@ -30,72 +29,78 @@ export class FacultyFilesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentAreaControl = JSON.parse(localStorage.getItem('currentAreaControl'));
+    this.currentAreaControl = JSON.parse(
+      localStorage.getItem('currentAreaControl')
+    );
     this.query = this.route.snapshot.queryParams['paramId'];
     this.fetchFilesByParameterId();
     this.registerCustomEvents();
   }
 
-   registerCustomEvents(){
-    this.fileService.updateNeeded.subscribe(() =>{
+  registerCustomEvents() {
+    this.fileService.updateNeeded.subscribe(() => {
       this.fetchFilesByParameterId();
     });
 
-    this.fileService.editFileShow.subscribe((file) =>{
+    this.fileService.editFileShow.subscribe((file) => {
       this.fileToEdit = file;
       this.toggleEditFileDialog();
     });
 
-    this.fileService.editFileClosed.subscribe(() =>{
-       this.toggleEditFileDialog();
+    this.fileService.editFileClosed.subscribe(() => {
+      this.toggleEditFileDialog();
     });
 
-    this.fileService.moveFileShow.subscribe((file) =>{
+    this.fileService.moveFileShow.subscribe((file) => {
       this.fileToMove = file;
       this.toggleMoveFileDialog();
     });
 
-    this.fileService.moveFileClosed.subscribe(() =>{
+    this.fileService.moveFileClosed.subscribe(() => {
       this.toggleMoveFileDialog();
       this.overlayService.hideOverlay.emit();
     });
 
-    this.fileService.onSearch.subscribe((key) =>{
-      this.fileService.searchFileByParameterId(key, this.query).subscribe({
-        next: response => this.files = response.data
+    this.fileService.onSearch.subscribe((key) => {
+      this.fileService.searchFileBySchemeId(key, this.query).subscribe({
+        next: (response) => (this.files = response.data),
       });
     });
 
     this.fileService.onSortName.subscribe({
-      next: method => {
-        this.fileService.sortNameOnSelectedParameter(method, this.query).subscribe({
-          next: sortedFiles => this.files = sortedFiles.data
-        });
-      }
+      next: (method) => {
+        this.fileService
+          .sortNameOnSelectedScheme(method, this.query)
+          .subscribe({
+            next: (sortedFiles) => (this.files = sortedFiles.data),
+          });
+      },
     });
 
-     this.fileService.onSortFileName.subscribe({
-      next: method => {
-        this.fileService.sortFileNameOnSelectedParameter(method, this.query).subscribe({
-          next: sortedFiles => this.files = sortedFiles.data
-        });
-      }
-    });
-  }
-
-  fetchFilesByParameterId(){
-    this.fileService.getFilesByParamId(this.query).subscribe({
-      next: response => this.files = response,
-      error: error => this.toaster.error(error.message),
-      complete: () => this.areFilesLoaded = true
+    this.fileService.onSortFileName.subscribe({
+      next: (method) => {
+        this.fileService
+          .sortFileNameOnSelectedScheme(method, this.query)
+          .subscribe({
+            next: (sortedFiles) => (this.files = sortedFiles.data),
+          });
+      },
     });
   }
 
-  toggleEditFileDialog(){
+  fetchFilesByParameterId() {
+    this.fileService.getFilesBySchemeId(this.query).subscribe({
+      next: (response) => (this.files = response),
+      error: (error) => this.toaster.error(error.message),
+      complete: () => (this.areFilesLoaded = true),
+    });
+  }
+
+  toggleEditFileDialog() {
     this.showEditFileDialog = !this.showEditFileDialog;
   }
 
-  toggleMoveFileDialog(){
+  toggleMoveFileDialog() {
     this.showMoveFileDialog = !this.showMoveFileDialog;
   }
 }

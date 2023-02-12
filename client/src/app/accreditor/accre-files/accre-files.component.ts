@@ -9,10 +9,9 @@ import { FileService } from 'src/app/_services/file.service';
 @Component({
   selector: 'app-accre-files',
   templateUrl: './accre-files.component.html',
-  styleUrls: ['./accre-files.component.css']
+  styleUrls: ['./accre-files.component.css'],
 })
 export class AccreFilesComponent implements OnInit {
-
   @Input() parameterName?: string;
   query: string = '';
   files: IFile[] = [];
@@ -29,7 +28,7 @@ export class AccreFilesComponent implements OnInit {
     private fileService: FileService,
     private toaster: ToastrService,
     private excelService: ExcelService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.query = this.route.snapshot.queryParams['paramId'];
@@ -37,81 +36,91 @@ export class AccreFilesComponent implements OnInit {
     this.registerCustomEvents();
   }
 
-  registerCustomEvents(){
-    this.fileService.updateNeeded.subscribe(() =>{
+  registerCustomEvents() {
+    this.fileService.updateNeeded.subscribe(() => {
       this.fetchFilesByParameterId();
     });
 
-    this.fileService.onSearch.subscribe((key) =>{
-      this.fileService.searchFileByParameterId(key, this.query).subscribe({
-        next: response => this.files = response.data
+    this.fileService.onSearch.subscribe((key) => {
+      this.fileService.searchFileBySchemeId(key, this.query).subscribe({
+        next: (response) => (this.files = response.data),
       });
     });
 
     this.fileService.onSortName.subscribe({
-      next: method => {
-        this.fileService.sortNameOnSelectedParameter(method, this.query).subscribe({
-          next: sortedFiles => this.files = sortedFiles.data
-        });
-      }
-    });
-
-     this.fileService.onSortFileName.subscribe({
-      next: method => {
-        this.fileService.sortFileNameOnSelectedParameter(method, this.query).subscribe({
-          next: sortedFiles => this.files = sortedFiles.data
-        });
-      }
-    });
-
-    this.fileService.getTotalFilesByParamId(this.query).subscribe({
-      next: response => this.totalFiles = response
-    });
-  }
-
-  initExcelData(){
-    this.columns = ['Name', 'File Name', 'Link to the File', 'Size', 'Date Created', 'Last Modified'];
-    this.data = [];
-    this.footerData = [['','','','','Total',this.totalFiles]];
-  }
-
-  fetchFilesByParameterId(){
-    this.fileService.getFilesByParamId(this.query).subscribe({
-      next: response => this.files = response,
-      error: error => this.toaster.error(error.message),
-      complete: () => this.areFilesLoaded = true
-    });
-  }
-
-  exportExcel(){
-    this.initExcelData();
-    from(this.files).pipe(
-      map((file: IFile) => file)
-    ).subscribe({
-      next: file =>{
-        let data = {
-          Name: file.name,
-          FileName: file.fileName,
-          LinkToTheFile: file.fileRepo,
-          Size: file.size,
-          DateCreated: file.createdAt,
-          LastModified: file.lastModifiedAt
-        }
-        this.data.push(data);
+      next: (method) => {
+        this.fileService
+          .sortNameOnSelectedScheme(method, this.query)
+          .subscribe({
+            next: (sortedFiles) => (this.files = sortedFiles.data),
+          });
       },
-      complete: () =>{
-        this.excelService.exportAsExcelFile(
-          'File',
-          'Summary of Files', 
-          'Web-Based File Repositories for Accreditation System', 
-          this.columns, 
-          this.data, 
-          this.footerData, 
-          'files-summary-report', 
-          'Sheet1'
-        );
-      }
+    });
+
+    this.fileService.onSortFileName.subscribe({
+      next: (method) => {
+        this.fileService
+          .sortFileNameOnSelectedScheme(method, this.query)
+          .subscribe({
+            next: (sortedFiles) => (this.files = sortedFiles.data),
+          });
+      },
+    });
+
+    this.fileService.getTotalFilesBySchemeId(this.query).subscribe({
+      next: (response) => (this.totalFiles = response),
     });
   }
 
+  initExcelData() {
+    this.columns = [
+      'Name',
+      'File Name',
+      'Link to the File',
+      'Size',
+      'Date Created',
+      'Last Modified',
+    ];
+    this.data = [];
+    this.footerData = [['', '', '', '', 'Total', this.totalFiles]];
+  }
+
+  fetchFilesByParameterId() {
+    this.fileService.getFilesBySchemeId(this.query).subscribe({
+      next: (response) => (this.files = response),
+      error: (error) => this.toaster.error(error.message),
+      complete: () => (this.areFilesLoaded = true),
+    });
+  }
+
+  exportExcel() {
+    this.initExcelData();
+    from(this.files)
+      .pipe(map((file: IFile) => file))
+      .subscribe({
+        next: (file) => {
+          let data = {
+            Name: file.name,
+            FileName: file.fileName,
+            LinkToTheFile: file.fileRepo,
+            Size: file.size,
+            DateCreated: file.createdAt,
+            LastModified: file.lastModifiedAt,
+          };
+          this.data.push(data);
+        },
+        complete: () => {
+          this.excelService.exportAsExcelFile(
+            'File',
+            'Summary of Files',
+            'Web-Based File Repositories for Accreditation System',
+            this.columns,
+            this.data,
+            this.footerData,
+            'files-summary-report',
+            'Sheet1'
+          );
+        },
+      });
+  }
 }

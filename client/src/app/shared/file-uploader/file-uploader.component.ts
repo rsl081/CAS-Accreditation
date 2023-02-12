@@ -36,7 +36,8 @@ export class FileUploaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.query = this.route.snapshot.queryParams['paramId'];
+    this.query = this.route.snapshot.queryParams['schemeId'];
+    console.log('schemeid' + this.query);
     this.initializeUploader();
   }
 
@@ -121,11 +122,12 @@ export class FileUploaderComponent implements OnInit {
   }
 
   onUpload(){
+
     let body = {
       name: this.user.displayName,
       fileName: this.uploader.queue[0]._file.name,
       size: ((this.uploader.queue[0]._file.size / 1024 / 1024).toFixed(3)).toString() + ' MB',
-      parameterId: isNaN(Number.parseInt(this.query))? this.fileToEdit.parameterId : Number.parseInt(this.query)
+      schemeId: this.query ? this.query : this.fileToEdit.schemeId
     }
 
     if (this.isOnDialog){

@@ -4,10 +4,10 @@ export interface IFile {
   name: string;
   size: string;
   fileRepo?: any;
-  parameterId: number;
+  schemeId: string;
   createdAt: string;
   lastModifiedAt: string;
-  status: string;
+  status: boolean;
 }
 
 export interface IFileRoot {
