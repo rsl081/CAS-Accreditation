@@ -10,6 +10,8 @@ import { ParameterService } from 'src/app/_services/parameter.service';
 import { LevelService } from 'src/app/_services/level.service';
 import { IArea } from '../models/area';
 import { KeywordService } from 'src/app/_services/keyword.service';
+import { SysimpleoutptService } from 'src/app/_services/sysimpleoutpt.service';
+import { SchemeService } from 'src/app/_services/scheme.service';
 
 @Component({
   selector: 'app-dashboard-edit-dialog',
@@ -35,6 +37,8 @@ export class DashboardEditDialogComponent implements OnInit {
     private keywordService: KeywordService,
     private areaService: AreaService,
     private parameterService: ParameterService,
+    private systemService: SysimpleoutptService,
+    private schemeService: SchemeService,
     private formBuilder: FormBuilder
     ) { }
 
@@ -138,6 +142,35 @@ export class DashboardEditDialogComponent implements OnInit {
             this.parameterService.updateParameter(this.currentId, body).subscribe({
               next: () =>{
                 this.parameterService.updateNeeded.next();
+              }
+            })
+          });
+        break;
+
+      case 'system':
+        this.route.queryParams.subscribe((params: Params) =>{
+            body = {
+              systemName: this.editForm.controls['newName'].value,
+              name: this.user.displayName,
+              parameterId: params['paramId'],
+            };
+            this.systemService.updateSysImpleOutpt(this.currentId, body).subscribe({
+              next: () =>{
+                this.systemService.updateNeeded.next();
+              }
+            })
+          });
+        break;
+      case 'scheme':
+        this.route.queryParams.subscribe((params: Params) =>{
+            body = {
+              schemeName: this.editForm.controls['newName'].value,
+              name: this.user.displayName,
+              sysImpOutptId: params['systemId'],
+            };
+            this.schemeService.updateScheme(this.currentId, body).subscribe({
+              next: () =>{
+                this.schemeService.updateNeeded.next();
               }
             })
           });

@@ -2,7 +2,7 @@
   *ngIf="showEditDialog"
   [currentId]="cardInfo.id"
   [type]="cardInfo.type"
-  dialogTitle="Edit Level Name"
+  dialogTitle="{{'Edit ' + cardInfo.cardLabel}}"
   [currentLabel]="cardInfo.cardLabel"
   (dialogClosed)="toggleEditDialog()"
 ></app-dashboard-edit-dialog>

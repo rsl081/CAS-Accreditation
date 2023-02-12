@@ -23,7 +23,7 @@ export class AdminParameterComponent implements OnInit {
       cardLabel: this.parameter.paramName, 
       name: this.parameter.name,
       lastModifiedAt: this.parameter.lastModifiedAt,
-      btnLabel: 'View Files'
+      btnLabel: 'View'
     };
   }
 
