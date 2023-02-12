@@ -2,12 +2,12 @@
 <app-dashboard-dialog
   *ngIf="showDialog"
   type="level"
-  dialogTitle="Add Level"
-  inputPlaceholder="Level Name"
+  dialogTitle="Add Program"
+  inputPlaceholder="Program Name"
   (dialogClosed)="toggleAddLevelDialog()"
 ></app-dashboard-dialog>
 <div
-  *ngIf="areaOutlet.isActivated == false"
+  *ngIf="keywordOutlet.isActivated == false"
   class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
 >
   <!-- Came from the shared folder -->
@@ -20,4 +20,4 @@
     [element]="level"
   ></app-admin-level>
 </div>
-<router-outlet #areaOutlet="outlet"></router-outlet>
+<router-outlet #keywordOutlet="outlet"></router-outlet>

@@ -12,6 +12,7 @@ import { AdminFilesComponent } from './admin-files/admin-files.component';
 import { AdminFacultyRegSelectAreaComponent } from './admin-faculty-reg-select-area/admin-faculty-reg-select-area.component';
 import { AdminFacultyRegSummaryComponent } from './admin-faculty-reg-summary/admin-faculty-reg-summary.component';
 import { AdminGuard } from '../_guards/admin.guard';
+import { AdminKeywordsComponent } from './admin-keywords/admin-keywords.component';
 
 
 const routes: Routes = [
@@ -33,27 +34,34 @@ const routes: Routes = [
           {
             path: 'level',
             component: AdminLevelsComponent,
-            data: { breadcrumb: 'Levels' },
+            data: { breadcrumb: 'Programs' },
             children: [
               {
-                path: 'area',
-                component: AdminAreasComponent,
-                data: { breadcrumb: 'Areas' },
+                path: 'keyword',
+                component: AdminKeywordsComponent,
+                data: {breadcrumb: 'Keywords'},
                 children: [
                   {
-                    path: 'parameter',
-                    component: AdminParametersComponent,
-                    data: { breadcrumb: 'Parameters' },
+                    path: 'area',
+                    component: AdminAreasComponent,
+                    data: { breadcrumb: 'Areas' },
                     children: [
                       {
-                        path: 'files',
-                        component: AdminFilesComponent,
-                        data: { breadcrumb: 'Files' },
+                        path: 'parameter',
+                        component: AdminParametersComponent,
+                        data: { breadcrumb: 'Parameters' },
+                        children: [
+                          {
+                            path: 'files',
+                            component: AdminFilesComponent,
+                            data: { breadcrumb: 'Files' },
+                          },
+                        ],
                       },
                     ],
                   },
                 ],
-              },
+              }
             ],
           },
         ],

@@ -1,0 +1,24 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  [selectedParentId]="query"
+  type="keyword"
+  dialogTitle="Add Keyword"
+  inputPlaceholder="Keyword Name"
+  (dialogClosed)="toggleAddKeywordDialog()"
+></app-dashboard-dialog>
+<div
+  *ngIf="keywordsOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+  <!-- Came from the shared folder -->
+  <app-dashboard-add-card
+    (cardClicked)="toggleAddKeywordDialog()"
+  ></app-dashboard-add-card>
+
+  <app-admin-keyword
+    *ngFor="let keyword of keywords"
+    [element]="keyword"
+  ></app-admin-keyword>
+</div>
+<router-outlet #keywordsOutlet="outlet"></router-outlet>

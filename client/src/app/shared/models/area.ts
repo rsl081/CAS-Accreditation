@@ -5,7 +5,7 @@ export interface IArea {
   name?: any;
   createdAt: string;
   lastModifiedAt: string;
-  levelId: string;
+  keywordId: string;
   facultyUserId?: any;
 }
 

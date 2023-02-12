@@ -29,19 +29,19 @@ export class AreaService {
     return this.http.put(this.baseURL+'areas/edit/'+id, body);
   }
 
-  getAreasByLevelId(levelId: string){
-    return this.http.get<IAreaRoot>(this.baseURL+'areas?levelId='+levelId);
+  getAreasByKeywordId(keywordId: string){
+    return this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+keywordId);
   }
   
-  getAreasByFacultyId(levelId: string, facultyId: string){
-    return this.getAreasByLevelId(levelId).pipe(
+  getAreasByFacultyId(keywordId: string, facultyId: string){
+    return this.getAreasByKeywordId(keywordId).pipe(
       mergeMap(area => area.data),
       filter(data => data.facultyUserId == facultyId)
     );
   }
 
-  getOtherAreas(levelId: string, facultyUserId: string){
-    return this.getAreasByLevelId(levelId).pipe(
+  getOtherAreas(keywordId: string, facultyUserId: string){
+    return this.getAreasByKeywordId(keywordId).pipe(
        mergeMap(area => area.data),
        filter(data => data.facultyUserId !== facultyUserId)
      );

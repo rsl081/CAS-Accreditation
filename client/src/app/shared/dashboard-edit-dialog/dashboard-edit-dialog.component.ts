@@ -9,6 +9,7 @@ import { AreaService } from 'src/app/_services/area.service';
 import { ParameterService } from 'src/app/_services/parameter.service';
 import { LevelService } from 'src/app/_services/level.service';
 import { IArea } from '../models/area';
+import { KeywordService } from 'src/app/_services/keyword.service';
 
 @Component({
   selector: 'app-dashboard-edit-dialog',
@@ -31,6 +32,7 @@ export class DashboardEditDialogComponent implements OnInit {
     private overlayService: OverlayService,
     private route: ActivatedRoute,
     private levelService: LevelService,
+    private keywordService: KeywordService,
     private areaService: AreaService,
     private parameterService: ParameterService,
     private formBuilder: FormBuilder
@@ -90,6 +92,20 @@ export class DashboardEditDialogComponent implements OnInit {
             this.levelService.updateNeeded.next();
           }
         });
+        break;
+      case 'keyword':
+        this.route.queryParams.subscribe((keyword: Params) =>{
+            body = {
+              keywordName: this.editForm.controls['newName'].value,
+              name: this.user.displayName,
+              levelId: keyword['levelId'],
+            };
+            this.keywordService.updateKeyword(this.currentId, body).subscribe({
+              next: () =>{
+                this.keywordService.updateNeeded.next();
+              }
+            })
+          });
         break;
       case 'area':
         console.log('area');

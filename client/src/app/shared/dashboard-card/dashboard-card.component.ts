@@ -37,9 +37,14 @@ export class DashboardCardComponent implements OnInit {
   setNavigationExtras(): void{
     if(this.card.type === 'level'){
        this.extras = {relativeTo: this.route, queryParams: {levelId: this.card.id}};
-    }else if(this.card.type === 'area'){
+    }
+    else if(this.card.type === 'keyword'){
+      this.extras = {relativeTo: this.route, queryParams: {keywordId: this.card.id}};
+    }
+    else if(this.card.type === 'area'){
       this.extras = {relativeTo: this.route, queryParams: {areaId: this.card.id}};
-    }else if(this.card.type === 'parameter'){
+    }
+    else if(this.card.type === 'parameter'){
       this.extras = {relativeTo: this.route, queryParams: {paramId: this.card.id}};
     }
   }

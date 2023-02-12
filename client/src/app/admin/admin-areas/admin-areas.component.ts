@@ -24,17 +24,17 @@ export class AdminAreasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.query = this.route.snapshot.queryParams['levelId'];
-    this.fetchAreasByLevelId();
+    this.query = this.route.snapshot.queryParams['keywordId'];
+    this.fetchAreasByKeywordId();
     this.areaService.updateNeeded.subscribe({
       next: () =>{
-        this.fetchAreasByLevelId();
+        this.fetchAreasByKeywordId();
       }
     });
   }
 
-  fetchAreasByLevelId(){
-    this.http.get<IAreaRoot>(this.baseURL+'areas?levelId='+this.query).subscribe({
+  fetchAreasByKeywordId(){
+    this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+this.query).subscribe({
       next: response =>{
         this.areas = response.data;
       },
