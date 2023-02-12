@@ -4,25 +4,33 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Core.Entities;
 
-namespace API.Dtos.SIO
+namespace API.Dtos
 {
-    public class OutputCreateDto
+    public class KeywordCreateDto
     {
         [Required]
-        public string OutputName { get; set; }
-        public string Name { get; set; }
+        public string KeywordName { get; set; }
         [Required]
-        public Guid ParameterId { get; set; }
+        public string Name { get; set; }
 
+        [Required]
+        public Guid LevelId { get; set; }
+        
         [JsonIgnore]
         public DateTime Created { get; set; } = DateTime.Now;
 
-        public string CreatedAt { 
+        public string CreatedAt {
+             
             get{
                 return Created.ToString("MM/dd/yyyy hh:mm:ss");
             }
             set{}
         }
+
+        [Required]
+        public List<Area> Areas { get; set; } 
+            = new List<Area>();
     }
 }

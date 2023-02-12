@@ -6,6 +6,6 @@ namespace Core.Entities
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; } = DateTime.Now;
-        public List<Area> Areas { get; set; } = new List<Area>();
+        public List<Keyword> Keywords { get; set; } = new List<Keyword>();
     }
 }

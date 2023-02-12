@@ -10,8 +10,6 @@ namespace Core.Entities
         public DateTime LastModified { get; set; } = DateTime.Now;
         public Area Area { get; set; }
         public Guid AreaId { get; set; }
-        public List<TheSystem> TheSystems { get; set; } = new List<TheSystem>();
-        public List<TheImplementation> TheImplementations { get; set; } = new List<TheImplementation>();
-        public List<TheOutput> TheOutputs { get; set; } = new List<TheOutput>();
-    }
+        public List<SysImpOutpt> SysImpOutpts { get; set; } = new List<SysImpOutpt>();
+    }   
 }

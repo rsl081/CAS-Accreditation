@@ -30,30 +30,30 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<TheSystem>> GetSystem(Guid id)
+        public async Task<ActionResult<SysImpOutpt>> GetSystem(Guid id)
         {
             var spec = new SystemsWithParamsSpec(id);
-            var system = await _unitOfWork.Repository<TheSystem>().GetEntityWithSpec(spec);
+            var system = await _unitOfWork.Repository<SysImpOutpt>().GetEntityWithSpec(spec);
 
-            var data = _mapper.Map<TheSystem, SystemToReturn>(system);
+            var data = _mapper.Map<SysImpOutpt, SystemToReturn>(system);
             
             return Ok(data);
         }
 
 
         [HttpGet]
-        public async Task<ActionResult<Pagination<TheSystem>>> 
+        public async Task<ActionResult<Pagination<SysImpOutpt>>> 
             GetSystems(
            [FromQuery]FileRepoSpecParams fileRepoSpecParams, Guid? paramId
         )
         {
             
             var spec = new SystemsWithParamsSpec(fileRepoSpecParams, paramId);
-            var systems = await _unitOfWork.Repository<TheSystem>().ListAsync(spec);
-            var totalItems = await _unitOfWork.Repository<TheSystem>().CountAsync(spec);
+            var systems = await _unitOfWork.Repository<SysImpOutpt>().ListAsync(spec);
+            var totalItems = await _unitOfWork.Repository<SysImpOutpt>().CountAsync(spec);
             
                
-            var data = _mapper.Map<IReadOnlyList<TheSystem>,
+            var data = _mapper.Map<IReadOnlyList<SysImpOutpt>,
                         IReadOnlyList<SystemToReturn>>(systems);
 
             return Ok(new Pagination<SystemToReturn>(totalItems, data));
@@ -62,18 +62,18 @@ namespace API.Controllers
 
         [HttpPost]
         [Authorize(Roles = "Admin,Faculty")]
-        public async Task<ActionResult<TheSystem>> CreateSystem(
+        public async Task<ActionResult<SysImpOutpt>> CreateSystem(
             SystemCreateDto systemToCreate)
         {
-            var system = _mapper.Map<SystemCreateDto, TheSystem>(systemToCreate);
+            var system = _mapper.Map<SystemCreateDto, SysImpOutpt>(systemToCreate);
 
-            _unitOfWork.Repository<TheSystem>().Add(system);
+            _unitOfWork.Repository<SysImpOutpt>().Add(system);
 
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return BadRequest(new ApiResponse(400, "Problem creating system"));
 
-            var data = _mapper.Map<TheSystem, SystemToReturn>(system);
+            var data = _mapper.Map<SysImpOutpt, SystemToReturn>(system);
 
             return Ok(data);
         }
@@ -81,18 +81,18 @@ namespace API.Controllers
 
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
-        public async Task<ActionResult<TheSystem>> DeleteSystem(Guid id)
+        public async Task<ActionResult<SysImpOutpt>> DeleteSystem(Guid id)
         {
-            var system = await _unitOfWork.Repository<TheSystem>()
+            var system = await _unitOfWork.Repository<SysImpOutpt>()
                 .GetByIdAsync(id);
             
-            _unitOfWork.Repository<TheSystem>().Delete(system);
+            _unitOfWork.Repository<SysImpOutpt>().Delete(system);
 
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return BadRequest(new ApiResponse(400, "Problem deleting system. Client error"));
 
-            var data = _mapper.Map<TheSystem, SystemToReturn>(system);
+            var data = _mapper.Map<SysImpOutpt, SystemToReturn>(system);
             
             return Ok(data);
         }
@@ -100,20 +100,20 @@ namespace API.Controllers
 
         [HttpPut("{id}")]
         [Authorize(Roles = "Admin,Faculty")]
-        public async Task<ActionResult<TheSystem>> UpdateSystem(
+        public async Task<ActionResult<SysImpOutpt>> UpdateSystem(
             Guid id, SystemUpdateDto sioToUpdate)
         {
-            var system = await _unitOfWork.Repository<TheSystem>().GetByIdAsync(id);
+            var system = await _unitOfWork.Repository<SysImpOutpt>().GetByIdAsync(id);
 
             _mapper.Map(sioToUpdate, system);
 
-            _unitOfWork.Repository<TheSystem>().Update(system);
+            _unitOfWork.Repository<SysImpOutpt>().Update(system);
 
             var result = await _unitOfWork.Complete();
 
             if (result <= 0) return BadRequest(new ApiResponse(400, "Problem updating system"));
 
-            var data = _mapper.Map<TheSystem, SystemToReturn>(system);
+            var data = _mapper.Map<SysImpOutpt, SystemToReturn>(system);
 
             return Ok(data);
         }

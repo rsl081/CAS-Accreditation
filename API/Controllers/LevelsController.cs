@@ -32,19 +32,7 @@ namespace API.Controllers
         public async Task<ActionResult<Level>> CreateLevel(LevelCreateDto levelToCreate)
         {
             var level = _mapper.Map<LevelCreateDto, Level>(levelToCreate);
-            
-            
-            level.Areas.Add(new Area("Area 1", "Missions, Goals, and Objectives"));
-            level.Areas.Add(new Area("Area 2", "Faculty"));
-            level.Areas.Add(new Area("Area 3", "Cirriculum and Instruction"));
-            level.Areas.Add(new Area("Area 4", "Students"));
-            level.Areas.Add(new Area("Area 5", "Research"));
-            level.Areas.Add(new Area("Area 6", "Extension and Community Involvement"));
-            level.Areas.Add(new Area("Area 7", "Library"));
-            level.Areas.Add(new Area("Area 8", "Physical Facilities"));
-            level.Areas.Add(new Area("Area 9", "Laboratories"));
-            level.Areas.Add(new Area("Area 10", "Administration"));
-
+             
             _unitOfWork.Repository<Level>().Add(level);
 
             var result = await _unitOfWork.Complete();
@@ -82,7 +70,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Level>> GetLevel(Guid id)
         {
-            var spec = new LevelsWithAreasSpec(id);
+            var spec = new LevelsWithKeywordsSpec(id);
             return await _unitOfWork.Repository<Level>().GetEntityWithSpec(spec);
         }
 
@@ -108,7 +96,7 @@ namespace API.Controllers
             [FromQuery]FileRepoSpecParams levelSpecParams
         )
         {
-            var spec = new LevelsWithAreasSpec(levelSpecParams);
+            var spec = new LevelsWithKeywordsSpec(levelSpecParams);
             var levels = await _unitOfWork.Repository<Level>().ListAsync(spec);
 
             var totalItems = await _unitOfWork.Repository<Level>().CountAsync(spec);

@@ -11,9 +11,9 @@ namespace Core.Entities
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; } = DateTime.Now;
         public FileRepo FileRepo { get; set; }
-        public List<TheSystem> TheSystems { get; set; } = new List<TheSystem>();
-        public List<TheImplementation> TheImplementations { get; set; } = new List<TheImplementation>();
-        public List<TheOutput> TheOutputs { get; set; } = new List<TheOutput>();
+        [JsonIgnore]
+        public SysImpOutpt SysImpOutpt { get; set; }
+        public Guid SysImpOutptId { get; set; }
         public bool Status { get; set; }
     }
 }

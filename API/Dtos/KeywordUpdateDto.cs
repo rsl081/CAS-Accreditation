@@ -5,19 +5,19 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace API.Dtos.SIO
+namespace API.Dtos
 {
-    public class ImpleUpdateDto
+    public class KeywordUpdateDto
     {
         [Required]
-        public string ImpleName { get; set; }
+        public string KeywordName { get; set; }
+        [Required]
         public string Name { get; set; }
         [Required]
-        public Guid ParameterId { get; set; }
-
+        public Guid LevelId { get; set; }
+        
         [JsonIgnore]
         public DateTime LastModified { get; set; } = DateTime.Now;
-
         public string LastModifiedAt { 
             get{
                 return LastModified.ToString("MM/dd/yyyy hh:mm:ss");

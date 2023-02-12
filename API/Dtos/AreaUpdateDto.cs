@@ -15,7 +15,7 @@ namespace API.Dtos
         [Required]
         public string Name { get; set; }
         [Required]
-        public Guid LevelId { get; set; }
+        public Guid KeywordId { get; set; }
         public DateTime LastModified { get; set; } = DateTime.Now;
 
         public string LastModifiedAt { 

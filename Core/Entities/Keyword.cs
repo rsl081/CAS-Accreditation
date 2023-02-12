@@ -5,15 +5,14 @@ using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class TheOutput : BaseEntity
+    public class Keyword : BaseEntity
     {
-        public string OutputName { get; set; }
+        public string KeywordName { get; set; }
         public string Name { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         public DateTime LastModified { get; set; } = DateTime.Now;
-        public Parameter Parameter { get; set; }
-        public Guid ParameterId { get; set; }
-        public TheFile TheFile { get; set; }
-        public Guid TheFileId { get; set; }
+        public Level Level { get; set; }
+        public Guid LevelId { get; set; }
+        public List<Area> Areas { get; set; } = new List<Area>();
     }
 }

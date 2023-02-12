@@ -26,8 +26,8 @@ namespace Core.Entities
             Id = id;
         }
         
-        public Level Level { get; set; }
-        public Guid LevelId { get; set; }
+        public Keyword Keyword { get; set; }
+        public Guid KeywordId { get; set; }
         public AppUser FacultyUser { get; set; }
         public string FacultyUserId { get; set; }
         public List<Parameter> Params { get; set; } = new List<Parameter>();

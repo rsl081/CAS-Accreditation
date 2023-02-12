@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace API.Dtos.SIO
+namespace API.Dtos
 {
-    public class ImpleToReturn
+    public class KeywordToReturn
     {
         public Guid Id { get; set; }
-        public string ImpleName { get; set; }
+        public string KeywordName { get; set; }
         public string Name { get; set; }
+
         [JsonIgnore]
         public DateTime Created { get; set; }
         public string CreatedAt { 
@@ -19,7 +21,7 @@ namespace API.Dtos.SIO
             }
             set{}
         }
-        
+
         [JsonIgnore]
         public DateTime LastModified { get; set; }
         public string LastModifiedAt { 
@@ -28,7 +30,9 @@ namespace API.Dtos.SIO
             }
             set{}
         }
-        
-        public Guid ParameterId { get; set; }
+
+        [Required]
+        public Guid LevelId { get; set; }
+
     }
 }

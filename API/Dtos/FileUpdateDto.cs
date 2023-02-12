@@ -14,7 +14,8 @@ namespace API.Dtos
         public string Name { get; set; }
         [Required]
         public string Size { get; set; }
-        public bool Status { get; set; }
+        [Required]
+        public Guid SysImpOutptId { get; set; }
         
         [JsonIgnore]
         public DateTime LastModified { get; set; } = DateTime.Now;

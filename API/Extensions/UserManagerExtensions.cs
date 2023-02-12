@@ -65,7 +65,7 @@ namespace API.Extensions
                 .Include(r => r.UserRoles)
                 .ThenInclude(r => r.Role)
                 .Include(a => a.Areas)
-                .ThenInclude(a => a.Level)
+                .ThenInclude(a => a.Keyword)
                 .Where(u => u.UserRoles.All(r => r.Role.Name == "Faculty"))
                 .ToListAsync();
 
