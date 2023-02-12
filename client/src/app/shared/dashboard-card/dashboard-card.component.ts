@@ -47,6 +47,12 @@ export class DashboardCardComponent implements OnInit {
     else if(this.card.type === 'parameter'){
       this.extras = {relativeTo: this.route, queryParams: {paramId: this.card.id}};
     }
+    else if(this.card.type === 'system'){
+      this.extras = {relativeTo: this.route, queryParams: {systemId: this.card.id}};
+    }
+    else if(this.card.type === 'scheme'){
+      this.extras = {relativeTo: this.route, queryParams: {schemeId: this.card.id}};
+    }
   }
 
   getNavigationExtras(): NavigationExtras{

@@ -23,6 +23,10 @@ import { AdminFacultyRegSelectAreaComponent } from './admin-faculty-reg-select-a
 import { AdminFacultyRegSummaryComponent } from './admin-faculty-reg-summary/admin-faculty-reg-summary.component';
 import { AdminKeywordsComponent } from './admin-keywords/admin-keywords.component';
 import { AdminKeywordComponent } from './admin-keywords/admin-keyword/admin-keyword.component';
+import { AdminSysimpleouptsComponent } from './admin-sysimpleoupts/admin-sysimpleoupts.component';
+import { AdminSysimpleoutptComponent } from './admin-sysimpleoupts/admin-sysimpleoutpt/admin-sysimpleoutpt.component';
+import { AdminSchemesComponent } from './admin-schemes/admin-schemes.component';
+import { AdminSchemeComponent } from './admin-schemes/admin-scheme/admin-scheme.component';
 
 
 @NgModule({
@@ -45,6 +49,10 @@ import { AdminKeywordComponent } from './admin-keywords/admin-keyword/admin-keyw
     AdminFacultyRegSummaryComponent,
     AdminKeywordsComponent,
     AdminKeywordComponent,
+    AdminSysimpleouptsComponent,
+    AdminSysimpleoutptComponent,
+    AdminSchemesComponent,
+    AdminSchemeComponent,
   ],
   imports: [
     CommonModule,

@@ -5,25 +5,28 @@ import { AreaService } from 'src/app/_services/area.service';
 import { LevelService } from 'src/app/_services/level.service';
 import { ParameterService } from 'src/app/_services/parameter.service';
 import { KeywordService } from 'src/app/_services/keyword.service';
+import { SysimpleoutptService } from 'src/app/_services/sysimpleoutpt.service';
+import { SchemeService } from 'src/app/_services/scheme.service';
 
 @Component({
   selector: 'app-kebab-menu',
   templateUrl: './kebab-menu.component.html',
-  styleUrls: ['./kebab-menu.component.css']
+  styleUrls: ['./kebab-menu.component.css'],
 })
 export class KebabMenuComponent implements OnInit {
-
   constructor(
-    private renderer: Renderer2, 
+    private renderer: Renderer2,
     private levelService: LevelService,
     private keywordService: KeywordService,
     private areaService: AreaService,
-    private parameterService: ParameterService
-  ) { }
+    private parameterService: ParameterService,
+    private systemService: SysimpleoutptService,
+    private schemeService: SchemeService
+  ) {}
 
   @Input() cardInfo!: IDashboardCard;
-  @ViewChild('kebab', {static: true}) kebabMenu!: ElementRef;
-  @ViewChild('dropdown', {static: true}) dropdown!: ElementRef;
+  @ViewChild('kebab', { static: true }) kebabMenu!: ElementRef;
+  @ViewChild('dropdown', { static: true }) dropdown!: ElementRef;
   baseUrl = environment.apiUrl;
   isKebabActive = false;
   showEditDialog = false;
@@ -36,42 +39,56 @@ export class KebabMenuComponent implements OnInit {
     this.isKebabActive = !this.isKebabActive;
   }
 
-  toggleEditDialog(){
+  toggleEditDialog() {
     this.showEditDialog = !this.showEditDialog;
   }
 
-  onEdit(){
+  onEdit() {
     this.toggleEditDialog();
   }
 
-  onDelete(){
-    switch(this.cardInfo.type){
+  onDelete() {
+    switch (this.cardInfo.type) {
       case 'level':
         this.levelService.deleteLevel(this.cardInfo.id).subscribe({
-          next: () =>{
+          next: () => {
             this.levelService.updateNeeded.next();
-          }
+          },
         });
         break;
       case 'keyword':
         this.keywordService.deleteKeyword(this.cardInfo.id).subscribe({
-          next: () =>{
+          next: () => {
             this.keywordService.updateNeeded.next();
-          }
+          },
         });
         break;
       case 'area':
         this.areaService.deleteArea(this.cardInfo.id).subscribe({
-          next: () =>{
+          next: () => {
             this.areaService.updateNeeded.next();
-          }
+          },
         });
         break;
       case 'parameter':
         this.parameterService.deleteParameter(this.cardInfo.id).subscribe({
-          next: () =>{
+          next: () => {
             this.parameterService.updateNeeded.next();
-          }
+          },
+        });
+        break;
+      case 'system':
+        this.systemService.deleteSysImpleOutpt(this.cardInfo.id).subscribe({
+          next: () => {
+            this.systemService.updateNeeded.next();
+          },
+        });
+          break;
+      case 'scheme':
+        this.schemeService.deleteScheme(this.cardInfo.id).subscribe({
+          next: () => {
+            this.schemeService.updateNeeded.next();
+          },
         });
         break;
       default:
@@ -79,16 +96,18 @@ export class KebabMenuComponent implements OnInit {
     }
   }
 
-  deleteErrorCallback(error: any){
+  deleteErrorCallback(error: any) {
     alert(error.message);
   }
 
   listenToOutsideClick(): void {
-     this.renderer.listen('window', 'click',(ev:Event)=>{
-      if(ev.target !== this.kebabMenu.nativeElement && ev.target !== this.dropdown.nativeElement){
+    this.renderer.listen('window', 'click', (ev: Event) => {
+      if (
+        ev.target !== this.kebabMenu.nativeElement &&
+        ev.target !== this.dropdown.nativeElement
+      ) {
         this.isKebabActive = false;
       }
     });
   }
-
 }
