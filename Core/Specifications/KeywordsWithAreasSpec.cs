@@ -8,20 +8,23 @@ namespace Core.Specifications
 {
     public class KeywordsWithAreasSpec : BaseSpecification<Keyword>
     {
-        public KeywordsWithAreasSpec(FileRepoSpecParams levelSpecParams)
+        public KeywordsWithAreasSpec(FileRepoSpecParams levelSpecParams,
+                Guid? levelId)
             : base(x => 
                 (string.IsNullOrEmpty(levelSpecParams.Search) ||
                     x.KeywordName.ToLower().Contains(levelSpecParams.Search) ||
                 string.IsNullOrEmpty(levelSpecParams.Search) ||
-                    x.Name.ToLower().Contains(levelSpecParams.Search)))
+                    x.Name.ToLower().Contains(levelSpecParams.Search))
+                    &&
+                (!levelId.HasValue || x.LevelId == levelId))
         {
-            AddInclude(x => x.Areas);
+            AddInclude(x => x.Level);
         }
 
         public KeywordsWithAreasSpec(Guid id) 
             : base(x => x.Id == id)
         {
-            AddInclude(x => x.Areas);
+            AddInclude(x => x.Level);
         }
     }
 }

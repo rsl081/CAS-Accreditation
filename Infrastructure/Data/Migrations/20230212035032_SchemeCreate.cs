@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Infrastructure.Data.Migrations
 {
-    public partial class KeywordCreate : Migration
+    public partial class SchemeCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,7 +33,7 @@ namespace Infrastructure.Data.Migrations
                 newName: "IX_Areas_KeywordId");
 
             migrationBuilder.AddColumn<Guid>(
-                name: "SysImpOutptId",
+                name: "SchemeId",
                 table: "TheFiles",
                 type: "TEXT",
                 nullable: false,
@@ -83,15 +83,42 @@ namespace Infrastructure.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Schemes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "TEXT", nullable: false),
+                    SchemeName = table.Column<string>(type: "TEXT", nullable: true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true),
+                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    LastModified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    SysImpOutptId = table.Column<Guid>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Schemes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Schemes_SysImpOutpts_SysImpOutptId",
+                        column: x => x.SysImpOutptId,
+                        principalTable: "SysImpOutpts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_TheFiles_SysImpOutptId",
+                name: "IX_TheFiles_SchemeId",
                 table: "TheFiles",
-                column: "SysImpOutptId");
+                column: "SchemeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Keywords_LevelId",
                 table: "Keywords",
                 column: "LevelId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Schemes_SysImpOutptId",
+                table: "Schemes",
+                column: "SysImpOutptId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SysImpOutpts_ParameterId",
@@ -107,10 +134,10 @@ namespace Infrastructure.Data.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_TheFiles_SysImpOutpts_SysImpOutptId",
+                name: "FK_TheFiles_Schemes_SchemeId",
                 table: "TheFiles",
-                column: "SysImpOutptId",
-                principalTable: "SysImpOutpts",
+                column: "SchemeId",
+                principalTable: "Schemes",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -122,21 +149,24 @@ namespace Infrastructure.Data.Migrations
                 table: "Areas");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_TheFiles_SysImpOutpts_SysImpOutptId",
+                name: "FK_TheFiles_Schemes_SchemeId",
                 table: "TheFiles");
 
             migrationBuilder.DropTable(
                 name: "Keywords");
 
             migrationBuilder.DropTable(
+                name: "Schemes");
+
+            migrationBuilder.DropTable(
                 name: "SysImpOutpts");
 
             migrationBuilder.DropIndex(
-                name: "IX_TheFiles_SysImpOutptId",
+                name: "IX_TheFiles_SchemeId",
                 table: "TheFiles");
 
             migrationBuilder.DropColumn(
-                name: "SysImpOutptId",
+                name: "SchemeId",
                 table: "TheFiles");
 
             migrationBuilder.RenameColumn(

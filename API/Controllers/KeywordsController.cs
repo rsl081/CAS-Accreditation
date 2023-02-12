@@ -92,10 +92,11 @@ namespace API.Controllers
         
         [HttpGet]
         public async Task<ActionResult<Pagination<Keyword>>> GetKeywords(
-            [FromQuery]FileRepoSpecParams keywordSpecParams
+            [FromQuery]FileRepoSpecParams keywordSpecParams, 
+            Guid? levelId 
         )
         {
-            var spec = new KeywordsWithAreasSpec(keywordSpecParams);
+            var spec = new KeywordsWithAreasSpec(keywordSpecParams, levelId);
             var keywords = await _unitOfWork.Repository<Keyword>().ListAsync(spec);
 
             var totalItems = await _unitOfWork.Repository<Keyword>().CountAsync(spec);

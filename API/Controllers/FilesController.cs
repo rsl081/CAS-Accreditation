@@ -41,16 +41,15 @@ namespace API.Controllers
         [HttpGet(Name = "TheFile")]
         public async Task<ActionResult<Pagination<TheFile>>> GetFiles(
             [FromQuery]FileRepoSpecParams fileSpecParams, 
-            Guid? systemId, Guid? impleId, Guid? outputId,
+            Guid? schemeId,
             string sort
         )
         {
-            var spec = new FileSpec(sort, fileSpecParams, systemId, impleId, outputId);
+            var spec = new FileSpec(sort, fileSpecParams, schemeId);
 
             // var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
             var files = await _context.TheFiles
                                 .Include(x => x.FileRepo)
-                                .Include(x => x.SysImpOutpt)
                                 .ToListAsync();
 
             var totalItems = await _unitOfWork.Repository<TheFile>().CountAsync(spec);

@@ -4,17 +4,13 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace API.Dtos
+namespace API.Dtos.SIO
 {
-    public class FileToReturnDto
+    public class SchemeToReturn
     {
         public Guid Id { get; set; }
-        public string FileName { get; set; }
+        public string SchemeName { get; set; }
         public string Name { get; set; }
-        public string Size { get; set; }
-        public string FileRepo { get; set; }
-        public Guid SchemeId { get; set; }
-
         [JsonIgnore]
         public DateTime Created { get; set; }
         public string CreatedAt { 
@@ -23,7 +19,7 @@ namespace API.Dtos
             }
             set{}
         }
-
+        
         [JsonIgnore]
         public DateTime LastModified { get; set; }
         public string LastModifiedAt { 
@@ -32,7 +28,7 @@ namespace API.Dtos
             }
             set{}
         }
-
-
+        
+        public Guid SysImpOutptId { get; set; }
     }
 }

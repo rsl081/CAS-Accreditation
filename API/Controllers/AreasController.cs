@@ -117,10 +117,10 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<Pagination<Area>>> GetAreas(
-            [FromQuery]FileRepoSpecParams areaSpecParams, Guid? levelId
+            [FromQuery]FileRepoSpecParams areaSpecParams, Guid? keywordId
         )
         {
-            var spec = new AreasWithParamsSpec(areaSpecParams, levelId);
+            var spec = new AreasWithParamsSpec(areaSpecParams, keywordId);
             var areas = await _unitOfWork.Repository<Area>().ListAsync(spec);
             var totaItems = await _unitOfWork.Repository<Area>().CountAsync(spec);
             

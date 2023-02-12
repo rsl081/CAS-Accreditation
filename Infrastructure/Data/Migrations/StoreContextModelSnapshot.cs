@@ -266,6 +266,34 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Params");
                 });
 
+            modelBuilder.Entity("Core.Entities.Scheme", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("LastModified")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SchemeName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("SysImpOutptId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SysImpOutptId");
+
+                    b.ToTable("Schemes");
+                });
+
             modelBuilder.Entity("Core.Entities.SysImpOutpt", b =>
                 {
                     b.Property<Guid>("Id")
@@ -315,18 +343,18 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid>("SchemeId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Size")
                         .HasColumnType("TEXT");
 
                     b.Property<bool>("Status")
                         .HasColumnType("INTEGER");
 
-                    b.Property<Guid>("SysImpOutptId")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SysImpOutptId");
+                    b.HasIndex("SchemeId");
 
                     b.ToTable("TheFiles");
                 });
@@ -510,6 +538,17 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Area");
                 });
 
+            modelBuilder.Entity("Core.Entities.Scheme", b =>
+                {
+                    b.HasOne("Core.Entities.SysImpOutpt", "SysImpOutpt")
+                        .WithMany()
+                        .HasForeignKey("SysImpOutptId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SysImpOutpt");
+                });
+
             modelBuilder.Entity("Core.Entities.SysImpOutpt", b =>
                 {
                     b.HasOne("Core.Entities.Parameter", "Parameter")
@@ -523,13 +562,13 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.TheFile", b =>
                 {
-                    b.HasOne("Core.Entities.SysImpOutpt", "SysImpOutpt")
-                        .WithMany()
-                        .HasForeignKey("SysImpOutptId")
+                    b.HasOne("Core.Entities.Scheme", "Scheme")
+                        .WithMany("TheFiles")
+                        .HasForeignKey("SchemeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SysImpOutpt");
+                    b.Navigation("Scheme");
                 });
 
             modelBuilder.Entity("Core.Entities.UserPhoto", b =>
@@ -609,6 +648,11 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Parameter", b =>
                 {
                     b.Navigation("SysImpOutpts");
+                });
+
+            modelBuilder.Entity("Core.Entities.Scheme", b =>
+                {
+                    b.Navigation("TheFiles");
                 });
 
             modelBuilder.Entity("Core.Entities.TheFile", b =>
