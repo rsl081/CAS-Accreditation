@@ -7,7 +7,7 @@ using Core.Entities;
 namespace Core.Specifications
 {
     public class SystemsWithParamsSpec : 
-        BaseSpecification<TheSystem>
+        BaseSpecification<SysImpOutpt>
     {
 
 

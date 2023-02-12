@@ -7,22 +7,22 @@ using Core.Entities;
 
 namespace Core.Specifications
 {
-    public class LevelsWithAreasSpec : BaseSpecification<Level>
+    public class LevelsWithKeywordsSpec : BaseSpecification<Level>
     {
-        public LevelsWithAreasSpec(FileRepoSpecParams levelSpecParams)
+        public LevelsWithKeywordsSpec(FileRepoSpecParams levelSpecParams)
             : base(x => 
                 (string.IsNullOrEmpty(levelSpecParams.Search) ||
                     x.LevelName.ToLower().Contains(levelSpecParams.Search) ||
                 string.IsNullOrEmpty(levelSpecParams.Search) ||
                     x.Name.ToLower().Contains(levelSpecParams.Search)))
         {
-            AddInclude(x => x.Areas);
+            AddInclude(x => x.Keywords);
         }
 
-        public LevelsWithAreasSpec(Guid id) 
+        public LevelsWithKeywordsSpec(Guid id) 
             : base(x => x.Id == id)
         {
-            AddInclude(x => x.Areas);
+            AddInclude(x => x.Keywords);
         }
     }
 }

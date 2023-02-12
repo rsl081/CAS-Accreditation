@@ -14,9 +14,6 @@ namespace API.Dtos.SIO
         public string Name { get; set; }
         [Required]
         public Guid ParameterId { get; set; }
-        [Required]
-        public Guid TheFileId { get; set; }
-
         [JsonIgnore]
         public DateTime Created { get; set; } = DateTime.Now;
 

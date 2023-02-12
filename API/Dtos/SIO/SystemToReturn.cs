@@ -30,6 +30,5 @@ namespace API.Dtos.SIO
         }
         
         public Guid ParameterId { get; set; }
-        public Guid TheFileId { get; set; }
     }
 }

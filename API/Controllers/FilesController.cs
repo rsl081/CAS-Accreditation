@@ -50,9 +50,7 @@ namespace API.Controllers
             // var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
             var files = await _context.TheFiles
                                 .Include(x => x.FileRepo)
-                                .Include(x => x.TheSystems)
-                                .Include(x => x.TheImplementations)
-                                .Include(x => x.TheOutputs)
+                                .Include(x => x.SysImpOutpt)
                                 .ToListAsync();
 
             var totalItems = await _unitOfWork.Repository<TheFile>().CountAsync(spec);

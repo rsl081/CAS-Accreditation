@@ -23,8 +23,8 @@ namespace API.Dtos
         }
 
         [Required]
-        public List<Area> Areas { get; set; } 
-            = new List<Area>();
+        public List<Keyword> Keywords { get; set; } 
+            = new List<Keyword>();
 
     }
 }

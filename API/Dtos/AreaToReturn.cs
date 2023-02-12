@@ -34,7 +34,7 @@ namespace API.Dtos
         }
 
 
-        public Guid LevelId { get; set; }
+        public Guid KeywordId { get; set; }
 
         public string FacultyUserId { get; set; }
     }
