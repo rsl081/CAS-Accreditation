@@ -23,7 +23,7 @@ export class AdminLevelComponent implements OnInit {
       name: this.level.name,
       lastModifiedAt: this.level.lastModifiedAt,
       cardLabel: this.level.levelName, 
-      btnLabel: 'View Area'
+      btnLabel: 'View'
     };
   }
 

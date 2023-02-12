@@ -4,6 +4,7 @@ import { IDashboardCard } from '../models/dashboard-card';
 import { AreaService } from 'src/app/_services/area.service';
 import { LevelService } from 'src/app/_services/level.service';
 import { ParameterService } from 'src/app/_services/parameter.service';
+import { KeywordService } from 'src/app/_services/keyword.service';
 
 @Component({
   selector: 'app-kebab-menu',
@@ -15,6 +16,7 @@ export class KebabMenuComponent implements OnInit {
   constructor(
     private renderer: Renderer2, 
     private levelService: LevelService,
+    private keywordService: KeywordService,
     private areaService: AreaService,
     private parameterService: ParameterService
   ) { }
@@ -48,6 +50,13 @@ export class KebabMenuComponent implements OnInit {
         this.levelService.deleteLevel(this.cardInfo.id).subscribe({
           next: () =>{
             this.levelService.updateNeeded.next();
+          }
+        });
+        break;
+      case 'keyword':
+        this.keywordService.deleteKeyword(this.cardInfo.id).subscribe({
+          next: () =>{
+            this.keywordService.updateNeeded.next();
           }
         });
         break;

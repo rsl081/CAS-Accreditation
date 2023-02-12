@@ -23,7 +23,7 @@ export class AdminAreaComponent implements OnInit {
       cardLabel: this.area.arNameNo+": "+this.area.arName, 
       name: this.area.name,
       lastModifiedAt: this.area.lastModifiedAt,
-      btnLabel: 'View Parameters'
+      btnLabel: 'View Parameter'
     };
   }
 

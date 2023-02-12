@@ -9,6 +9,7 @@ import { AreaService } from 'src/app/_services/area.service';
 import { LevelService } from 'src/app/_services/level.service';
 import { ParameterService } from 'src/app/_services/parameter.service';
 import { IArea } from '../models/area';
+import { KeywordService } from 'src/app/_services/keyword.service';
 
 @Component({
   selector: 'app-dashboard-dialog',
@@ -33,6 +34,7 @@ export class DashboardDialogComponent implements OnInit{
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private levelService: LevelService,
+    private keywordService: KeywordService,
     private areaService: AreaService,
     private parameterService: ParameterService
   ) { }
@@ -92,12 +94,24 @@ export class DashboardDialogComponent implements OnInit{
           }
         });
         break;
+      case 'keyword':
+        body = {
+          keywordName: this.addDirectoryForm.controls['prefName'].value,
+          Name: this.user.displayName,
+          levelId: this.selectedParentId,
+        };
+        this.keywordService.addKeyword(body).subscribe({
+          next: () =>{
+            this.keywordService.updateNeeded.next();
+          }
+        });
+        break; 
       case 'area':
         body = { 
           arNameNo: this.addDirectoryForm.controls['areaNameNo'].value,
           arName: this.addDirectoryForm.controls['prefName'].value,
           name: this.user.displayName,
-          LevelId: this.query,
+          keywordId: this.query,
         };
 
         if(this.user.role === 'Faculty'){
@@ -113,8 +127,7 @@ export class DashboardDialogComponent implements OnInit{
             }
           }
         });
-        break
-
+        break;
       case 'parameter':
         body = {
           paramName: this.addDirectoryForm.controls['prefName'].value,

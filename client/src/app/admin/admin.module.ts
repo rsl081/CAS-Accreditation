@@ -21,6 +21,8 @@ import { AdminParameterComponent } from './admin-parameters/admin-parameter/admi
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminFacultyRegSelectAreaComponent } from './admin-faculty-reg-select-area/admin-faculty-reg-select-area.component';
 import { AdminFacultyRegSummaryComponent } from './admin-faculty-reg-summary/admin-faculty-reg-summary.component';
+import { AdminKeywordsComponent } from './admin-keywords/admin-keywords.component';
+import { AdminKeywordComponent } from './admin-keywords/admin-keyword/admin-keyword.component';
 
 
 @NgModule({
@@ -41,6 +43,8 @@ import { AdminFacultyRegSummaryComponent } from './admin-faculty-reg-summary/adm
     AdminParameterComponent,
     AdminFacultyRegSelectAreaComponent,
     AdminFacultyRegSummaryComponent,
+    AdminKeywordsComponent,
+    AdminKeywordComponent,
   ],
   imports: [
     CommonModule,
