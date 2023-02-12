@@ -10,7 +10,7 @@ namespace Core.Specifications
     {
   
         public FileSpec(string sort, FileRepoSpecParams fileSpecParam, 
-            Guid? systemId, Guid? impleId, Guid? outputId) 
+            Guid? schemeId) 
             : base(x => 
             (string.IsNullOrEmpty(fileSpecParam.Search) ||
                 x.Name.ToLower().Contains(fileSpecParam.Search) ||

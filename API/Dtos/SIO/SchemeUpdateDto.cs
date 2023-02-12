@@ -5,18 +5,16 @@ using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace API.Dtos
+namespace API.Dtos.SIO
 {
-    public class FileUpdateDto
+    public class SchemeUpdateDto
     {
         [Required]
-        public string FileName { get; set; }
+        public string SchemeName { get; set; }
         public string Name { get; set; }
         [Required]
-        public string Size { get; set; }
-        [Required]
-        public Guid SchemeId { get; set; }
-        
+        public Guid SysImpOutptId { get; set; }
+
         [JsonIgnore]
         public DateTime LastModified { get; set; } = DateTime.Now;
 

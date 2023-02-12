@@ -2,7 +2,7 @@ using System.Text.Json.Serialization;
 
 namespace Core.Entities
 {
-    public class TheFile : BaseEntity
+    public class    TheFile : BaseEntity
     {
         public string FacultyName { get; set; }
         public string FileName { get; set; }
@@ -12,8 +12,8 @@ namespace Core.Entities
         public DateTime LastModified { get; set; } = DateTime.Now;
         public FileRepo FileRepo { get; set; }
         [JsonIgnore]
-        public SysImpOutpt SysImpOutpt { get; set; }
-        public Guid SysImpOutptId { get; set; }
+        public Scheme Scheme { get; set; }
+        public Guid SchemeId { get; set; }
         public bool Status { get; set; }
     }
 }

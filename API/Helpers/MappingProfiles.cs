@@ -30,6 +30,10 @@ namespace API.Helpers
             CreateMap<SysImpOutpt, SystemToReturn>();
             CreateMap<SystemUpdateDto, SysImpOutpt>(); 
 
+            CreateMap<SchemeCreateDto, Scheme>();
+            CreateMap<Scheme, SchemeToReturn>();
+            CreateMap<SchemeUpdateDto, Scheme>(); 
+
             CreateMap<FileCreateDto, TheFile>();
             CreateMap<FileUpdateDto, TheFile>();
             CreateMap<FileRepoCreateDto, FileRepo>().ReverseMap();

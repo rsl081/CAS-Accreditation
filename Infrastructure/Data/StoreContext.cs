@@ -20,6 +20,7 @@ namespace Infrastructure.Data
         public DbSet<Area> Areas { get; set; }
         public DbSet<Parameter> Params { get; set; }
         public DbSet<SysImpOutpt> SysImpOutpts { get; set; }
+        public DbSet<Scheme> Schemes { get; set; }
         public DbSet<TheFile> TheFiles { get; set; }
 
          protected override void OnModelCreating(

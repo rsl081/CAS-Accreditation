@@ -26,14 +26,14 @@ namespace Core.Specifications
                 &&
             (!keywordId.HasValue || x.KeywordId == keywordId))
         {
-            AddInclude(x => x.Params);
+            AddInclude(x => x.Keyword);
         }
 
         public AreasWithParamsSpec(Guid id) 
             : base(x => x.Id == id)
         {
             //* To Show Levels, Its okay to not include
-            AddInclude(x => x.Params);
+            AddInclude(x => x.Keyword);
         }
         
     }
