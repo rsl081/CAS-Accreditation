@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { IKeywordRoot } from '../shared/models/keyword';
+import { IKeyword, IKeywordRoot } from '../shared/models/keyword';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +34,10 @@ export class KeywordService {
 
   getKeywordByLevelId(levelId: string){
     return this.http.get<IKeywordRoot>(this.baseURL+'keywords?levelId='+levelId)
+  }
+
+  getKeywordByLevelIdNotRoot(levelId: string){
+    return this.http.get<IKeyword>(this.baseURL+'keywords?levelId='+levelId)
   }
 
 
