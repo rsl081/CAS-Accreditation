@@ -29,4 +29,5 @@ export class ParameterService {
   getParametersByAreaId(areaId: string){
     return this.http.get<IParameterRoot>(this.baseURL+'params?areaId='+areaId)
   }
+  
 }

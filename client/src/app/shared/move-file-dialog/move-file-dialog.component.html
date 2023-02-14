@@ -4,7 +4,7 @@
 >
  
   <h2 class="mb-3 font-bold text-xl text-gray-600 dark:text-white">
-    Move File
+    Tag File
   </h2>
   <div
     class="p-2 bg-orange-100 text-[#f96332] dark:bg-neutral-700 dark:text-white w-full rounded-lg"
@@ -15,7 +15,7 @@
     *ngIf="currentlySelectedScheme"
     class="text-gray-600 dark:text-[#f96332] p-2 rounded-lg w-full border border-gray-600 dark:border-[#f96332]"
   >
-    {{ "Destination: " + currentlySelectedScheme.letterName }}
+    {{ "Destination: " + currentlySelectedScheme.schemeName }}
   </div>
   
   <div
@@ -23,8 +23,7 @@
   >
     <div class="text-gray-600 dark:text-white">
       <i class="fa fa-folder"></i>
-      Levels
-      
+      Programs
       <!-- ================================ -->
         <div *ngFor="let level of levels; let levelIndex = index" class="ml-4">
           <!-- Level -->
@@ -150,7 +149,7 @@
       enabledBackgroundColor="#f96332"
       class="flex-1 max-w-xs rounded-full relative overflow-hidden inline-flex group items-center justify-center bg-[#f96332] text-white px-10 py-2 hover:opacity-90"
     >
-      Move
+      Tag
     </button>
     <button
       (click)="closeDialog()"

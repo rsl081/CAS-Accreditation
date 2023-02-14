@@ -32,6 +32,11 @@ export class AreaService {
   getAreasByKeywordId(keywordId: string){
     return this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+keywordId);
   }
+
+
+  getAreasByKeywordIdNotRoot(keywordId: string){
+    return this.http.get<IArea>(this.baseURL+'areas?keywordId='+keywordId);
+  }
   
   getAreasByFacultyId(keywordId: string, facultyId: string){
     return this.getAreasByKeywordId(keywordId).pipe(
