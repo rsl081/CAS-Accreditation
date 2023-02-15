@@ -33,6 +33,12 @@ export class FileService {
     );
   }
 
+  getAllFilesGeneral(){
+    return this.http.get<IFileRoot>(this.baseURL+'files/thefilegeneral').pipe(
+      map(file => file.data)
+    );
+  }
+
   getFileRepoById(id: string){
     return this.http.get(this.baseURL+'files/repo?fileId='+id);
   }
@@ -67,6 +73,10 @@ export class FileService {
 
   searchFile(key: string){
     return this.http.get<IFileRoot>(this.baseURL+'files?search='+key);
+  }
+
+  searchFileGeneral(key: string){
+    return this.http.get<IFileRoot>(this.baseURL+'files/thefilegeneral?search='+key);
   }
 
   searchFileBySchemeId(key: string, schemeId: string){

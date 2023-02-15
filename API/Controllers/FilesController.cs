@@ -38,6 +38,69 @@ namespace API.Controllers
             return await _unitOfWork.Repository<TheFile>().GetEntityWithSpec(spec);
         }
 
+        [HttpGet("TheFileGeneral")]
+        public async Task<ActionResult<Pagination<TheFile>>> GetFilesGeneral(
+            [FromQuery]string search
+        )
+        {
+           
+     
+            // var files = await _context.TheFiles
+            //                     .Select(f => new TheFile{
+            //                         FileName = f.FileName,
+            //                         Scheme = f.Scheme.
+            //                     })
+            //                     .ToListAsync();
+
+            var files = await _context.TheFiles
+                                .Select(f => new FileToReturnDto {
+                                    Id = f.Id,
+                                    FileRepo = f.FileRepo.Url,
+                                    FileName = f.FileName,
+                                    Name = f.Name,
+                                    Size = f.Size,
+                                    Scheme = f.Scheme.SchemeName,
+                                    SysImpOutpt = f.Scheme.SysImpOutpt.SystemName,
+                                    Parameter = f.Scheme.SysImpOutpt.Parameter.ParamName,
+                                    Area = f.Scheme.SysImpOutpt.Parameter.Area.ArNameNo,
+                                })
+                                .ToListAsync();
+
+            var countData = await _context.TheFiles
+                                .Select(f => new{
+                                    File = new {
+                                            f.FileName,
+                                            f.Name,
+                                            f.Size,
+                                        },
+                                    Scheme = f.Scheme.SchemeName,
+                                    SysImpOutpt = f.Scheme.SysImpOutpt.SystemName,
+                                    Parameter = f.Scheme.SysImpOutpt.Parameter.ParamName,
+                                    Area = f.Scheme.SysImpOutpt.Parameter.Area.ArNameNo,
+                                }).CountAsync();
+
+                    
+            if (!String.IsNullOrEmpty(search))
+            {
+                search = search.ToLower();
+                files = files.Where(
+                        f => f.FileName!.ToLower().Contains(search) ||
+                        f.Size!.ToLower().Contains(search) ||
+                        f.Name!.ToLower().Contains(search) ||
+                        f.Scheme!.ToLower().Contains(search) ||
+                        f.SysImpOutpt!.ToLower().Contains(search) ||
+                        f.Parameter!.ToLower().Contains(search) ||
+                        f.Area!.ToLower().Contains(search))
+                    .ToList();
+            }
+
+            
+            // var data = _mapper.Map<IReadOnlyList<TheFile>,
+            //             IReadOnlyList<FileToReturnDto>>(files);
+            
+            return Ok(new Pagination<FileToReturnDto>(countData, files));
+        }
+
         [HttpGet(Name = "TheFile")]
         public async Task<ActionResult<Pagination<TheFile>>> GetFiles(
             [FromQuery]FileRepoSpecParams fileSpecParams, 
@@ -48,9 +111,7 @@ namespace API.Controllers
             var spec = new FileSpec(sort, fileSpecParams, schemeId);
 
             var files = await _unitOfWork.Repository<TheFile>().ListAsync(spec);
-            // var files = await _context.TheFiles
-            //                     .Include(x => x.FileRepo)
-            //                     .ToListAsync();
+            
 
             var totalItems = await _unitOfWork.Repository<TheFile>().CountAsync(spec);
 

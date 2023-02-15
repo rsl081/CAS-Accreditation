@@ -14,6 +14,15 @@ namespace API.Dtos
         public string Size { get; set; }
         public string FileRepo { get; set; }
         public Guid SchemeId { get; set; }
+        public string Scheme { get; set; }
+        public string  SysImpOutpt { get; set; }
+        public string Parameter { get; set; }
+        public string Area { get; set; }
+
+        //   Scheme = f.Scheme.SchemeName,
+        //                             SysImpOutpt = f.Scheme.SysImpOutpt.SystemName,
+        //                             Parameter = f.Scheme.SysImpOutpt.Parameter.ParamName,
+        //                             Area =
 
         [JsonIgnore]
         public DateTime Created { get; set; }
