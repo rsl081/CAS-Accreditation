@@ -5,20 +5,23 @@ import { AccreAreasComponent } from './accre-areas/accre-areas.component';
 import { AccreDashboardComponent } from './accre-dashboard/accre-dashboard.component';
 import { AccreFilesComponent } from './accre-files/accre-files.component';
 import { AccreHomeComponent } from './accre-home/accre-home.component';
+import { AccreKeywordsComponent } from './accre-keywords/accre-keywords.component';
 import { AccreLevelsComponent } from './accre-levels/accre-levels.component';
 import { AccreParametersComponent } from './accre-parameters/accre-parameters.component';
+import { AccreSchemesComponent } from './accre-schemes/accre-schemes.component';
+import { AccreSysimpleoutptsComponent } from './accre-sysimpleoutpts/accre-sysimpleoutpts.component';
 import { AccreditorEditProfileComponent } from './accreditor-edit-profile/accreditor-edit-profile.component';
 
 const routes: Routes = [
   {
     path: 'accreditor',
     component: AccreHomeComponent,
-    data: {breadcrumb: 'Accreditor'},
+    data: { breadcrumb: 'Accreditor' },
     canActivate: [AccreditorGuard],
     children: [
       {
         path: '',
-        redirectTo: 'level',
+        redirectTo: 'program',
         pathMatch: 'full',
       },
       {
@@ -26,30 +29,50 @@ const routes: Routes = [
         component: AccreDashboardComponent,
         children: [
           {
-            path: 'level',
+            path: 'program',
             component: AccreLevelsComponent,
+            data: { breadcrumb: 'Programs' },
             children: [
               {
-                path: 'area',
-                component: AccreAreasComponent,
-                data: {breadcrumb: 'Areas'},
+                path: 'keyword',
+                component: AccreKeywordsComponent,
+                data: { breadcrumb: 'Keywords' },
                 children: [
                   {
-                    path: 'parameter',
-                    component: AccreParametersComponent,
-                    data: {breadcrumb: 'Parameters'},
+                    path: 'area',
+                    component: AccreAreasComponent,
+                    data: { breadcrumb: 'Areas' },
                     children: [
                       {
-                        path: 'files',
-                        component: AccreFilesComponent,
-                        data: {breadcrumb: 'Files'},
+                        path: 'parameter',
+                        component: AccreParametersComponent,
+                        data: { breadcrumb: 'Parameters' },
+                        children: [
+                          {
+                            path: 'systems',
+                            component: AccreSysimpleoutptsComponent,
+                            data: { breadcrumb: 'SIO' },
+                            children:[{
+                                path: 'schemes',
+                                component: AccreSchemesComponent,
+                                data: { breadcrumb: 'Schemes' },
+                                children: [
+                                  {
+                                    path: 'files',
+                                    component: AccreFilesComponent,
+                                    data: { breadcrumb: 'Files' },
+                                  },
+                                ],
+                            }]
+                          },
+                        ],
                       },
                     ],
                   },
                 ],
               },
-            ]
-          }
+            ],
+          },
         ],
       },
       {

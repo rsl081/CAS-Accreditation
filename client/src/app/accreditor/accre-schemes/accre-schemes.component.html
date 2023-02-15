@@ -1,0 +1,21 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  [selectedParentId]="query"
+  type="scheme"
+  dialogTitle="Add"
+  inputPlaceholder="Name"
+  (dialogClosed)="toggleAddSchemeDialog()"
+></app-dashboard-dialog>
+<div
+  *ngIf="filesOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+
+  <app-accre-scheme
+    *ngFor="let scheme of schemes"
+    [element]="scheme"
+  ></app-accre-scheme>
+  
+</div>
+<router-outlet #filesOutlet="outlet"></router-outlet>
