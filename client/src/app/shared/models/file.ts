@@ -8,6 +8,8 @@ export interface IFile {
   createdAt: string;
   lastModifiedAt: string;
   status: boolean;
+  parameter: string;
+  area: string;
 }
 
 export interface IFileRoot {

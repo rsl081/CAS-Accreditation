@@ -15,12 +15,6 @@
 </td>
 
 
-
-<td class="text-sm text-[#ff3636] px-6 py-4 whitespace-nowrap" 
-    [ngClass]="{'text-[#18CE0F]' : file.status}">
-  <div *ngIf="file.status; else elseBlock">Approved</div>
-  <ng-template #elseBlock>Stand by</ng-template>
-</td>
 <td
   class="flex justify-center text-sm text-gray-900 px-6 py-4 whitespace-nowrap gap-2"
 >
@@ -51,7 +45,7 @@
     "
     disabledBackgroundColor="#bfdbfe"
     enabledBackgroundColor="#2ca8ff"
-    title="Move"
+    title="Tag"
     (click)="onMove()"
     type="button"
     class="btn px-2 py-1 bg-[#2ca8ff] text-white rounded hover:brightness-95 focus:shadow-lg focus:outline-none active:shadow-lg transition duration-150 ease-in-out"

@@ -24,6 +24,7 @@ export class AdminSummaryGenComponent implements OnInit {
   totalFaculties: number = 0;
   totalFiles: number = 0;
   areFilesLoaded: boolean;
+  isSearching: boolean;
 
   // for excel
   data: any[] = [];
@@ -69,8 +70,19 @@ export class AdminSummaryGenComponent implements OnInit {
     });
 
     this.fileService.onSearch.subscribe((key) =>{
-      this.fileService.searchFile(key).subscribe({
-        next: response => this.files = response.data
+      this.fileService.searchFileGeneral(key).subscribe({
+        next: (response) => {
+          this.files = response.data;
+          console.log(key);
+          if (key.length === 1) {
+            this.isSearching = false;
+          }else{
+            this.isSearching = true;
+          }
+        },
+        complete: () => {;
+          
+        },
       });
     });
 
@@ -116,10 +128,10 @@ export class AdminSummaryGenComponent implements OnInit {
   }
 
   fetchAllFiles(){
-    this.fileService.getAllFiles().subscribe({
-      next: files => this.files = files,
-      error: error => this.toaster.error(error.message),
-      complete: () => this.areFilesLoaded = true
+    this.fileService.getAllFilesGeneral().subscribe({
+      next: (files) => (this.files = files),
+      error: (error) => this.toaster.error(error.message),
+      complete: () => (this.areFilesLoaded = true),
     });
   }
 

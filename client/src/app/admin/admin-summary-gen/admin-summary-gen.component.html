@@ -58,9 +58,12 @@
     </p>
   </div>
 
-  <div class="w-full overflow-x-auto" *ngIf="files.length > 0">
-    <app-file-table [files]="files"></app-file-table>
+  <div class="w-full overflow-x-auto" *ngIf="isSearching; else elseBlock">
+    <app-admin-table [files]="files"></app-admin-table>
   </div>
+  <ng-template #elseBlock>
+    <app-file-table [files]="files"></app-file-table>
+  </ng-template>
 
   <!-- faculty -->
   <div class="w-full">

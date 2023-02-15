@@ -30,6 +30,9 @@ import { FileSortButtonGroupComponent } from './file-sort-button-group/file-sort
 import { FacultyTableComponent } from './faculty-table/faculty-table.component';
 import { FacultyTableRowComponent } from './faculty-table-row/faculty-table-row.component';
 import { HeaderComponent } from './header/header.component';
+import { AdminTableComponent } from './admin-table/admin-table.component';
+
+
 
 
 @NgModule({
@@ -60,6 +63,7 @@ import { HeaderComponent } from './header/header.component';
     FacultyTableComponent,
     FacultyTableRowComponent,
     HeaderComponent,
+    AdminTableComponent,
   ],
   imports: [
     CommonModule,
@@ -67,10 +71,10 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     ToastrModule.forRoot({
       positionClass: 'toast-bottom-right',
-      preventDuplicates: true
+      preventDuplicates: true,
     }),
     FileUploadModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports: [
     AlertMessageComponent,
@@ -99,6 +103,7 @@ import { HeaderComponent } from './header/header.component';
     FacultyTableComponent,
     FacultyTableRowComponent,
     HeaderComponent,
-  ]
+    AdminTableComponent,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}
