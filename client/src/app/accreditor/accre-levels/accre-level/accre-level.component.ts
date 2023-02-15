@@ -23,7 +23,7 @@ export class AccreLevelComponent implements OnInit {
       cardLabel: this.level.levelName, 
       name: this.level.name,
       lastModifiedAt: this.level.lastModifiedAt,
-      btnLabel: 'View Area'
+      btnLabel: 'View'
     };
   }
 

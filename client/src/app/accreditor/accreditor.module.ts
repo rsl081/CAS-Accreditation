@@ -15,6 +15,12 @@ import { AccreLevelComponent } from './accre-levels/accre-level/accre-level.comp
 import { AccreParameterComponent } from './accre-parameters/accre-parameter/accre-parameter.component';
 import { AccreAreasComponent } from './accre-areas/accre-areas.component';
 import { AccreAreaComponent } from './accre-areas/accre-area/accre-area.component';
+import { AccreKeywordsComponent } from './accre-keywords/accre-keywords.component';
+import { AccreKeywordComponent } from './accre-keywords/accre-keyword/accre-keyword.component';
+import { AccreSysimpleoutptsComponent } from './accre-sysimpleoutpts/accre-sysimpleoutpts.component';
+import { AccreSysimpleoutptComponent } from './accre-sysimpleoutpts/accre-sysimpleoutpt/accre-sysimpleoutpt.component';
+import { AccreSchemesComponent } from './accre-schemes/accre-schemes.component';
+import { AccreSchemeComponent } from './accre-schemes/accre-scheme/accre-scheme.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +35,12 @@ import { AccreAreaComponent } from './accre-areas/accre-area/accre-area.componen
     AccreParameterComponent,
     AccreAreasComponent,
     AccreAreaComponent,
+    AccreKeywordsComponent,
+    AccreKeywordComponent,
+    AccreSysimpleoutptsComponent,
+    AccreSysimpleoutptComponent,
+    AccreSchemesComponent,
+    AccreSchemeComponent,
   ],
   imports: [
     CommonModule,

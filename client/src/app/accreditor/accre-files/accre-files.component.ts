@@ -31,14 +31,14 @@ export class AccreFilesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.query = this.route.snapshot.queryParams['paramId'];
-    this.fetchFilesByParameterId();
+    this.query = this.route.snapshot.queryParams['schemeId'];
+    this.fetchFilesBySchemeId();
     this.registerCustomEvents();
   }
 
   registerCustomEvents() {
     this.fileService.updateNeeded.subscribe(() => {
-      this.fetchFilesByParameterId();
+      this.fetchFilesBySchemeId();
     });
 
     this.fileService.onSearch.subscribe((key) => {
@@ -85,7 +85,7 @@ export class AccreFilesComponent implements OnInit {
     this.footerData = [['', '', '', '', 'Total', this.totalFiles]];
   }
 
-  fetchFilesByParameterId() {
+  fetchFilesBySchemeId() {
     this.fileService.getFilesBySchemeId(this.query).subscribe({
       next: (response) => (this.files = response),
       error: (error) => this.toaster.error(error.message),
