@@ -39,29 +39,36 @@ const routes: Routes = [
             data: { breadcrumb: 'Programs' },
             children: [
               {
-                path: 'area',
-                component: AdminAreasComponent,
-                data: { breadcrumb: 'Areas' },
+                path: 'keyword',
+                component: AdminKeywordsComponent,
+                data: { breadcrumb: 'Keywords' },
                 children: [
                   {
-                    path: 'parameter',
-                    component: AdminParametersComponent,
-                    data: { breadcrumb: 'Parameters' },
+                    path: 'area',
+                    component: AdminAreasComponent,
+                    data: { breadcrumb: 'Areas' },
                     children: [
                       {
-                        path: 'systems',
-                        component: AdminSysimpleouptsComponent,
-                        data: { breadcrumb: 'SIO' },
+                        path: 'parameter',
+                        component: AdminParametersComponent,
+                        data: { breadcrumb: 'Parameters' },
                         children: [
                           {
-                            path: 'schemes',
-                            component: AdminSchemesComponent,
-                            data: { breadcrumb: 'Schemes' },
+                            path: 'systems',
+                            component: AdminSysimpleouptsComponent,
+                            data: { breadcrumb: 'SIO' },
                             children: [
                               {
-                                path: 'files',
-                                component: AdminFilesComponent,
-                                data: { breadcrumb: 'Files' },
+                                path: 'schemes',
+                                component: AdminSchemesComponent,
+                                data: { breadcrumb: 'Schemes' },
+                                children: [
+                                  {
+                                    path: 'files',
+                                    component: AdminFilesComponent,
+                                    data: { breadcrumb: 'Files' },
+                                  },
+                                ],
                               },
                             ],
                           },
@@ -72,13 +79,6 @@ const routes: Routes = [
                 ],
               },
             ],
-            // children: [
-            //   {
-            //     path: 'keyword',
-            //     component: AdminKeywordsComponent,
-            //     data: { breadcrumb: 'Keywords' },
-            //   },
-            // ],
           },
         ],
       },
