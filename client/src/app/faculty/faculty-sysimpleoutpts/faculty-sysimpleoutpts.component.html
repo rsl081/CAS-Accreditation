@@ -1,0 +1,24 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  [selectedParentId]="query"
+  type="system"
+  dialogTitle="Add"
+  inputPlaceholder="Name"
+  (dialogClosed)="toggleAddSystemDialog()"
+></app-dashboard-dialog>
+<div
+  *ngIf="schemesOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+  <!-- Came from the shared folder -->
+  <app-dashboard-add-card
+    (cardClicked)="toggleAddSystemDialog()"
+  ></app-dashboard-add-card>
+
+  <app-faculty-sysimpleoutpt
+    *ngFor="let system of systems"
+    [element]="system"
+  ></app-faculty-sysimpleoutpt>
+</div>
+<router-outlet #schemesOutlet="outlet"></router-outlet>

@@ -33,13 +33,17 @@ export class AreaService {
     return this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+keywordId);
   }
 
+  getAreasByLevelId(levelId: string){
+    return this.http.get<IAreaRoot>(this.baseURL+'areas?levelId='+levelId);
+  }
+
 
   getAreasByKeywordIdNotRoot(keywordId: string){
     return this.http.get<IArea>(this.baseURL+'areas?keywordId='+keywordId);
   }
   
   getAreasByFacultyId(keywordId: string, facultyId: string){
-    return this.getAreasByKeywordId(keywordId).pipe(
+    return this.getAreasByLevelId(keywordId).pipe(
       mergeMap(area => area.data),
       filter(data => data.facultyUserId == facultyId)
     );

@@ -1,0 +1,24 @@
+<!--Came from the shared folder -->
+<app-dashboard-dialog
+  *ngIf="showDialog"
+  [selectedParentId]="query"
+  type="scheme"
+  dialogTitle="Add"
+  inputPlaceholder="Name"
+  (dialogClosed)="toggleAddSchemeDialog()"
+></app-dashboard-dialog>
+<div
+  *ngIf="filesOutlet.isActivated == false"
+  class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3 p-3 auto-rows-[1fr]"
+>
+  <!-- Came from the shared folder -->
+  <app-dashboard-add-card
+    (cardClicked)="toggleAddSchemeDialog()"
+  ></app-dashboard-add-card>
+
+  <app-faculty-scheme
+    *ngFor="let scheme of schemes"
+    [element]="scheme"
+  ></app-faculty-scheme>
+</div>
+<router-outlet #filesOutlet="outlet"></router-outlet>
