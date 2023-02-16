@@ -15,7 +15,7 @@ namespace Core.Specifications
         //     AddInclude(x => x.Params);
         // }
         
-        public AreasWithParamsSpec(FileRepoSpecParams areaSpecParam, Guid? keywordId) 
+        public AreasWithParamsSpec(FileRepoSpecParams areaSpecParam, Guid? keywordId, Guid? levelId) 
             : base(x => 
             (string.IsNullOrEmpty(areaSpecParam.Search) ||
                 x.Name.ToLower().Contains(areaSpecParam.Search) ||
@@ -24,9 +24,12 @@ namespace Core.Specifications
             string.IsNullOrEmpty(areaSpecParam.Search) ||
                 x.ArNameNo.ToLower().Contains(areaSpecParam.Search)) 
                 &&
-            (!keywordId.HasValue || x.KeywordId == keywordId))
+            (!keywordId.HasValue || x.KeywordId == keywordId) 
+                &&
+            (!levelId.HasValue || x.Keyword.LevelId == levelId))
         {
             AddInclude(x => x.Keyword);
+            AddInclude(x => x.Keyword.Level);
         }
 
         public AreasWithParamsSpec(Guid id) 
@@ -34,6 +37,7 @@ namespace Core.Specifications
         {
             //* To Show Levels, Its okay to not include
             AddInclude(x => x.Keyword);
+            AddInclude(x => x.Keyword.Level);
         }
         
     }

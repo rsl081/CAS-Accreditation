@@ -8,13 +8,15 @@ import { FacultyHomeComponent } from './faculty-home/faculty-home.component';
 import { FacultyParametersComponent } from './faculty-parameters/faculty-parameters.component';
 import { FacultyGuard } from '../_guards/faculty.guard';
 import { FacultyLevelsComponent } from './faculty-levels/faculty-levels.component';
+import { FacultySysimpleoutptsComponent } from './faculty-sysimpleoutpts/faculty-sysimpleoutpts.component';
+import { FacultySchemesComponent } from './faculty-schemes/faculty-schemes.component';
 
 
 const routes: Routes = [
   {
     path: 'faculty',
-    component: FacultyHomeComponent, 
-    data: {breadcrumb: 'Faculty'},
+    component: FacultyHomeComponent,
+    data: { breadcrumb: 'Faculty' },
     canActivate: [FacultyGuard],
     children: [
       {
@@ -29,28 +31,42 @@ const routes: Routes = [
           {
             path: 'level',
             component: FacultyLevelsComponent,
-            data: {breadcrumb: 'Levels'},
+            data: { breadcrumb: 'Programs' },
             children: [
               {
                 path: 'area',
                 component: FacultyAreasComponent,
-                data: {breadcrumb: 'Areas'},
+                data: { breadcrumb: 'Areas' },
                 children: [
                   {
                     path: 'parameter',
                     component: FacultyParametersComponent,
-                    data: {breadcrumb: 'Parameters'},
+                    data: { breadcrumb: 'Parameters' },
                     children: [
                       {
-                        path: 'files',
-                        component: FacultyFilesComponent,
-                        data: {breadcrumb: 'Files'},
+                        path: 'systems',
+                        component: FacultySysimpleoutptsComponent,
+                        data: { breadcrumb: 'SIO' },
+                        children: [
+                          {
+                            path: 'schemes',
+                            component: FacultySchemesComponent,
+                            data: { breadcrumb: 'Schemes' },
+                            children: [
+                              {
+                                path: 'files',
+                                component: FacultyFilesComponent,
+                                data: { breadcrumb: 'Files' },
+                              },
+                            ],
+                          },
+                        ],
                       },
                     ],
                   },
                 ],
               },
-            ]
+            ],
           },
         ],
       },

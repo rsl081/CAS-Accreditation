@@ -32,7 +32,7 @@ export class FacultyFilesComponent implements OnInit {
     this.currentAreaControl = JSON.parse(
       localStorage.getItem('currentAreaControl')
     );
-    this.query = this.route.snapshot.queryParams['paramId'];
+    this.query = this.route.snapshot.queryParams['schemeId'];
     this.fetchFilesByParameterId();
     this.registerCustomEvents();
   }

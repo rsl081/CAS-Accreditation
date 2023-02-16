@@ -21,12 +21,12 @@ export class AccreAreasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.query = this.route.snapshot.queryParams['levelId'];
+    this.query = this.route.snapshot.queryParams['keywordId'];
     this.fetchAreasByLevelId();
   }
 
     fetchAreasByLevelId(){
-    this.http.get<IAreaRoot>(this.baseURL+'areas?levelId='+this.query).subscribe({
+    this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+this.query).subscribe({
       next: response =>{
         this.areas = response.data;
       },

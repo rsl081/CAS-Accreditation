@@ -18,6 +18,10 @@ import { FacultyAreaComponent } from './faculty-areas/faculty-area/faculty-area.
 import { FacultyParameterComponent } from './faculty-parameters/faculty-parameter/faculty-parameter.component';
 import { FacultyLevelsComponent } from './faculty-levels/faculty-levels.component';
 import { FacultyLevelComponent } from './faculty-levels/faculty-level/faculty-level.component';
+import { FacultySysimpleoutptsComponent } from './faculty-sysimpleoutpts/faculty-sysimpleoutpts.component';
+import { FacultySysimpleoutptComponent } from './faculty-sysimpleoutpts/faculty-sysimpleoutpt/faculty-sysimpleoutpt.component';
+import { FacultySchemesComponent } from './faculty-schemes/faculty-schemes.component';
+import { FacultySchemeComponent } from './faculty-schemes/faculty-scheme/faculty-scheme.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +39,10 @@ import { FacultyLevelComponent } from './faculty-levels/faculty-level/faculty-le
     FacultyParameterComponent,
     FacultyLevelsComponent,
     FacultyLevelComponent,
+    FacultySysimpleoutptsComponent,
+    FacultySysimpleoutptComponent,
+    FacultySchemesComponent,
+    FacultySchemeComponent,
   ],
   imports: [
     CommonModule,

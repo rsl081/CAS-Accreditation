@@ -98,7 +98,7 @@ export class AdminFacultyRegSelectAreaComponent implements OnInit {
         // Append each area to 'areas' object of data object dynamically - this will pass to the next route
         data['areas']['area ' + index] = {
           id: area.id,
-          levelId: area.keywordId,
+          keywordId: area.keywordId,
           title: area.arNameNo + ': ' + area.arName,
         };
       });
