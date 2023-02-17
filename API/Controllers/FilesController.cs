@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using API.Dtos;
 using API.Errors;
 using API.Helpers;
@@ -32,12 +33,56 @@ namespace API.Controllers
         
         //*= Files =
         [HttpGet("{id}")]
-        public async Task<ActionResult<TheFile>> GetFile(Guid id)
+        public async Task<ActionResult> GetFile(Guid id, [FromQuery]string search)
         {
-            var spec = new FileSpec(id);
-            return await _unitOfWork.Repository<TheFile>().GetEntityWithSpec(spec);
+            search = search.ToLower();
+            
+            var file = await _context.TheFiles
+                                .Select((f) => new {
+                                    Id = f.Id,
+                                    Keyword = f.Scheme.SysImpOutpt.Parameter.Area.Keyword.Level.Keywords.Select(
+                                        k => new {
+                                            k.Id,
+                                            k.KeywordName,
+                                            k.Level.LevelName,
+                                            Area = k.Areas.Select(a => 
+                                                new {
+                                                    a.Id,
+                                                    a.ArNameNo,
+                                                    a.ArName,
+                                                    Parameter = a.Params.Select(
+                                                        p => new {
+                                                            p.Id,
+                                                            p.ParamName,
+                                                            SIO = p.SysImpOutpts.Select(s => new {
+                                                                s.Id,
+                                                                s.SystemName,
+                                                                Schemes = s.Schemes.Select(s => new {
+                                                                    s.Id,
+                                                                    s.SchemeName
+                                                                }).ToList()
+                                                            }).ToList(),
+                                                    }).ToList(),
+                                                }).ToList(),
+                                        }
+                                    ).Where(k =>
+                                        search.Contains(k.KeywordName!.ToLower())
+                                        ).ToList(),
+                                }).FirstOrDefaultAsync(x => x.Id == id);
+
+                    
+                    
+            return Ok(file);
         }
 
+        public string Test(string q, string keyword)
+        {
+            // if(q.Contains(keyword)) {
+            //     return keyword;
+            // }
+            return "qwe";
+        }
+        
         [HttpGet("TheFileGeneral")]
         public async Task<ActionResult<Pagination<TheFile>>> GetFilesGeneral(
             [FromQuery]string search

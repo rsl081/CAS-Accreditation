@@ -43,11 +43,11 @@ export class FileUploaderComponent implements OnInit {
 
   initializeUploader(){
     this.uploader = new FileUploader({
-      authToken: 'Bearer '+this.user.token,
+      authToken: 'Bearer ' + this.user.token,
       isHTML5: true,
-      allowedFileType: ['pdf', 'image'],
+      allowedFileType: ['pdf', 'image', 'doc'],
       removeAfterUpload: true,
-      autoUpload: false
+      autoUpload: false,
     });
 
     this.uploader.onAfterAddingFile = (file: FileItem) =>{

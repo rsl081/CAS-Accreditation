@@ -541,7 +541,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Scheme", b =>
                 {
                     b.HasOne("Core.Entities.SysImpOutpt", "SysImpOutpt")
-                        .WithMany()
+                        .WithMany("Schemes")
                         .HasForeignKey("SysImpOutptId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -653,6 +653,11 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Scheme", b =>
                 {
                     b.Navigation("TheFiles");
+                });
+
+            modelBuilder.Entity("Core.Entities.SysImpOutpt", b =>
+                {
+                    b.Navigation("Schemes");
                 });
 
             modelBuilder.Entity("Core.Entities.TheFile", b =>

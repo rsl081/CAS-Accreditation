@@ -13,5 +13,6 @@ namespace Core.Entities
         public DateTime LastModified { get; set; } = DateTime.Now;
         public Parameter Parameter { get; set; }
         public Guid ParameterId { get; set; }
+        public List<Scheme> Schemes { get; set; } = new List<Scheme>();
     }
 }

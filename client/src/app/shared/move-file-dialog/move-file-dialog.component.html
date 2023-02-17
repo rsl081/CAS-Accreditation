@@ -23,104 +23,63 @@
   >
     <div class="text-gray-600 dark:text-white">
       <i class="fa fa-folder"></i>
-      Programs
+      <!-- {{ files.keyword.keywordName }} -->
+      {{ keyword }}
       <!-- ================================ -->
-        <div *ngFor="let level of levels; let levelIndex = index" class="ml-4">
-          <!-- Level -->
+        <div *ngFor="let area of areas; let areaIndex = index" class="ml-4">
+          <!-- Area -->
           <div
             class="text-gray-600 dark:text-white cursor-pointer"
-            (click)="onSelectLevel(level, levelIndex)"
+            (click)="onSelectArea(area, areaIndex)"
           >
             <i class="fa fa-folder"></i>
-            {{ level.levelName }}
+            {{ area.arNameNo + ': ' + area.arName }}
           </div>
           
-          <div *ngIf="isParentLevelSelected" class="ml-4">
-            <!-- ==============Keyword================== -->
-            <div *ngFor="let keyword of keywords[levelIndex]; let keywordIndex = index">
+          <div *ngIf="isParentAreaSelected" class="ml-4">
+            <!-- ==============Parameter================== -->
+            <div *ngFor="let parameter of parameters[areaIndex]; let parameterIndex = index">
               
               <div
                 class="text-gray-600 dark:text-white cursor-pointer"
-                (click)="onSelectKeyword(keyword, keywordIndex)"
+                (click)="onSelectParameter(parameter, parameterIndex)"
               >
                 <i class="fa fa-folder"></i>
-                {{ keyword.keywordName }}
+                {{ parameter.paramName }}
               </div>
 
-                <div *ngIf="isParentKeywordSelected" class="ml-4">
+                <div *ngIf="isParentParameterSelected" class="ml-4">
 
-                  <!-- ==============Area================== -->
+                  <!-- ==============SIO================== -->
 
-                    <div *ngFor="let area of areas[keywordIndex]; let areaIndex = index">
+                    <div *ngFor="let sysimpleoutpt of sysimpleoutpts[parameterIndex]; let sysimpleoutptIndex = index">
 
                        <div
                         class="text-gray-600 dark:text-white cursor-pointer"
-                        (click)="onSelectArea(area, areaIndex)"
+                        (click)="onSelectSysImpleOutpt(sysimpleoutpt, sysimpleoutptIndex)"
                       >
                         <i class="fa fa-folder"></i>
-                        {{ area.arNameNo + ": " + area.arName }}
+                         {{ sysimpleoutpt.systemName }}
                       </div>
 
-                      <div *ngIf="isParentAreaSelected" class="ml-4">
+                      <div *ngIf="isParentSysImpleOutptSelected" class="ml-4">
 
-                        <!-- ==============Parameter================== -->
-                        <div *ngFor="let parameter of parameters[areaIndex]; let parameterIndex = index">
+                        <!-- ==============Scheme================== -->
+                        <div *ngFor="let scheme of schemes[sysimpleoutptIndex]; let schemeIndex = index">
 
                           <div
                             class="text-gray-600 dark:text-white cursor-pointer"
-                            (click)="onSelectParameter(parameter, parameterIndex)"
                           >
-                            <i class="fa fa-folder"></i>
-                            {{ parameter.paramName }}
-                          </div>
 
-                          <div *ngIf="isParentParameterSelected" class="ml-4">
-
-                             <!-- ==============SysImpleOutput================== -->
-
-                            <div *ngFor="let sysimpleoutpt of sysimpleoutpts[parameterIndex]; let sysimpleoutptIndex = index">
-
-                              <div
-                                class="text-gray-600 dark:text-white cursor-pointer"
-                                (click)="onSelectSysImpleOutpt(sysimpleoutpt, sysimpleoutptIndex)"
-                              >
-                                <i class="fa fa-folder"></i>
-                                {{ sysimpleoutpt.systemName }}
-                              </div>
-
-                              <div *ngIf="isParentSysImpleOutptSelected" class="ml-4">
-
-                                <!-- ==============Scheme================== -->
-
-                                  <div *ngFor="let scheme of schemes[sysimpleoutptIndex];">
-
-                                    <div
-                                      class="text-gray-600 dark:text-white cursor-pointer"
-                                      (click)="onSelectScheme(scheme)"
-                                    >
-                                      <i class="fa fa-folder"></i>
-                                      {{ scheme.schemeName }}
-                                    </div>
-
-                                  </div>
-
-
-                                <!-- ==============End of Scheme================== -->
-
-                              </div>
-
-
-                              
-                            </div>
-                            
-                             <!-- ==============End of SysImpleOutput================== -->
+                            <input
+                              [value]="scheme.id"
+                              (change)="onChangeFilesId($event)" type="checkbox" class="border-gray-300 rounded h-5 w-5" />
+                            {{ scheme.schemeName }}
 
                           </div>
-
-
 
                         </div>
-                        <!-- ==============End of Parameter================== -->
+                        <!-- ==============End of Scheme================== -->
 
                       </div>
                       
@@ -136,7 +95,7 @@
 
         </div>
       <!-- ================================ -->
-      
+     
     </div>
   </div>
 
@@ -144,7 +103,7 @@
   <div class="flex w-full gap-3">
     <button
       (click)="onMove()"
-      [appDisabledBtn]="!isDestinationValid"
+      [appDisabledBtn]="isDestinationValid"
       disabledBackgroundColor="#ffedd5"
       enabledBackgroundColor="#f96332"
       class="flex-1 max-w-xs rounded-full relative overflow-hidden inline-flex group items-center justify-center bg-[#f96332] text-white px-10 py-2 hover:opacity-90"
