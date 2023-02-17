@@ -32,6 +32,10 @@ export class FileService {
       map(file => file.data)
     );
   }
+  
+  getFile(id: string, search: string){
+    return this.http.get(this.baseURL+'files/'+id + '?search=' + search);
+  }
 
   getAllFilesGeneral(){
     return this.http.get<IFileRoot>(this.baseURL+'files/thefilegeneral').pipe(
