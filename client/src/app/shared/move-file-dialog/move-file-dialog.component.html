@@ -38,9 +38,10 @@
           
           <div *ngIf="isParentAreaSelected" class="ml-4">
             <!-- ==============Parameter================== -->
-            <div *ngFor="let parameter of parameters[areaIndex]; let parameterIndex = index">
+            <div *ngFor="let parameter of parameters; let parameterIndex = index">
               
               <div
+                *ngIf="areaIndex === myAreaIndex"
                 class="text-gray-600 dark:text-white cursor-pointer"
                 (click)="onSelectParameter(parameter, parameterIndex)"
               >
@@ -52,9 +53,10 @@
 
                   <!-- ==============SIO================== -->
 
-                    <div *ngFor="let sysimpleoutpt of sysimpleoutpts[parameterIndex]; let sysimpleoutptIndex = index">
+                    <div *ngFor="let sysimpleoutpt of sysimpleoutpts; let sysimpleoutptIndex = index">
 
-                       <div
+                      <div
+                        *ngIf="parameterIndex === myParameterIndex && myAreaIndex === areaIndex"
                         class="text-gray-600 dark:text-white cursor-pointer"
                         (click)="onSelectSysImpleOutpt(sysimpleoutpt, sysimpleoutptIndex)"
                       >
@@ -62,12 +64,15 @@
                          {{ sysimpleoutpt.systemName }}
                       </div>
 
-                      <div *ngIf="isParentSysImpleOutptSelected" class="ml-4">
-
+                      <div *ngIf="isParentSysImpleOutptSelected && isParentSchemeSelected" class="ml-4">
+                        
                         <!-- ==============Scheme================== -->
-                        <div *ngFor="let scheme of schemes[sysimpleoutptIndex]; let schemeIndex = index">
-
+                        <div  *ngFor="let scheme of schemes; let schemeIndex = index">    
+                         
                           <div
+                            *ngIf="sysimpleoutptIndex === mySysImpleOutptIndex && 
+                                    parameterIndex === myParameterIndex && 
+                                    myAreaIndex === areaIndex"
                             class="text-gray-600 dark:text-white cursor-pointer"
                           >
 
@@ -77,8 +82,11 @@
                             {{ scheme.schemeName }}
 
                           </div>
+                        
 
                         </div>
+
+
                         <!-- ==============End of Scheme================== -->
 
                       </div>
