@@ -14,7 +14,7 @@ import { SchemeService } from 'src/app/_services/scheme.service';
 import { SysimpleoutptService } from 'src/app/_services/sysimpleoutpt.service';
 import { environment } from 'src/environments/environment';
 import { IArea, IAreaRoot } from '../models/area';
-import { IFile } from '../models/file';
+import { IFile, IFileRoot } from '../models/file';
 import { IKeyword, IKeywordRoot } from '../models/keyword';
 import { ILevel } from '../models/level';
 import { IParameter, IParameterRoot } from '../models/parameter';
@@ -31,13 +31,21 @@ export class MoveFileDialogComponent implements OnInit {
   baseURL = environment.apiUrl;
   user: IUser;
   levels: ILevel[] = [];
+
   areas: IArea[] = [];
+  myAreaIndex: string;
+
+  parameters: IParameter[] = [];
+  myParameterIndex: string;
+
+  sysimpleoutpts: ISysImpleOutpt[] = [];
+  mySysImpleOutptIndex: string;
+
+  schemes: IScheme[] = [];
+  mySchemesIndex: string;
+
   keyword: string = '';
   keywordRoots: IKeywordRoot;
-
-  parameters: IParameter[][] = [];
-  sysimpleoutpts: ISysImpleOutpt[][] = [];
-  schemes: IScheme[][] = [];
 
   files: any = [];
   filesSend: any = [];
@@ -50,6 +58,7 @@ export class MoveFileDialogComponent implements OnInit {
   isParentAreaSelected: boolean = false;
   isParentParameterSelected: boolean = false;
   isParentSysImpleOutptSelected: boolean = false;
+  isParentSchemeSelected: boolean = false;
 
   isDestinationValid: boolean = false;
   currentlySelectedScheme: IScheme;
@@ -93,7 +102,6 @@ export class MoveFileDialogComponent implements OnInit {
           this.files.keyword.map((keyword: IKeyword, index) => {
             this.keyword = keyword.keywordName;
 
-            console.log('qwewq' + keyword.keywordName + ' ' + index);
             this.http
               .get<IAreaRoot>(this.baseURL + 'areas?keywordId=' + keyword.id)
               .subscribe({
@@ -141,78 +149,74 @@ export class MoveFileDialogComponent implements OnInit {
   //       });
   //   }
   // }
-
+  
   onSelectArea(area: IArea, areaIndex: string) {
-    if (!this.parameters[areaIndex]) {
-      this.http
-        .get<IParameterRoot>(this.baseURL + 'params?areaId=' + area.id)
-        .subscribe({
-          next: (response) => (this.parameters[areaIndex] = response.data),
-          complete: () => {
-            this.isDestinationValid = false;
-            this.currentlySelectedScheme = null;
-            this.isParentAreaSelected = true;
-          },
-        });
-    }
+
+    this.myAreaIndex = areaIndex;
+    this.myParameterIndex = '-1';
+    this.mySysImpleOutptIndex = '-1';
+    this.mySchemesIndex = '-1';
+   
+    this.http
+      .get<IParameterRoot>(this.baseURL + 'params?areaId=' + area.id)
+      .subscribe({
+        next: (response) => {
+          this.parameters = response.data;
+        },
+        complete: () => {
+          this.isDestinationValid = false;
+          this.currentlySelectedScheme = null;
+          this.isParentAreaSelected = true;
+          
+        },
+      });
   }
 
   onSelectParameter(parameter: IParameter, parameterIndex: string) {
-    if (!this.sysimpleoutpts[parameterIndex]) {
-      this.http
-        .get<ISysImpleOutptRoot>(
-          this.baseURL + 'systems?paramId=' + parameter.id
-        )
-        .subscribe({
-          next: (response) =>
-            (this.sysimpleoutpts[parameterIndex] = response.data),
-          complete: () => {
-            this.isDestinationValid = false;
-            this.currentlySelectedScheme = null;
-            this.isParentParameterSelected = true;
-          },
-        });
-    }
+    this.myParameterIndex = parameterIndex;
+    this.isParentSchemeSelected = !this.isParentSchemeSelected;
+
+    this.http
+      .get<ISysImpleOutptRoot>(this.baseURL + 'systems?paramId=' + parameter.id)
+      .subscribe({
+        next: (response) => (this.sysimpleoutpts = response.data),
+        complete: () => {
+          this.isDestinationValid = false;
+          this.currentlySelectedScheme = null;
+          this.isParentParameterSelected = true;
+        },
+      });
   }
 
   onSelectSysImpleOutpt(system: ISysImpleOutpt, systemIndex: string) {
-    if (!this.schemes[systemIndex]) {
-      this.http
-        .get<ISchemeRoot>(
-          this.baseURL + 'schemes?sysImpOutptId=' + system.id
-        )
-        .subscribe({
-          next: (response) =>
-            (this.schemes[systemIndex] = response.data),
-          complete: () => {
-            this.isDestinationValid = false;
-            this.currentlySelectedScheme = null;
-            this.isParentSysImpleOutptSelected = true;
-            
-          },
-        });
-    }
-  }
+    this.mySysImpleOutptIndex = systemIndex;
+    this.isParentSchemeSelected = !this.isParentSchemeSelected;
+    
+    this.http
+      .get<ISchemeRoot>(this.baseURL + 'schemes?sysImpOutptId=' + system.id)
+      .subscribe({
+        next: (response) => (this.schemes = response.data),
+        complete: () => {
+          this.isDestinationValid = false;
+          this.currentlySelectedScheme = null;
+          this.isParentSysImpleOutptSelected = true;
+          
+        },
+      });
 
-  // onSelectScheme(scheme: IScheme) {
-  //   // console.log(scheme.id)
-  //   this.isDestinationValid = true;
-  //   this.currentlySelectedScheme = scheme;
-  // }
+  }
 
   onChangeFilesId($event) {
     const isCheck = $event.target.checked;
     const schemeId = $event.target.value;
     if (isCheck) {
       this.schemeIds = [...this.schemeIds, schemeId];
-      console.log(this.schemeIds);
     } else {
       const index = this.schemeIds.indexOf(schemeId);
       if (index > -1) {
         // only splice array when item is found
         this.schemeIds.splice(index, 1); // 2nd parameter means remove one item only
       }
-      console.log(this.schemeIds);
     }
   }
 
@@ -226,13 +230,12 @@ export class MoveFileDialogComponent implements OnInit {
           return val; //Returning Value
         })
       )
-      .subscribe((ret) => {
-        console.log('Recd from map : ' + ret);
+      .subscribe((scheId) => {
         let body = {
           fileName: this.FileToMove.fileName,
           Name: this.user.displayName,
           size: this.FileToMove.size,
-          schemeId: ret,
+          schemeId: scheId,
         };
 
         this.fileService.createFile(body).subscribe({
