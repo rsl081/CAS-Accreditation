@@ -20,7 +20,7 @@ export class AdminAreaComponent implements OnInit {
     return {
       id: this.area.id, 
       type: 'area', 
-      cardLabel: this.area.arNameNo+": "+this.area.arName + " " + this.area.keyword, 
+      cardLabel: this.area.arNameNo+": "+this.area.arName, 
       name: this.area.name,
       lastModifiedAt: this.area.lastModifiedAt,
       btnLabel: 'View Parameter'
