@@ -56,6 +56,7 @@ export class DashboardDialogComponent implements OnInit {
 
   createAddDirectoryForm() {
     this.addDirectoryForm = this.formBuilder.group({
+      keywordId: [null, [Validators.required]],
       areaNameNo: [null, [Validators.required]],
       prefName: [null, [Validators.required]],
     });
@@ -116,7 +117,7 @@ export class DashboardDialogComponent implements OnInit {
           arNameNo: this.addDirectoryForm.controls['areaNameNo'].value,
           arName: this.addDirectoryForm.controls['prefName'].value,
           name: this.user.displayName,
-          keywordId: this.query,
+          keywordId: this.addDirectoryForm.controls['keywordId'].value,
         };
 
         if (this.user.role === 'Faculty') {

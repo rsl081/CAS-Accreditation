@@ -27,10 +27,7 @@ export class FacultyService {
   getFacultyLevel(areas: string[]){
     return from(areas).pipe(
       map((area: string) =>{
-        return area.split("=").splice(0, 2).join().split(",").join()
-        .replace("{ LevelName", "")
-        .replace(" , ", "")
-        .replace(", ArNameNo", "");
+        return area;
       })
     );
   }
@@ -38,11 +35,7 @@ export class FacultyService {
   getFacultyArea(areas: string[]){
      return from(areas).pipe(
       map((area: string) =>{
-       return area.split("=").splice(2, 2).join()
-       .replace(",", ":")
-       .replace("ArName ,", "")
-       .replace("}", "")
-       .replace("  ", " ");
+       return area
       })
     );
   }

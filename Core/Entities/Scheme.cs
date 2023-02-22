@@ -14,5 +14,13 @@ namespace Core.Entities
         public SysImpOutpt SysImpOutpt { get; set; }
         public Guid SysImpOutptId { get; set; }
         public List<TheFile> TheFiles { get; set; } = new List<TheFile>();
+    
+        public Scheme(){}
+
+        public Scheme(string schemeName)
+        {
+            SchemeName = schemeName;
+        }
+
     }
 }

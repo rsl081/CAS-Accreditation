@@ -24,7 +24,7 @@ export class AdminAreasComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.query = this.route.snapshot.queryParams['keywordId'];
+    this.query = this.route.snapshot.queryParams['levelId'];
 
     this.fetchAreasByKeywordId();
     this.areaService.updateNeeded.subscribe({
@@ -35,7 +35,7 @@ export class AdminAreasComponent implements OnInit {
   }
 
   fetchAreasByKeywordId(){
-    this.http.get<IAreaRoot>(this.baseURL+'areas?keywordId='+this.query).subscribe({
+    this.http.get<IAreaRoot>(this.baseURL+'areas?levelId='+this.query).subscribe({
       next: response =>{
         this.areas = response.data;
         

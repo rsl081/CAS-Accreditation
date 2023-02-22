@@ -26,10 +26,12 @@ namespace Core.Specifications
                 &&
             (!keywordId.HasValue || x.KeywordId == keywordId) 
                 &&
-            (!levelId.HasValue || x.Keyword.LevelId == levelId))
+            (!levelId.HasValue || x.Keyword.LevelId == levelId)
+            )
         {
             AddInclude(x => x.Keyword);
             AddInclude(x => x.Keyword.Level);
+            // AddInclude(x => x.Keyword.KeywordName);
         }
 
         public AreasWithParamsSpec(Guid id) 
@@ -38,6 +40,7 @@ namespace Core.Specifications
             //* To Show Levels, Its okay to not include
             AddInclude(x => x.Keyword);
             AddInclude(x => x.Keyword.Level);
+            // AddInclude(x => x.Keyword.KeywordName);
         }
         
     }

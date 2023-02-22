@@ -20,6 +20,12 @@ namespace Core.Entities
             ArNameNo = nameNo;
             ArName = name;
         }
+        public Area(string nameNo, string name, List<Parameter> dparams)
+        {
+            ArNameNo = nameNo;
+            ArName = name;
+            Params = dparams;
+        }
 
         public Area(Guid id)
         {

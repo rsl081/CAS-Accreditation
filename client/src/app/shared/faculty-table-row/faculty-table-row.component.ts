@@ -9,9 +9,11 @@ import { IFaculty } from '../models/faculty';
 })
 export class FacultyTableRowComponent implements OnInit {
 
-  @Input() faculty: IFaculty;
-  levels: string[] = [];
+  @Input() faculty: any;
+  levels: any = [];
   areas: string[] = [];
+  params: any[] = [];
+  sysimpleoutpts: any[] = [];
   
   constructor(private facultyService: FacultyService) { }
 
@@ -23,9 +25,12 @@ export class FacultyTableRowComponent implements OnInit {
   getLevel(){
     this.facultyService.getFacultyLevel(this.faculty.areas)
     .subscribe({
-      next: response => {
+      next: (response: any) => {
         if (this.levels.length === 0){
           this.levels.push(response);
+          this.params.push(response.param);
+          this.sysimpleoutpts.push(response.sysImpOutpt);
+          // console.log(response.sysImpOutpt);
         } else if(this.levels.length > 0){
           let flag = this.levels.find(level => level === response);
           if(flag == undefined){

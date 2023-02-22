@@ -75,33 +75,20 @@ namespace API.Controllers
             return Ok(file);
         }
 
-        public string Test(string q, string keyword)
-        {
-            // if(q.Contains(keyword)) {
-            //     return keyword;
-            // }
-            return "qwe";
-        }
         
         [HttpGet("TheFileGeneral")]
         public async Task<ActionResult<Pagination<TheFile>>> GetFilesGeneral(
             [FromQuery]string search
         )
         {
-           
-     
-            // var files = await _context.TheFiles
-            //                     .Select(f => new TheFile{
-            //                         FileName = f.FileName,
-            //                         Scheme = f.Scheme.
-            //                     })
-            //                     .ToListAsync();
 
             var files = await _context.TheFiles
                                 .Select(f => new FileToReturnDto {
                                     Id = f.Id,
                                     FileRepo = f.FileRepo.Url,
                                     FileName = f.FileName,
+                                    Created = f.Created,
+                                    LastModified = f.LastModified,
                                     Name = f.Name,
                                     Size = f.Size,
                                     Scheme = f.Scheme.SchemeName,

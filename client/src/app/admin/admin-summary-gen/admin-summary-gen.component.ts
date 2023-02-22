@@ -14,7 +14,6 @@ import { OverlayService } from 'src/app/_services/overlay.service';
   styleUrls: ['./admin-summary-gen.component.css'],
 })
 export class AdminSummaryGenComponent implements OnInit {
-
   files: IFile[] = [];
   showEditFileDialog: boolean = false;
   fileToEdit: IFile;
@@ -25,6 +24,8 @@ export class AdminSummaryGenComponent implements OnInit {
   totalFiles: number = 0;
   areFilesLoaded: boolean;
   isSearching: boolean;
+
+  file: IFile;
 
   // for excel
   data: any[] = [];
@@ -37,190 +38,198 @@ export class AdminSummaryGenComponent implements OnInit {
     private overlayService: OverlayService,
     private facultyService: FacultyService,
     private excelService: ExcelService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.fetchAllFiles();
     this.registerCustomEvents();
+  
+   
   }
 
-  registerCustomEvents(){
-    this.fileService.updateNeeded.subscribe(() =>{
+  registerCustomEvents() {
+    this.fileService.updateNeeded.subscribe(() => {
       this.fetchAllFiles();
     });
 
-    this.fileService.editFileShow.subscribe((file) =>{
+    this.fileService.editFileShow.subscribe((file) => {
       this.fileToEdit = file;
       this.toggleEditFileDialog();
     });
 
-    this.fileService.editFileClosed.subscribe(() =>{
-       this.toggleEditFileDialog();
-       this.overlayService.hideOverlay.emit();
+    this.fileService.editFileClosed.subscribe(() => {
+      this.toggleEditFileDialog();
+      this.overlayService.hideOverlay.emit();
     });
 
-    this.fileService.moveFileShow.subscribe((file) =>{
+    this.fileService.moveFileShow.subscribe((file) => {
       this.fileToMove = file;
       this.toggleMoveFileDialog();
     });
 
-    this.fileService.moveFileClosed.subscribe(() =>{
+    this.fileService.moveFileClosed.subscribe(() => {
       this.toggleMoveFileDialog();
       this.overlayService.hideOverlay.emit();
     });
 
-    this.fileService.onSearch.subscribe((key) =>{
+    this.fileService.onSearch.subscribe((key) => {
       this.fileService.searchFileGeneral(key).subscribe({
         next: (response) => {
           this.files = response.data;
           console.log(key);
           if (key.length === 1) {
             this.isSearching = false;
-          }else{
+          } else {
             this.isSearching = true;
           }
         },
-        complete: () => {;
-          
-        },
+        complete: () => {},
       });
     });
 
     this.fileService.onSortName.subscribe({
-      next: method => {
+      next: (method) => {
         this.fileService.sortName(method).subscribe({
-          next: sortedFiles => this.files = sortedFiles.data
+          next: (sortedFiles) => (this.files = sortedFiles.data),
         });
-      }
+      },
     });
 
-     this.fileService.onSortFileName.subscribe({
-      next: method => {
+    this.fileService.onSortFileName.subscribe({
+      next: (method) => {
         this.fileService.sortFileName(method).subscribe({
-          next: sortedFiles => this.files = sortedFiles.data
+          next: (sortedFiles) => (this.files = sortedFiles.data),
         });
-      }
+      },
     });
 
     this.facultyService.getAllFaculties().subscribe({
-      next: response => this.faculty = response.data
+      next: (response) => (this.faculty = response.data),
     });
-    
+
     this.facultyService.getTotalFaculties().subscribe({
-      next: response => this.totalFaculties = response
+      next: (response) => (this.totalFaculties = response),
     });
 
     this.fileService.getTotalFiles().subscribe({
-      next: response => this.totalFiles = response
+      next: (response) => (this.totalFiles = response),
     });
   }
 
-  initExcelProperties(){
+  initExcelProperties() {
     this.columns = [
-      ['Name', 'File Name', 'Link to the File', 'Size', 'Date Created', 'Last Modified'],
+      [
+        'Name',
+        'File Name',
+        'Link to the File',
+        'Size',
+        'Date Created',
+        'Last Modified',
+      ],
       ['Name', 'Email', 'Acount Creation Date', 'Level(s)', 'Area(s)'],
     ];
     this.data = [];
     this.footerData = [
-      [['','','','','Total',this.totalFiles]], 
-      [['','','','Total',this.totalFaculties]]
+      [['', '', '', '', 'Total', this.totalFiles]],
+      [['', '', '', 'Total', this.totalFaculties]],
     ];
   }
 
-  fetchAllFiles(){
+  fetchAllFiles() {
     this.fileService.getAllFilesGeneral().subscribe({
-      next: (files) => (this.files = files),
+      next: (files) => {
+        this.files = files;
+        this.files.map((f) => (this.file = f));
+      },
       error: (error) => this.toaster.error(error.message),
       complete: () => (this.areFilesLoaded = true),
     });
   }
 
-  toggleEditFileDialog(){
+  toggleEditFileDialog() {
     this.showEditFileDialog = !this.showEditFileDialog;
   }
 
-  toggleMoveFileDialog(){
+  toggleMoveFileDialog() {
     this.showMoveFileDialog = !this.showMoveFileDialog;
   }
 
-  exportExcel(type: string){
+  exportExcel(type: string) {
     this.initExcelProperties();
-    if(type === 'File'){
-      from(this.files).pipe(
-        map((file: IFile) => file)
-      ).subscribe({
-        next: file =>{
-          let data = this.setFileData(file);
-          this.data.push(data);
-        },
-        complete: () =>{
-          this.excelService.exportAsExcelFile(
-            'File',
-            'Summary of Files', 
-            'Web-Based File Repositories for Accreditation System', 
-            this.columns[0], 
-            this.data, 
-            this.footerData[0], 
-            'files-summary-report', 
-            'Sheet1'
-          );
-        }
-      });
-    }else if(type === 'Faculty'){
-      from(this.faculty).pipe(
-        map((faculty: IFaculty) => faculty)
-      ).subscribe({
-        next: faculty =>{
-          let data = this.setFacultyData(faculty);
-          this.data.push(data);
-        },
-        complete: () =>{
-          this.excelService.exportAsExcelFile(
-            'Faculty',
-            'Summary of Faculty', 
-            'Web-Based File Repositories for Accreditation System', 
-            this.columns[1], 
-            this.data, 
-            this.footerData[1], 
-            'faculty-summary-report', 
-            'Sheet1'
-          );
-        }
-      });
-    } 
+    if (type === 'File') {
+      from(this.files)
+        .pipe(map((file: IFile) => file))
+        .subscribe({
+          next: (file) => {
+            let data = this.setFileData(file);
+            this.data.push(data);
+          },
+          complete: () => {
+            this.excelService.exportAsExcelFile(
+              'File',
+              'Summary of Files',
+              'Web-Based File Repositories for Accreditation System',
+              this.columns[0],
+              this.data,
+              this.footerData[0],
+              'files-summary-report',
+              'Sheet1'
+            );
+          },
+        });
+    } else if (type === 'Faculty') {
+      from(this.faculty)
+        .pipe(map((faculty: IFaculty) => faculty))
+        .subscribe({
+          next: (faculty) => {
+            let data = this.setFacultyData(faculty);
+            this.data.push(data);
+          },
+          complete: () => {
+            this.excelService.exportAsExcelFile(
+              'Faculty',
+              'Summary of Faculty',
+              'Web-Based File Repositories for Accreditation System',
+              this.columns[1],
+              this.data,
+              this.footerData[1],
+              'faculty-summary-report',
+              'Sheet1'
+            );
+          },
+        });
+    }
   }
 
-  setFileData(file: IFile): any{
+  setFileData(file: IFile): any {
     return {
       Name: file.name,
       FileName: file.fileName,
       LinkToTheFile: file.fileRepo,
       Size: file.size,
       DateCreated: file.createdAt,
-      LastModified: file.lastModifiedAt
-    }
+      LastModified: file.lastModifiedAt,
+    };
   }
 
-  setFacultyData(faculty: IFaculty){
+  setFacultyData(faculty: IFaculty) {
     let levels = '';
     let areas = '';
 
-    this.facultyService.getFacultyLevel(faculty.areas)
-    .subscribe({
-      next: response => {
-        if (levels.length === 0){
+    this.facultyService.getFacultyLevel(faculty.areas).subscribe({
+      next: (response) => {
+        if (levels.length === 0) {
           levels += response;
-        } else if(levels.length > 0){
+        } else if (levels.length > 0) {
           let flag = levels.includes(response);
-          if(!flag){
+          if (!flag) {
             levels += response;
           }
         }
-      }
+      },
     });
-    this.facultyService.getFacultyArea(faculty.areas)
-      .subscribe({
-        next: response => areas += response
+    this.facultyService.getFacultyArea(faculty.areas).subscribe({
+      next: (response) => (areas += response),
     });
     return {
       Name: faculty.displayName,
@@ -228,7 +237,8 @@ export class AdminSummaryGenComponent implements OnInit {
       AccountCreationDate: faculty.createdAt,
       Levels: levels,
       Areas: areas,
-    }
+    };
   }
 
+  
 }

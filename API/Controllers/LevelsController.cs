@@ -31,8 +31,186 @@ namespace API.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ActionResult<Level>> CreateLevel(LevelCreateDto levelToCreate)
         {
+
             var level = _mapper.Map<LevelCreateDto, Level>(levelToCreate);
              
+             List<Area> areas = new List<Area>();
+             level.Keywords.Add(new Keyword(
+                            new Guid("e19c0f65-997b-4258-b78c-c8c7732b3b47"),
+                            "ADMINISTRATIVE MANUAL", new List<Area>{
+                                new Area("Area 1", "Missions, Goals, and Objectives", new List<Parameter>{
+                                    new Parameter("Parameter A", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    })
+                                }),
+                                new Area("Area 2", "Faculty", new List<Parameter>{
+                                    new Parameter("Parameter B", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter D", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter E", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter F", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                }),
+                                new Area("Area 3", "Cirriculum and Instruction", new List<Parameter>{
+                                    new Parameter("Parameter C", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 2"),
+                                            new Scheme("System 3"),
+                                        })
+                                    })
+                                }),
+                            }));
+             level.Keywords.Add(new Keyword(
+                            new Guid("adf89e57-cf9e-439f-bbad-4a3d43caaf9e"),
+                            "SYLLABI", new List<Area>{
+                                new Area("Area 1", "Missions, Goals, and Objectives", new List<Parameter>{
+                                    new Parameter("Parameter A", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    })
+                                }),
+                                new Area("Area 2", "Faculty", new List<Parameter>{
+                                    new Parameter("Parameter B", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter D", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter E", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter F", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                }),
+                                new Area("Area 3", "Cirriculum and Instruction", new List<Parameter>{
+                                    new Parameter("Parameter C", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 2"),
+                                            new Scheme("System 3"),
+                                        })
+                                    })
+                                }),
+                            }));
+             level.Keywords.Add(new Keyword(
+                            new Guid("bf673748-6dd4-42bc-8494-41b394233c54"),
+                            "FINANCIAL", new List<Area>{
+                                new Area("Area 4", "Students", new List<Parameter>{
+                                    new Parameter("Parameter A", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 6"),
+                                            new Scheme("System 3"),
+                                            new Scheme("System 2"),
+                                        })
+                                    })
+                                }),
+                                new Area("Area 5", "Research", new List<Parameter>{
+                                    new Parameter("Parameter B", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                }),
+                                new Area("Area 10", "Administration", new List<Parameter>{
+                                    new Parameter("Parameter D", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1"),
+                                            new Scheme("System 3"),
+                                        })
+                                    })
+                                }),
+                            }));
+             level.Keywords.Add(new Keyword(
+                            new Guid("55b79cf1-bbf0-4c9e-9550-a35b9cc21603"),
+                            "MINUTES OF THE MEETING", new List<Area>{
+                                new Area("Area 4", "Students", new List<Parameter>{
+                                    new Parameter("Parameter A", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter B", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 5")
+                                        })
+                                    }),
+                                }),
+                                new Area("Area 5", "Research", new List<Parameter>{
+                                    new Parameter("Parameter A", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 2"),
+                                        })
+                                    })
+                                }),
+                            }));
+             level.Keywords.Add(new Keyword(
+                            new Guid("bdcd585f-483d-423a-8f9d-a7de2eed21b4"),
+                            "ACCOMPLISMENT REPORT", new List<Area>{
+                                new Area("Area 1", "Missions, Goals, and Objectives", new List<Parameter>{
+                                    new Parameter("Parameter A", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    })
+                                }),
+                                new Area("Area 2", "Faculty", new List<Parameter>{
+                                    new Parameter("Parameter B", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter D", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter E", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                    new Parameter("Parameter F", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 1")
+                                        })
+                                    }),
+                                }),
+                                new Area("Area 3", "Cirriculum and Instruction", new List<Parameter>{
+                                    new Parameter("Parameter C", new List<SysImpOutpt>{
+                                        new SysImpOutpt("System", new List<Scheme>{
+                                            new Scheme("System 2"),
+                                            new Scheme("System 3"),
+                                        })
+                                    })
+                                }),
+                            }));
+
+
             _unitOfWork.Repository<Level>().Add(level);
 
             var result = await _unitOfWork.Complete();

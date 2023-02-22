@@ -39,36 +39,29 @@ const routes: Routes = [
             data: { breadcrumb: 'Programs' },
             children: [
               {
-                path: 'keyword',
-                component: AdminKeywordsComponent,
-                data: { breadcrumb: 'Keywords' },
+                path: 'area',
+                component: AdminAreasComponent,
+                data: { breadcrumb: 'Areas' },
                 children: [
                   {
-                    path: 'area',
-                    component: AdminAreasComponent,
-                    data: { breadcrumb: 'Areas' },
+                    path: 'parameter',
+                    component: AdminParametersComponent,
+                    data: { breadcrumb: 'Parameters' },
                     children: [
                       {
-                        path: 'parameter',
-                        component: AdminParametersComponent,
-                        data: { breadcrumb: 'Parameters' },
+                        path: 'systems',
+                        component: AdminSysimpleouptsComponent,
+                        data: { breadcrumb: 'SIO' },
                         children: [
                           {
-                            path: 'systems',
-                            component: AdminSysimpleouptsComponent,
-                            data: { breadcrumb: 'SIO' },
+                            path: 'schemes',
+                            component: AdminSchemesComponent,
+                            data: { breadcrumb: 'Schemes' },
                             children: [
                               {
-                                path: 'schemes',
-                                component: AdminSchemesComponent,
-                                data: { breadcrumb: 'Schemes' },
-                                children: [
-                                  {
-                                    path: 'files',
-                                    component: AdminFilesComponent,
-                                    data: { breadcrumb: 'Files' },
-                                  },
-                                ],
+                                path: 'files',
+                                component: AdminFilesComponent,
+                                data: { breadcrumb: 'Files' },
                               },
                             ],
                           },

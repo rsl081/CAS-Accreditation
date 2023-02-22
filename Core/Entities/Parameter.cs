@@ -11,5 +11,15 @@ namespace Core.Entities
         public Area Area { get; set; }
         public Guid AreaId { get; set; }
         public List<SysImpOutpt> SysImpOutpts { get; set; } = new List<SysImpOutpt>();
+    
+        public Parameter(){}
+
+        public Parameter(string paramName, List<SysImpOutpt> sysmimp)
+        {
+            ParamName = paramName;
+            SysImpOutpts = sysmimp;
+        }
+
+        
     }   
 }
