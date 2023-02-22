@@ -64,8 +64,15 @@ namespace API.Extensions
                 .Include(p => p.UserPhoto)
                 .Include(r => r.UserRoles)
                 .ThenInclude(r => r.Role)
+                .Include(p => p.Areas)
+                .ThenInclude(k => k.Keyword)
+                .ThenInclude(k => k.Level)
                 .Include(a => a.Areas)
                 .ThenInclude(a => a.Keyword)
+                .ThenInclude(a => a.Areas)
+                .ThenInclude(a => a.Params)
+                .ThenInclude(a => a.SysImpOutpts)
+                .ThenInclude(a => a.Schemes)
                 .Where(u => u.UserRoles.All(r => r.Role.Name == "Faculty"))
                 .ToListAsync();
 

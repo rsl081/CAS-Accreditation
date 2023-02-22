@@ -14,5 +14,15 @@ namespace Core.Entities
         public Level Level { get; set; }
         public Guid LevelId { get; set; }
         public List<Area> Areas { get; set; } = new List<Area>();
+
+        public Keyword(){}
+
+        public Keyword(Guid id, string keywordName, List<Area> area)
+        {
+            Id = id;
+            KeywordName = keywordName;
+            Areas = area;
+        }
+
     }
 }

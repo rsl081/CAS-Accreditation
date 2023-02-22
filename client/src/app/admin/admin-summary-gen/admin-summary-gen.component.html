@@ -59,7 +59,7 @@
   </div>
 
   <div class="w-full overflow-x-auto" *ngIf="isSearching; else elseBlock">
-    <app-admin-table [files]="files"></app-admin-table>
+    <app-admin-table [files]="files" [file]="file"></app-admin-table>
   </div>
   <ng-template #elseBlock>
     <app-file-table [files]="files"></app-file-table>

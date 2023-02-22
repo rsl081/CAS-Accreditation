@@ -9,11 +9,22 @@
 </td>
 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
   <div *ngFor="let level of levels">
-    {{ level }}
+    {{ level.levelName }}
   </div>
 </td>
 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-  <div *ngFor="let area of areas">
-    {{ area }}
+  <div *ngFor="let area of levels">
+    {{ area.arNameNo }}
   </div>
 </td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  <div *ngFor="let parameter of params">
+    {{ parameter }}
+  </div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+  <div *ngFor="let sysimpleoutpt of sysimpleoutpts">
+    {{ sysimpleoutpt }}
+  </div>
+</td>
+

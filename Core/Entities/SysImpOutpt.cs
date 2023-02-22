@@ -14,5 +14,15 @@ namespace Core.Entities
         public Parameter Parameter { get; set; }
         public Guid ParameterId { get; set; }
         public List<Scheme> Schemes { get; set; } = new List<Scheme>();
+    
+        
+        public SysImpOutpt(){}
+
+        public SysImpOutpt(string systemName, List<Scheme> schemes)
+        {
+            SystemName = systemName;
+            Schemes = schemes;
+        }
+
     }
 }

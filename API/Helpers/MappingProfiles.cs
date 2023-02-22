@@ -41,7 +41,8 @@ namespace API.Helpers
             CreateMap<FileRepo, FileRepoToReturn>();
 
             CreateMap<AreaFacultyUserIdDto, Area>();
-            CreateMap<Area, AreaToReturn>();
+            CreateMap<Area, AreaToReturn>()
+                .ForMember(a => a.Keyword, o => o.MapFrom(s => s.Keyword.KeywordName));
             CreateMap<AreaCreateDto, Area>();
             CreateMap<AreaUpdateDto, Area>();
 
@@ -59,8 +60,17 @@ namespace API.Helpers
                     {
                         user.Keyword.KeywordName,
                         user.ArNameNo,
-                        user.ArName
-                    })));
+                        user.Keyword.Level.LevelName,
+                        Param = user.Keyword.Areas
+                                    .Select(a => 
+                                        a.Params.Select(p => p.ParamName).ToList()),
+                        SysImpOutpt = user.Keyword.Areas
+                                    .Select(a => 
+                                        a.Params.Select(p => p.SysImpOutpts.Select(s => s.SystemName)).ToList()),
+                        Scheme = user.Keyword.Areas
+                                    .Select(a => 
+                                        a.Params.Select(p => p.SysImpOutpts.Select(s => s.Schemes.Select(sc => sc.SchemeName)).ToList())),
+                    }).ToList()));
         
         }
     }

@@ -99,8 +99,8 @@ export class MoveFileDialogComponent implements OnInit {
         next: (files) => {
           this.files = files;
 
-          this.files.keyword.map((keyword: IKeyword, index) => {
-            this.keyword = keyword.keywordName;
+          this.files.keyword.map((keyword: any) => {
+            this.keyword = keyword.levelName;
 
             this.http
               .get<IAreaRoot>(this.baseURL + 'areas?keywordId=' + keyword.id)

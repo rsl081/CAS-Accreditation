@@ -22,6 +22,6 @@ namespace API.Dtos
             set{}
         }
 
-        public List<string> Areas { get; set; } = new List<string>();
+        public List<object> Areas { get; set; } = new List<object>();
     }
 }

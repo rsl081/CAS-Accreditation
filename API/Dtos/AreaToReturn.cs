@@ -35,6 +35,7 @@ namespace API.Dtos
 
 
         public Guid KeywordId { get; set; }
+        public string Keyword { get; set; }
 
         public string FacultyUserId { get; set; }
     }
