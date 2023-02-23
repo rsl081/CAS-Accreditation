@@ -34,38 +34,31 @@ const routes: Routes = [
             data: { breadcrumb: 'Programs' },
             children: [
               {
-                path: 'keyword',
-                component: AccreKeywordsComponent,
-                data: { breadcrumb: 'Keywords' },
+                path: 'area',
+                component: AccreAreasComponent,
+                data: { breadcrumb: 'Areas' },
                 children: [
                   {
-                    path: 'area',
-                    component: AccreAreasComponent,
-                    data: { breadcrumb: 'Areas' },
+                    path: 'parameter',
+                    component: AccreParametersComponent,
+                    data: { breadcrumb: 'Parameters' },
                     children: [
                       {
-                        path: 'parameter',
-                        component: AccreParametersComponent,
-                        data: { breadcrumb: 'Parameters' },
-                        children: [
-                          {
-                            path: 'systems',
-                            component: AccreSysimpleoutptsComponent,
-                            data: { breadcrumb: 'SIO' },
-                            children:[{
-                                path: 'schemes',
-                                component: AccreSchemesComponent,
-                                data: { breadcrumb: 'Schemes' },
-                                children: [
-                                  {
-                                    path: 'files',
-                                    component: AccreFilesComponent,
-                                    data: { breadcrumb: 'Files' },
-                                  },
-                                ],
-                            }]
-                          },
-                        ],
+                        path: 'systems',
+                        component: AccreSysimpleoutptsComponent,
+                        data: { breadcrumb: 'SIO' },
+                        children:[{
+                            path: 'schemes',
+                            component: AccreSchemesComponent,
+                            data: { breadcrumb: 'Schemes' },
+                            children: [
+                              {
+                                path: 'files',
+                                component: AccreFilesComponent,
+                                data: { breadcrumb: 'Files' },
+                              },
+                            ],
+                        }]
                       },
                     ],
                   },
