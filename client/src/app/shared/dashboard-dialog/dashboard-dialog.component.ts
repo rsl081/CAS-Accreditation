@@ -50,13 +50,13 @@ export class DashboardDialogComponent implements OnInit {
     });
 
     //if this line of route is not before to the area may cause errors
-    this.query = this.route.snapshot.queryParams['keywordId'];
+    this.query = this.route.snapshot.queryParams['levelId'];
     this.createAddDirectoryForm();
   }
 
   createAddDirectoryForm() {
     this.addDirectoryForm = this.formBuilder.group({
-      keywordId: [null, [Validators.required]],
+      prefNameKeyword: [null, [Validators.required]],
       areaNameNo: [null, [Validators.required]],
       prefName: [null, [Validators.required]],
     });
@@ -100,39 +100,46 @@ export class DashboardDialogComponent implements OnInit {
           },
         });
         break;
-      case 'keyword':
+   
+      case 'area':
+        let v:any;
         body = {
-          keywordName: this.addDirectoryForm.controls['prefName'].value,
+          keywordName: this.addDirectoryForm.controls['prefNameKeyword'].value,
           Name: this.user.displayName,
-          levelId: this.selectedParentId,
+          levelId: this.query,
         };
         this.keywordService.addKeyword(body).subscribe({
-          next: () => {
+          next: (value:any) => {
             this.keywordService.updateNeeded.next();
+            // v = value.id;
+            v = value.id;
           },
-        });
-        break;
-      case 'area':
-        body = {
-          arNameNo: this.addDirectoryForm.controls['areaNameNo'].value,
-          arName: this.addDirectoryForm.controls['prefName'].value,
-          name: this.user.displayName,
-          keywordId: this.addDirectoryForm.controls['keywordId'].value,
-        };
-
-        if (this.user.role === 'Faculty') {
-          body['facultyUserId'] = this.user.id;
-        }
-
-        this.areaService.addArea(body).subscribe({
-          next: (response: IArea) => {
+          complete: () => {
+            body = {
+              arNameNo: this.addDirectoryForm.controls['areaNameNo'].value,
+              arName: this.addDirectoryForm.controls['prefName'].value,
+              name: this.user.displayName,
+              keywordId: v,
+            };
+    
             if (this.user.role === 'Faculty') {
-              this.areaService.lastInUpdateNeeded.next(response);
-            } else {
-              this.areaService.updateNeeded.next();
+              body['facultyUserId'] = this.user.id;
             }
-          },
+    
+            this.areaService.addArea(body).subscribe({
+              next: (response: IArea) => {
+                if (this.user.role === 'Faculty') {
+                  this.areaService.lastInUpdateNeeded.next(response);
+                } else {
+                  this.areaService.updateNeeded.next();
+                }
+              },
+            });
+            
+          }
         });
+
+
         break;
       case 'parameter':
         body = {
