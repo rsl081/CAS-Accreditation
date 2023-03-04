@@ -93,7 +93,7 @@ namespace API.Controllers
             var urlString = uriBuilder.ToString();
 
             await _emailService.SendAsync(
-                "rodriguez.johnrussel.d.1592@gmail.com",
+                "cas.webaccreditation@gmail.com",
                 user.Email, 
                 "Reset Password",
                 $"Please click on this link to reset your password <a href=\"{urlString}\">Reset Password</a>");
@@ -383,7 +383,7 @@ namespace API.Controllers
                 var urlString = uriBuilder.ToString();
 
                 await _emailService.SendAsync(
-                    "rodriguez.johnrussel.d.1592@gmail.com",
+                    "cas.webaccreditation@gmail.com",
                     user.Email, 
                     "Please confirm your email",
                     $"Please click on this link to your email <a href=\"{urlString}\">Verify Email</a>");
@@ -454,7 +454,7 @@ namespace API.Controllers
                 var urlString = uriBuilder.ToString();
 
                 await _emailService.SendAsync(
-                    "rodriguez.johnrussel.d.1592@gmail.com",
+                    "cas.webaccreditation@gmail.com",
                     user.Email, 
                     "Please confirm your email",
                     $"Please click on this link to confirm your email <a href=\"{urlString}\">Verify Email</a>");
@@ -520,7 +520,7 @@ namespace API.Controllers
                 var urlString = uriBuilder.ToString();
 
                 await _emailService.SendAsync(
-                    "rodriguez.johnrussel.d.1592@gmail.com",
+                    "cas.webaccreditation@gmail.com",
                     user.Email, 
                     "Please confirm your email",
                     $"Please click on this link to confirm your email <a href=\"{urlString}\">Verify Email</a>");
